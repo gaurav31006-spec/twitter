@@ -1,2099 +1,2489 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     >
 
-    <title>Insights UI Demo</title>
+    <title>X Post Activity</title>
 
     <script src="https://unpkg.com/lucide@latest"></script>
 
-<style>
-
-/* =========================================================
-   RESET
-   ========================================================= */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    width: 100%;
-    min-width: 0;
-    min-height: 100%;
-    overflow-x: hidden;
-    background: #000;
-    -webkit-text-size-adjust: 100%;
-}
-
-body {
-    width: 100%;
-    min-width: 0;
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-
-    background: #000;
-    color: #fff;
-
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Helvetica,
-        Arial,
-        sans-serif;
-}
-
-button,
-input,
-textarea {
-    font: inherit;
-}
-
-button {
-    cursor: pointer;
-}
-
-img {
-    max-width: 100%;
-}
-
+    <style>
 
-/* =========================================================
-   FORM PAGE
-   ========================================================= */
+        /* =========================================================
+           RESET
+        ========================================================= */
 
-#formPage {
-    width: 100%;
-    min-height: 100vh;
-    min-height: 100svh;
-
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-
-    padding: 40px 16px;
-
-    background: #000;
-}
-
-
-/* =========================================================
-   FORM WRAPPER
-   ========================================================= */
-
-.form-wrapper {
-    width: 100%;
-    max-width: 720px;
-
-    background: #111;
-
-    border: 1px solid #333;
-
-    border-radius: 24px;
-
-    padding: 30px;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        html {
+            width: 100%;
+            min-width: 0;
+            min-height: 100%;
+            background: #000;
+            overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
+        }
 
-/* =========================================================
-   FORM TITLE
-   ========================================================= */
+        body {
+            width: 100%;
+            min-width: 0;
+            min-height: 100vh;
+            min-height: 100svh;
 
-.form-title {
-    font-size: 30px;
-    font-weight: 750;
-    letter-spacing: -.7px;
-    margin-bottom: 8px;
-}
+            margin: 0;
+            padding: 0;
 
-.form-subtitle {
-    color: #777;
-    font-size: 15px;
-    line-height: 1.5;
-    margin-bottom: 30px;
-}
+            overflow-x: hidden;
 
+            background: #000;
+            color: #fff;
 
-/* =========================================================
-   FORM GRID
-   ========================================================= */
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Helvetica,
+                Arial,
+                sans-serif;
+        }
 
-.form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 18px;
-}
+        button,
+        input,
+        textarea {
+            font: inherit;
+        }
 
-.field {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-}
+        button {
+            cursor: pointer;
+        }
 
-.field.full {
-    grid-column: 1 / -1;
-}
+        img {
+            max-width: 100%;
+        }
 
-.field label {
-    color: #aaa;
-    font-size: 14px;
-    font-weight: 600;
-}
 
+        /* =========================================================
+           FORM PAGE
+        ========================================================= */
 
-/* =========================================================
-   INPUTS
-   ========================================================= */
+        #formPage {
+            width: 100%;
+            min-height: 100vh;
+            min-height: 100svh;
 
-.field input,
-.field textarea {
-    width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
 
-    border: 1px solid #363636;
-    outline: none;
+            padding: 40px 16px;
 
-    background: #181818;
-    color: #fff;
+            background: #000;
+        }
 
-    border-radius: 11px;
+        .form-wrapper {
+            width: 100%;
+            max-width: 720px;
 
-    padding: 12px 13px;
+            padding: 30px;
 
-    transition:
-        border-color .2s,
-        background .2s;
-}
+            background: #111;
 
-.field input {
-    height: 46px;
-}
+            border: 1px solid #333;
+            border-radius: 24px;
+        }
 
-.field textarea {
-    min-height: 105px;
-    resize: vertical;
-    line-height: 1.5;
-}
+        .form-title {
+            color: #fff;
 
-.field input:focus,
-.field textarea:focus {
-    border-color: #777;
-    background: #1b1b1b;
-}
+            font-size: 30px;
+            line-height: 1.2;
 
+            font-weight: 750;
 
-/* =========================================================
-   IMAGE UPLOAD
-   ========================================================= */
+            letter-spacing: -.7px;
 
-.upload-box {
-    width: 100%;
-    min-height: 150px;
+            margin-bottom: 8px;
+        }
 
-    border: 1px dashed #444;
-    border-radius: 15px;
+        .form-subtitle {
+            color: #777;
 
-    background: #151515;
+            font-size: 15px;
+            line-height: 1.5;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+            margin-bottom: 30px;
+        }
 
-    cursor: pointer;
 
-    overflow: hidden;
+        /* =========================================================
+           FORM GRID
+        ========================================================= */
 
-    transition:
-        border-color .2s,
-        background .2s;
-}
+        .form-grid {
+            display: grid;
 
-.upload-box:hover {
-    border-color: #777;
-    background: #191919;
-}
+            grid-template-columns:
+                1fr 1fr;
 
-.upload-box input {
-    display: none;
-}
+            gap: 18px;
+        }
 
-.upload-content {
-    text-align: center;
-    color: #777;
-}
+        .field {
+            display: flex;
+            flex-direction: column;
 
-.upload-content svg {
-    width: 30px;
-    height: 30px;
-    margin-bottom: 8px;
-}
+            gap: 7px;
 
-.upload-content span {
-    display: block;
-    font-size: 14px;
-}
+            min-width: 0;
+        }
 
-#imagePreview {
-    width: 100%;
-    height: 180px;
+        .field.full {
+            grid-column: 1 / -1;
+        }
 
-    object-fit: cover;
+        .field label {
+            color: #aaa;
 
-    display: none;
-}
+            font-size: 14px;
 
+            font-weight: 600;
+        }
 
-/* =========================================================
-   GENERATE BUTTON
-   ========================================================= */
+        .field input,
+        .field textarea {
+            width: 100%;
 
-.generate-button {
-    width: 100%;
-    height: 50px;
+            border: 1px solid #363636;
+            outline: none;
 
-    margin-top: 25px;
+            background: #181818;
+            color: #fff;
 
-    border: none;
-    border-radius: 13px;
+            border-radius: 11px;
 
-    background: #fff;
-    color: #000;
+            padding: 12px 13px;
 
-    font-size: 16px;
-    font-weight: 700;
+            transition:
+                border-color .2s,
+                background .2s;
+        }
 
-    transition:
-        transform .2s,
-        opacity .2s;
-}
+        .field input {
+            height: 46px;
+        }
 
-.generate-button:hover {
-    transform: translateY(-2px);
-    opacity: .9;
-}
+        .field textarea {
+            min-height: 105px;
 
-.generate-button:active {
-    transform: scale(.98);
-}
+            resize: vertical;
 
+            line-height: 1.5;
+        }
 
-/* =========================================================
-   INSIGHTS PAGE
-   ========================================================= */
+        .field input:focus,
+        .field textarea:focus {
+            border-color: #777;
 
-#insightsPage {
-    display: none;
+            background: #1b1b1b;
+        }
 
-    width: 100%;
-    min-height: 100vh;
-    min-height: 100svh;
 
-    background: #101010;
-}
+        /* =========================================================
+           UPLOAD
+        ========================================================= */
 
-#insightsPage.active {
-    display: block;
-}
+        .upload-box {
+            width: 100%;
+            min-height: 150px;
 
+            border: 1px dashed #444;
 
-/* =========================================================
-   HEADER
-   ========================================================= */
+            border-radius: 15px;
 
-.header {
-    width: 100%;
-    height: 68px;
+            background: #151515;
 
-    background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-    border-bottom: 1px solid #2d2d2d;
+            cursor: pointer;
 
-    display: flex;
-    align-items: center;
+            overflow: hidden;
 
-    gap: 18px;
+            transition:
+                border-color .2s,
+                background .2s;
+        }
 
-    padding: 0 18px;
+        .upload-box:hover {
+            border-color: #777;
+            background: #191919;
+        }
 
-    position: sticky;
-    top: 0;
+        .upload-box input {
+            display: none;
+        }
 
-    z-index: 100;
-}
+        .upload-content {
+            text-align: center;
+            color: #777;
+        }
 
-.back-button {
-    width: 36px;
-    height: 36px;
+        .upload-content svg {
+            width: 30px;
+            height: 30px;
 
-    min-width: 36px;
+            margin-bottom: 8px;
+        }
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+        .upload-content span {
+            display: block;
 
-    border: none;
+            font-size: 14px;
+        }
 
-    background: transparent;
-    color: #fff;
+        #imagePreview {
+            width: 100%;
+            height: 180px;
 
-    border-radius: 50%;
-}
+            object-fit: cover;
 
-.back-button:hover {
-    background: #181818;
-}
+            display: none;
+        }
 
-.back-button:active {
-    transform: scale(.92);
-}
 
-.back-button svg {
-    width: 26px;
-    height: 26px;
-}
+        /* =========================================================
+           BUTTON
+        ========================================================= */
 
-.header-title {
-    min-width: 0;
+        .generate-button {
+            width: 100%;
+            height: 50px;
 
-    font-size: 22px;
-    font-weight: 750;
+            margin-top: 25px;
 
-    letter-spacing: -.3px;
+            border: none;
 
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+            border-radius: 13px;
 
+            background: #fff;
+            color: #000;
 
-/* =========================================================
-   POST CARD
-   ========================================================= */
+            font-size: 16px;
 
-.post-card {
-    width: calc(100% - 20px);
+            font-weight: 700;
 
-    margin: 20px 10px 18px;
+            transition:
+                transform .2s,
+                opacity .2s;
+        }
 
-    padding: 19px 18px;
+        .generate-button:hover {
+            transform: translateY(-2px);
+            opacity: .9;
+        }
 
-    background: #111;
+        .generate-button:active {
+            transform: scale(.98);
+        }
 
-    border: 1px solid #393939;
 
-    border-radius: 24px;
+        /* =========================================================
+           INSIGHTS PAGE
+        ========================================================= */
 
-    overflow: hidden;
-}
+        #insightsPage {
+            display: none;
 
+            width: 100%;
+            min-width: 0;
 
-/* =========================================================
-   USER
-   ========================================================= */
+            min-height: 100vh;
+            min-height: 100svh;
 
-.user-row {
-    width: 100%;
+            background: #101010;
 
-    display: flex;
-    align-items: center;
+            overflow-x: hidden;
+        }
 
-    min-width: 0;
-}
+        #insightsPage.active {
+            display: block;
+        }
 
-.avatar {
-    width: 35px;
-    height: 35px;
 
-    min-width: 35px;
+        /* =========================================================
+           HEADER
+        ========================================================= */
 
-    border-radius: 50%;
+        .header {
+            width: 100%;
+            height: 68px;
 
-    background: #dcebd9;
+            padding: 0 18px;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+            display: flex;
+            align-items: center;
 
-    overflow: hidden;
-}
+            gap: 18px;
 
-.avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+            background: #000;
 
-.avatar-default {
-    font-size: 17px;
-}
+            border-bottom: 1px solid #2d2d2d;
 
-.user-info {
-    min-width: 0;
+            position: sticky;
 
-    margin-left: 11px;
+            top: 0;
 
-    display: flex;
-    align-items: center;
+            z-index: 100;
+        }
 
-    gap: 5px;
+        .back-button {
+            width: 40px;
+            height: 40px;
 
-    font-size: 16px;
+            min-width: 40px;
 
-    white-space: nowrap;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-    overflow: hidden;
-}
+            border: none;
 
-.username {
-    color: #f5f5f5;
-    font-weight: 700;
+            background: transparent;
 
-    flex-shrink: 0;
-}
+            color: #fff;
 
-.handle,
-.post-time {
-    color: #777;
+            border-radius: 50%;
+        }
 
-    overflow: hidden;
-    text-overflow: ellipsis;
+        .back-button:hover {
+            background: #181818;
+        }
 
-    white-space: nowrap;
-}
+        .back-button:active {
+            transform: scale(.92);
+        }
 
-.user-dot {
-    color: #777;
-    flex-shrink: 0;
-}
+        .back-button svg {
+            width: 28px;
+            height: 28px;
 
+            stroke-width: 2;
+        }
 
-/* =========================================================
-   POST CONTENT
-   ========================================================= */
+        .header-title {
+            min-width: 0;
 
-.post-content {
-    width: 100%;
+            color: #fff;
 
-    margin-top: 11px;
+            font-size: 22px;
 
-    display: flex;
-    align-items: flex-start;
+            font-weight: 750;
 
-    gap: 12px;
+            letter-spacing: -.3px;
 
-    min-width: 0;
-}
+            white-space: nowrap;
 
+            overflow: hidden;
 
-/* =========================================================
-   THUMBNAIL
-   ========================================================= */
+            text-overflow: ellipsis;
+        }
 
-.thumbnail {
-    position: relative;
 
-    width: 128px;
-    height: 124px;
+        /* =========================================================
+           POST CARD
+        ========================================================= */
 
-    min-width: 128px;
+        .post-card {
+            width: calc(100% - 20px);
 
-    flex-shrink: 0;
+            margin: 20px 10px 18px;
 
-    border-radius: 20px;
+            padding: 19px 18px;
 
-    overflow: hidden;
+            background: #111;
 
-    background:
-        linear-gradient(
-            135deg,
-            #2424a5 0%,
-            #c53e89 52%,
-            #e64a75 100%
-        );
-}
+            border: 1px solid #393939;
 
-.thumbnail-image {
-    position: absolute;
+            border-radius: 24px;
 
-    inset: 0;
+            overflow: hidden;
+        }
 
-    width: 100%;
-    height: 100%;
 
-    object-fit: cover;
+        /* =========================================================
+           USER
+        ========================================================= */
 
-    display: none;
-}
+        .user-row {
+            width: 100%;
 
-.thumbnail.has-image .thumbnail-image {
-    display: block;
-}
+            display: flex;
+            align-items: center;
 
-.thumbnail.has-image .thumbnail-default {
-    display: none;
-}
+            min-width: 0;
+        }
 
-.thumbnail-default {
-    position: absolute;
-    inset: 0;
-}
+        .avatar {
+            width: 35px;
+            height: 35px;
 
-.thumbnail-name {
-    position: absolute;
+            min-width: 35px;
 
-    top: 8px;
-    left: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-    font-size: 9px;
+            background: #dcebd9;
 
-    font-weight: 800;
+            border-radius: 50%;
 
-    color: #fff;
-}
+            overflow: hidden;
+        }
 
-.thumbnail-icon {
-    position: absolute;
+        .avatar img {
+            width: 100%;
+            height: 100%;
 
-    left: 0;
-    right: 0;
+            object-fit: cover;
+        }
 
-    top: 39px;
+        .avatar-default {
+            font-size: 17px;
+        }
 
-    text-align: center;
+        .user-info {
+            min-width: 0;
 
-    font-size: 34px;
-}
+            margin-left: 11px;
 
-.thumbnail-duration {
-    position: absolute;
+            display: flex;
+            align-items: center;
 
-    right: 8px;
-    bottom: 7px;
+            gap: 5px;
 
-    font-size: 17px;
+            font-size: 16px;
 
-    font-weight: 700;
+            white-space: nowrap;
 
-    color: #fff;
+            overflow: hidden;
+        }
 
-    text-shadow:
-        0 1px 5px #000;
-}
+        .username {
+            color: #f5f5f5;
 
+            font-weight: 700;
 
-/* =========================================================
-   CAPTION
-   ========================================================= */
+            flex-shrink: 0;
+        }
 
-.caption {
-    flex: 1;
+        .handle,
+        .post-time {
+            color: #777;
 
-    min-width: 0;
+            min-width: 0;
 
-    color: #eee;
+            overflow: hidden;
 
-    font-size: 20px;
+            text-overflow: ellipsis;
 
-    line-height: 1.28;
+            white-space: nowrap;
+        }
 
-    overflow-wrap: anywhere;
+        .user-dot {
+            color: #777;
 
-    word-break: break-word;
-}
+            flex-shrink: 0;
+        }
 
 
-/* =========================================================
-   ENGAGEMENT CARD
-   ========================================================= */
+        /* =========================================================
+           POST CONTENT
+        ========================================================= */
 
-.engagement-card {
-    width: calc(100% - 30px);
+        .post-content {
+            width: 100%;
 
-    height: 102px;
+            margin-top: 11px;
 
-    margin: 0 15px;
+            display: flex;
+            align-items: flex-start;
 
-    background: #111;
+            gap: 12px;
 
-    border: 1px solid #393939;
+            min-width: 0;
+        }
 
-    border-radius: 20px;
 
-    display: grid;
+        /* =========================================================
+           THUMBNAIL
+        ========================================================= */
 
-    grid-template-columns:
-        repeat(3, 1fr);
-}
+        .thumbnail {
+            position: relative;
 
-.engagement-item {
-    min-width: 0;
+            width: 128px;
+            height: 124px;
 
-    display: flex;
+            min-width: 128px;
 
-    flex-direction: column;
+            flex-shrink: 0;
 
-    justify-content: center;
+            border-radius: 20px;
 
-    align-items: center;
+            overflow: hidden;
 
-    gap: 7px;
+            background:
+                linear-gradient(
+                    135deg,
+                    #2424a5 0%,
+                    #c53e89 52%,
+                    #e64a75 100%
+                );
+        }
 
-    color: #888;
-}
+        .thumbnail-image {
+            position: absolute;
 
-.engagement-item svg {
-    width: 23px;
-    height: 23px;
+            inset: 0;
 
-    stroke-width: 1.7;
-}
+            width: 100%;
+            height: 100%;
 
-.engagement-value {
-    color: #eee;
+            object-fit: cover;
 
-    font-size: 21px;
+            display: none;
+        }
 
-    font-weight: 500;
+        .thumbnail.has-image .thumbnail-image {
+            display: block;
+        }
 
-    white-space: nowrap;
-}
+        .thumbnail.has-image .thumbnail-default {
+            display: none;
+        }
 
+        .thumbnail-default {
+            position: absolute;
 
-/* =========================================================
-   METRICS
-   ========================================================= */
+            inset: 0;
+        }
 
-.metrics {
-    width: 100%;
+        .thumbnail-name {
+            position: absolute;
 
-    padding: 50px 40px;
-}
+            top: 8px;
+            left: 9px;
 
-.metric {
-    margin-bottom: 47px;
-}
+            color: #fff;
 
-.metric-label {
-    display: flex;
+            font-size: 9px;
 
-    align-items: center;
+            font-weight: 800;
+        }
 
-    gap: 5px;
+        .thumbnail-icon {
+            position: absolute;
 
-    color: #858585;
+            left: 0;
+            right: 0;
 
-    font-size: 16px;
+            top: 50%;
 
-    margin-bottom: 8px;
-}
+            transform: translateY(-50%);
 
-.metric-label svg {
-    width: 13px;
-    height: 13px;
+            text-align: center;
 
-    stroke-width: 1.8;
+            font-size: 34px;
+        }
 
-    flex-shrink: 0;
-}
+        .thumbnail-duration {
+            position: absolute;
 
-.metric-value {
-    color: #f3f3f3;
+            right: 8px;
+            bottom: 7px;
 
-    font-size: 43px;
+            color: #fff;
 
-    font-weight: 500;
+            font-size: 17px;
 
-    line-height: 1;
+            font-weight: 700;
 
-    letter-spacing: -1.5px;
+            text-shadow:
+                0 1px 5px #000;
+        }
 
-    overflow-wrap: anywhere;
-}
 
+        /* =========================================================
+           CAPTION
+        ========================================================= */
 
-/* =========================================================
-   TWO COLUMNS
-   ========================================================= */
+        .caption {
+            flex: 1;
 
-.two-columns {
-    width: 100%;
+            min-width: 0;
 
-    display: grid;
+            color: #eee;
 
-    grid-template-columns:
-        minmax(0, 1fr)
-        minmax(0, 1fr);
+            font-size: 20px;
 
-    gap: 30px;
-}
+            line-height: 1.28;
 
-.two-columns .metric-value {
-    font-size: 36px;
-}
+            overflow-wrap: anywhere;
 
+            word-break: break-word;
+        }
 
-/* =========================================================
-   VIDEO SECTION
-   ========================================================= */
 
-.video-section {
-    width: 100%;
+        /* =========================================================
+           ENGAGEMENT CARD
+        ========================================================= */
 
-    border-top: 1px solid #363636;
+        .engagement-card {
+            width: calc(100% - 30px);
 
-    padding: 35px 40px 60px;
-}
+            height: 102px;
 
-.video-heading {
-    font-size: 32px;
+            margin: 0 15px;
 
-    font-weight: 750;
+            background: #111;
 
-    letter-spacing: -.7px;
-}
+            border: 1px solid #393939;
 
-.video-description {
-    margin-top: 8px;
+            border-radius: 20px;
 
-    color: #808080;
+            display: grid;
 
-    font-size: 16px;
+            grid-template-columns:
+                repeat(3, 1fr);
 
-    line-height: 1.5;
-}
+            overflow: hidden;
+        }
 
-.video-metrics {
-    width: 100%;
+        .engagement-item {
+            min-width: 0;
 
-    margin-top: 45px;
+            display: flex;
 
-    display: grid;
+            flex-direction: column;
 
-    grid-template-columns:
-        minmax(0, 1fr)
-        minmax(0, 1fr);
+            justify-content: center;
 
-    gap: 30px;
-}
+            align-items: center;
 
-.video-metrics .metric-value {
-    font-size: 36px;
-}
+            gap: 7px;
 
+            color: #888;
+        }
 
-/* =========================================================
-   RETENTION
-   ========================================================= */
+        .engagement-item svg {
+            width: 23px;
+            height: 23px;
 
-.retention {
-    margin-top: 4px;
-}
+            stroke-width: 1.7;
+        }
 
-.retention-title {
-    display: flex;
+        .engagement-value {
+            color: #eee;
 
-    align-items: center;
+            font-size: 21px;
 
-    gap: 5px;
+            font-weight: 500;
 
-    color: #858585;
+            white-space: nowrap;
+        }
 
-    font-size: 16px;
-}
 
-.retention-title svg {
-    width: 13px;
-    height: 13px;
-}
+        /* =========================================================
+           METRICS
+        ========================================================= */
 
+        .metrics {
+            width: 100%;
 
-/* =========================================================
-   CHART
-   ========================================================= */
+            padding: 50px 40px;
+        }
 
-.chart-area {
-    position: relative;
+        .metric {
+            width: 100%;
 
-    width: 100%;
+            margin-bottom: 47px;
+        }
 
-    height: 190px;
+        .metric-label {
+            display: flex;
+            align-items: center;
 
-    margin-top: 12px;
+            gap: 5px;
 
-    padding-right: 55px;
-}
+            color: #858585;
 
-.chart {
-    position: relative;
+            font-size: 16px;
 
-    width: 100%;
+            margin-bottom: 8px;
+        }
 
-    height: 150px;
-}
+        .metric-label svg {
+            width: 13px;
+            height: 13px;
 
-.chart-line {
-    position: absolute;
+            stroke-width: 1.8;
 
-    left: 12px;
-    right: 0;
+            flex-shrink: 0;
+        }
 
-    height: 1px;
+        .metric-value {
+            color: #f3f3f3;
 
-    background: #343434;
-}
+            font-size: 43px;
 
-.chart-line.one {
-    top: 0;
-}
+            font-weight: 500;
 
-.chart-line.two {
-    top: 73px;
-}
+            line-height: 1;
 
-.chart-line.three {
-    top: 146px;
-}
+            letter-spacing: -1.5px;
 
-.chart-bar {
-    position: absolute;
+            overflow-wrap: anywhere;
+        }
 
-    left: 12px;
 
-    bottom: 4px;
+        /* =========================================================
+           TWO COLUMN METRICS
+        ========================================================= */
 
-    width: 74px;
+        .two-columns {
+            width: 100%;
 
-    height: 90px;
+            display: grid;
 
-    background: #a9e8fa;
+            grid-template-columns:
+                minmax(0, 1fr)
+                minmax(0, 1fr);
 
-    transform-origin: bottom;
+            gap: 30px;
+        }
 
-    transform: scaleY(0);
+        .two-columns .metric-value {
+            font-size: 36px;
+        }
 
-    transition:
-        height .7s ease,
-        transform .7s ease;
-}
 
-.chart-bar.animate {
-    transform: scaleY(1);
-}
+        /* =========================================================
+           VIDEO
+        ========================================================= */
 
-.y-label {
-    position: absolute;
+        .video-section {
+            width: 100%;
 
-    left: calc(100% + 12px);
+            border-top: 1px solid #363636;
 
-    transform: translateY(-50%);
+            padding: 35px 40px 60px;
+        }
 
-    color: #858585;
+        .video-heading {
+            color: #fff;
 
-    font-size: 14px;
+            font-size: 32px;
 
-    white-space: nowrap;
-}
+            font-weight: 750;
 
-.y100 {
-    top: 0;
-}
+            line-height: 1.1;
 
-.y50 {
-    top: 73px;
-}
+            letter-spacing: -.7px;
+        }
 
-.y0 {
-    top: 146px;
-}
+        .video-description {
+            margin-top: 8px;
 
-.x-labels {
-    position: absolute;
+            color: #808080;
 
-    left: 12px;
-    right: -5px;
+            font-size: 16px;
 
-    top: 158px;
+            line-height: 1.4;
+        }
 
-    display: flex;
+        .video-metrics {
+            width: 100%;
 
-    justify-content: space-between;
+            margin-top: 45px;
 
-    color: #747474;
+            display: grid;
 
-    font-size: 13px;
-}
+            grid-template-columns:
+                minmax(0, 1fr)
+                minmax(0, 1fr);
 
+            gap: 30px;
+        }
 
-/* =========================================================
-   PAGE ANIMATION
-   ========================================================= */
+        .video-metrics .metric-value {
+            font-size: 36px;
+        }
 
-.page-animation {
-    animation:
-        pageIn .45s ease both;
-}
 
-@keyframes pageIn {
-    from {
-        opacity: 0;
-        transform: translateY(12px);
-    }
+        /* =========================================================
+           RETENTION
+        ========================================================= */
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+        .retention {
+            width: 100%;
 
+            margin-top: 4px;
+        }
 
-/* =========================================================
-   MOBILE — FULL SCREEN
-   ========================================================= */
+        .retention-title {
+            display: flex;
 
-@media (max-width: 600px) {
+            align-items: center;
 
-    html,
-    body {
-        width: 100%;
-        min-width: 0;
-    }
+            gap: 5px;
 
-    /* -------------------------
-       FORM
-       ------------------------- */
+            color: #858585;
 
-    #formPage {
-        width: 100%;
-        min-height: 100svh;
+            font-size: 16px;
+        }
 
-        padding:
-            max(16px, env(safe-area-inset-top))
-            10px
-            max(20px, env(safe-area-inset-bottom));
+        .retention-title svg {
+            width: 13px;
+            height: 13px;
+        }
 
-        align-items: flex-start;
-    }
 
-    .form-wrapper {
-        width: 100%;
-        max-width: none;
+        /* =========================================================
+           CHART
+        ========================================================= */
 
-        padding: 20px 14px;
+        .chart-area {
+            position: relative;
 
-        border-radius: 18px;
-    }
+            width: 100%;
 
-    .form-title {
-        font-size: clamp(23px, 7vw, 28px);
-        line-height: 1.2;
-    }
+            height: 190px;
 
-    .form-subtitle {
-        font-size: 14px;
+            margin-top: 12px;
 
-        line-height: 1.5;
+            padding-right: 55px;
+        }
 
-        margin-bottom: 22px;
-    }
+        .chart {
+            position: relative;
 
-    .form-grid {
-        width: 100%;
+            width: 100%;
 
-        grid-template-columns: 1fr;
+            height: 150px;
+        }
 
-        gap: 14px;
-    }
+        .chart-line {
+            position: absolute;
 
-    .field {
-        width: 100%;
-        min-width: 0;
-    }
+            left: 12px;
+            right: 0;
 
-    .field.full {
-        grid-column: auto;
-    }
+            height: 1px;
 
-    .field input,
-    .field textarea {
-        width: 100%;
+            background: #343434;
+        }
 
-        font-size: 16px;
-    }
+        .chart-line.one {
+            top: 0;
+        }
 
-    .field input {
-        height: 48px;
-    }
+        .chart-line.two {
+            top: 73px;
+        }
 
-    .field textarea {
-        min-height: 120px;
-    }
+        .chart-line.three {
+            top: 146px;
+        }
 
-    .upload-box {
-        width: 100%;
-        min-height: 145px;
-    }
+        .chart-bar {
+            position: absolute;
 
-    .generate-button {
-        width: 100%;
+            left: 12px;
 
-        height: 52px;
+            bottom: 4px;
 
-        margin-top: 20px;
-    }
+            width: 74px;
 
+            height: 90px;
 
-    /* -------------------------
-       HEADER
-       ------------------------- */
+            background: #a9e8fa;
 
-    .header {
-        width: 100%;
+            transform-origin: bottom;
 
-        height: 58px;
+            transform: scaleY(0);
 
-        padding:
-            0
-            max(12px, env(safe-area-inset-right))
-            0
-            max(12px, env(safe-area-inset-left));
+            transition:
+                transform .7s ease;
+        }
 
-        gap: 10px;
-    }
+        .chart-bar.animate {
+            transform: scaleY(1);
+        }
 
-    .back-button {
-        width: 40px;
-        height: 40px;
+        .y-label {
+            position: absolute;
 
-        min-width: 40px;
-    }
+            left: calc(100% + 12px);
 
-    .back-button svg {
-        width: 24px;
-        height: 24px;
-    }
+            transform: translateY(-50%);
 
-    .header-title {
-        min-width: 0;
+            color: #858585;
 
-        font-size: 19px;
+            font-size: 14px;
 
-        overflow: hidden;
+            white-space: nowrap;
+        }
 
-        text-overflow: ellipsis;
+        .y100 {
+            top: 0;
+        }
 
-        white-space: nowrap;
-    }
+        .y50 {
+            top: 73px;
+        }
 
+        .y0 {
+            top: 146px;
+        }
 
-    /* -------------------------
-       POST CARD
-       ------------------------- */
+        .x-labels {
+            position: absolute;
 
-    .post-card {
-        width: calc(100% - 20px);
+            left: 12px;
+            right: -5px;
 
-        margin:
-            12px 10px 14px;
+            top: 158px;
 
-        padding:
-            15px 12px;
+            display: flex;
 
-        border-radius: 18px;
-    }
+            justify-content: space-between;
 
-    .user-row {
-        width: 100%;
+            color: #747474;
 
-        min-width: 0;
-    }
+            font-size: 13px;
+        }
 
-    .avatar {
-        width: 35px;
-        height: 35px;
 
-        min-width: 35px;
-    }
+        /* =========================================================
+           ANIMATION
+        ========================================================= */
 
-    .user-info {
-        min-width: 0;
+        .page-animation {
+            animation:
+                pageIn .45s ease both;
+        }
 
-        max-width:
-            calc(100% - 46px);
+        @keyframes pageIn {
 
-        margin-left: 10px;
+            from {
+                opacity: 0;
 
-        font-size: 14px;
+                transform:
+                    translateY(12px);
+            }
 
-        gap: 4px;
-    }
+            to {
+                opacity: 1;
 
-    .username,
-    .handle,
-    .post-time {
-        min-width: 0;
+                transform:
+                    translateY(0);
+            }
+        }
 
-        overflow: hidden;
 
-        text-overflow: ellipsis;
+        /* =========================================================
+           MOBILE — MATCH PHONE SCREEN
+        ========================================================= */
 
-        white-space: nowrap;
-    }
+        @media (max-width: 600px) {
 
+            html {
+                width: 100%;
+                min-width: 0;
 
-    /* -------------------------
-       POST CONTENT
-       ------------------------- */
+                overflow-x: hidden;
+            }
 
-    .post-content {
-        width: 100%;
+            body {
+                width: 100%;
+                min-width: 0;
 
-        display: grid;
+                overflow-x: hidden;
+            }
 
-        grid-template-columns:
-            minmax(86px, 31vw)
-            minmax(0, 1fr);
 
-        gap: 10px;
+            /* -----------------------------------------
+               FORM
+            ----------------------------------------- */
 
-        align-items: start;
-    }
+            #formPage {
+                width: 100%;
 
+                min-height: 100svh;
 
-    /* -------------------------
-       THUMBNAIL
-       ------------------------- */
+                padding:
+                    max(16px, env(safe-area-inset-top))
+                    10px
+                    max(20px, env(safe-area-inset-bottom));
+            }
 
-    .thumbnail {
-        width: 100%;
+            .form-wrapper {
+                width: 100%;
+                max-width: none;
 
-        height: auto;
+                padding: 22px 15px;
 
-        aspect-ratio: 1 / 1;
+                border-radius: 18px;
+            }
 
-        min-width: 0;
+            .form-title {
+                font-size: 26px;
+            }
 
-        border-radius: 15px;
-    }
+            .form-subtitle {
+                font-size: 14px;
 
-    .thumbnail-icon {
-        top: 50%;
+                margin-bottom: 22px;
+            }
 
-        transform:
-            translateY(-50%);
+            .form-grid {
+                grid-template-columns: 1fr;
 
-        font-size:
-            clamp(25px, 8vw, 34px);
-    }
+                gap: 14px;
+            }
 
-    .thumbnail-name {
-        top: 7px;
-        left: 7px;
+            .field.full {
+                grid-column: auto;
+            }
 
-        font-size: 8px;
-    }
+            .field input,
+            .field textarea {
+                font-size: 16px;
+            }
 
-    .thumbnail-duration {
-        right: 6px;
-        bottom: 6px;
+            .field input {
+                height: 48px;
+            }
 
-        font-size: 14px;
-    }
+            .field textarea {
+                min-height: 120px;
+            }
 
+            .upload-box {
+                min-height: 145px;
+            }
 
-    /* -------------------------
-       CAPTION
-       ------------------------- */
+            .generate-button {
+                width: 100%;
 
-    .caption {
-        min-width: 0;
+                height: 52px;
 
-        font-size:
-            clamp(15px, 4.5vw, 18px);
+                margin-top: 20px;
+            }
 
-        line-height: 1.32;
 
-        overflow-wrap: anywhere;
+            /* -----------------------------------------
+               HEADER
+            ----------------------------------------- */
 
-        word-break: break-word;
-    }
+            .header {
+                width: 100%;
 
+                height: 72px;
 
-    /* -------------------------
-       ENGAGEMENT
-       ------------------------- */
+                padding:
+                    0
+                    max(20px, env(safe-area-inset-right))
+                    0
+                    max(20px, env(safe-area-inset-left));
 
-    .engagement-card {
-        width: calc(100% - 20px);
+                gap: 20px;
 
-        height: 92px;
+                background: #000;
 
-        margin:
-            0 10px;
+                border-bottom:
+                    1px solid #292929;
+            }
 
-        border-radius: 17px;
-    }
+            .back-button {
+                width: 40px;
+                height: 40px;
 
-    .engagement-item {
-        min-width: 0;
+                min-width: 40px;
+            }
 
-        gap: 5px;
-    }
+            .back-button svg {
+                width: 32px;
+                height: 32px;
+            }
 
-    .engagement-item svg {
-        width: 20px;
-        height: 20px;
-    }
+            .header-title {
+                font-size: 24px;
 
-    .engagement-value {
-        font-size:
-            clamp(17px, 5vw, 21px);
-    }
+                letter-spacing: -.5px;
+            }
 
 
-    /* -------------------------
-       METRICS
-       ------------------------- */
+            /* -----------------------------------------
+               POST
+            ----------------------------------------- */
 
-    .metrics {
-        width: 100%;
+            .post-card {
+                width: calc(100% - 52px);
 
-        padding:
-            36px 20px
-            42px;
-    }
+                margin:
+                    28px 26px 20px;
 
-    .metric {
-        width: 100%;
+                padding:
+                    19px 20px;
 
-        margin-bottom: 38px;
-    }
+                border-radius: 24px;
+            }
 
-    .metric-label {
-        font-size: 14px;
 
-        margin-bottom: 7px;
-    }
+            /* -----------------------------------------
+               USER
+            ----------------------------------------- */
 
-    .metric-value {
-        font-size:
-            clamp(34px, 10vw, 43px);
+            .avatar {
+                width: 40px;
+                height: 40px;
 
-        letter-spacing: -1px;
-    }
+                min-width: 40px;
+            }
 
+            .user-info {
+                margin-left: 10px;
 
-    /* -------------------------
-       TWO COLUMN METRICS
-       ------------------------- */
+                gap: 5px;
 
-    .two-columns {
-        width: 100%;
+                font-size: 16px;
+            }
 
-        grid-template-columns:
-            minmax(0, 1fr)
-            minmax(0, 1fr);
+            .username {
+                font-size: 17px;
+            }
 
-        gap: 18px;
-    }
+            .handle,
+            .post-time {
+                font-size: 16px;
+            }
 
-    .two-columns .metric-value,
-    .video-metrics .metric-value {
-        font-size:
-            clamp(27px, 8vw, 34px);
-    }
 
+            /* -----------------------------------------
+               POST BODY
+            ----------------------------------------- */
 
-    /* -------------------------
-       VIDEO
-       ------------------------- */
+            .post-content {
+                width: 100%;
 
-    .video-section {
-        width: 100%;
+                margin-top: 12px;
 
-        padding:
-            28px 20px
-            max(45px, env(safe-area-inset-bottom));
-    }
+                display: grid;
 
-    .video-heading {
-        font-size:
-            clamp(26px, 8vw, 32px);
+                grid-template-columns:
+                    128px
+                    minmax(0, 1fr);
 
-        line-height: 1.2;
-    }
+                gap: 18px;
+            }
 
-    .video-description {
-        font-size: 14px;
+            .thumbnail {
+                width: 128px;
+                height: 124px;
 
-        line-height: 1.45;
-    }
+                min-width: 128px;
 
-    .video-metrics {
-        width: 100%;
+                border-radius: 18px;
+            }
 
-        grid-template-columns:
-            minmax(0, 1fr)
-            minmax(0, 1fr);
+            .thumbnail-icon {
+                top: 50%;
 
-        gap: 18px;
+                transform:
+                    translateY(-50%);
 
-        margin-top: 32px;
-    }
+                font-size: 35px;
+            }
 
+            .thumbnail-name {
+                top: 8px;
+                left: 9px;
 
-    /* -------------------------
-       CHART
-       ------------------------- */
+                font-size: 9px;
+            }
 
-    .chart-area {
-        width: 100%;
+            .thumbnail-duration {
+                right: 8px;
+                bottom: 7px;
 
-        height: 180px;
+                font-size: 16px;
+            }
 
-        padding-right: 43px;
-    }
+            .caption {
+                width: 100%;
 
-    .chart {
-        width: 100%;
+                font-size: 20px;
 
-        height: 145px;
-    }
+                line-height: 1.35;
 
-    .chart-line {
-        left: 8px;
-    }
+                overflow-wrap: anywhere;
 
-    .chart-bar {
-        left: 8px;
+                word-break: break-word;
+            }
 
-        width:
-            clamp(48px, 16vw, 70px);
-    }
 
-    .x-labels {
-        left: 8px;
-        right: -2px;
+            /* -----------------------------------------
+               ENGAGEMENT
+            ----------------------------------------- */
 
-        font-size: 11px;
-    }
+            .engagement-card {
+                width: calc(100% - 52px);
 
-    .y-label {
-        left:
-            calc(100% + 7px);
+                height: 126px;
 
-        font-size: 11px;
-    }
-}
+                margin:
+                    0 26px;
 
+                border-radius: 22px;
+            }
 
-/* =========================================================
-   SMALL PHONES — 380px
-   ========================================================= */
+            .engagement-item {
+                gap: 10px;
+            }
 
-@media (max-width: 380px) {
+            .engagement-item svg {
+                width: 28px;
+                height: 28px;
+            }
 
-    #formPage {
-        padding-left: 8px;
-        padding-right: 8px;
-    }
+            .engagement-value {
+                font-size: 22px;
+            }
 
-    .form-wrapper {
-        padding:
-            18px 12px;
-    }
 
-    .form-title {
-        font-size: 23px;
-    }
+            /* -----------------------------------------
+               METRICS
+            ----------------------------------------- */
 
+            .metrics {
+                width: 100%;
 
-    /* Post */
+                padding:
+                    66px 52px 55px;
+            }
 
-    .post-card {
-        width: calc(100% - 16px);
+            .metric {
+                margin-bottom: 66px;
+            }
 
-        margin-left: 8px;
-        margin-right: 8px;
-    }
+            .metric-label {
+                font-size: 20px;
 
-    .post-content {
-        grid-template-columns:
-            88px
-            minmax(0, 1fr);
+                margin-bottom: 8px;
+            }
 
-        gap: 9px;
-    }
+            .metric-label svg {
+                width: 18px;
+                height: 18px;
+            }
 
-    .caption {
-        font-size: 15px;
-    }
+            .metric-value {
+                font-size: 48px;
 
+                line-height: 1.05;
+            }
 
-    /* Engagement */
 
-    .engagement-card {
-        width: calc(100% - 16px);
+            /* -----------------------------------------
+               TWO COLUMNS
+            ----------------------------------------- */
 
-        margin-left: 8px;
-        margin-right: 8px;
-    }
+            .two-columns {
+                grid-template-columns:
+                    minmax(0, 1fr)
+                    minmax(0, 1fr);
 
+                column-gap: 40px;
+            }
 
-    /* Metrics */
+            .two-columns .metric-value {
+                font-size: 45px;
+            }
 
-    .metrics,
-    .video-section {
-        padding-left: 16px;
-        padding-right: 16px;
-    }
 
-    .two-columns,
-    .video-metrics {
-        gap: 12px;
-    }
+            /* -----------------------------------------
+               VIDEO
+            ----------------------------------------- */
 
-    .metric-value {
-        font-size: 32px;
-    }
+            .video-section {
+                width: 100%;
 
-    .two-columns .metric-value,
-    .video-metrics .metric-value {
-        font-size: 26px;
-    }
+                padding:
+                    30px 52px
+                    max(70px, env(safe-area-inset-bottom));
 
+                border-top:
+                    1px solid #373737;
+            }
 
-    /* Chart */
+            .video-heading {
+                font-size: 38px;
 
-    .x-labels span:nth-child(2),
-    .x-labels span:nth-child(4) {
-        display: none;
-    }
-}
+                line-height: 1.1;
+            }
 
+            .video-description {
+                margin-top: 8px;
 
-/* =========================================================
-   VERY SMALL PHONES — 320px
-   ========================================================= */
+                font-size: 20px;
 
-@media (max-width: 320px) {
+                line-height: 1.35;
+            }
 
-    .form-wrapper {
-        padding:
-            17px 11px;
-    }
 
-    .form-title {
-        font-size: 22px;
-    }
+            /* -----------------------------------------
+               VIDEO METRICS
+            ----------------------------------------- */
 
-    .post-card {
-        width: calc(100% - 12px);
+            .video-metrics {
+                width: 100%;
 
-        margin-left: 6px;
-        margin-right: 6px;
-    }
+                margin-top: 55px;
 
-    .post-content {
-        grid-template-columns:
-            78px
-            minmax(0, 1fr);
+                grid-template-columns:
+                    minmax(0, 1fr)
+                    minmax(0, 1fr);
 
-        gap: 8px;
-    }
+                gap: 40px;
+            }
 
-    .caption {
-        font-size: 14px;
-    }
+            .video-metrics .metric-value {
+                font-size: 45px;
+            }
 
-    .thumbnail {
-        border-radius: 13px;
-    }
+            .video-metrics .metric-label {
+                font-size: 19px;
+            }
 
-    .thumbnail-duration {
-        font-size: 12px;
-    }
 
-    .thumbnail-name {
-        font-size: 7px;
-    }
+            /* -----------------------------------------
+               RETENTION
+            ----------------------------------------- */
 
-    .engagement-card {
-        width: calc(100% - 12px);
+            .retention {
+                margin-top: 82px;
+            }
 
-        margin-left: 6px;
-        margin-right: 6px;
-    }
+            .retention-title {
+                font-size: 19px;
+            }
 
-    .engagement-value {
-        font-size: 16px;
-    }
+            .retention-title svg {
+                width: 18px;
+                height: 18px;
+            }
 
-    .metrics {
-        padding-left: 14px;
-        padding-right: 14px;
-    }
 
-    .video-section {
-        padding-left: 14px;
-        padding-right: 14px;
-    }
+            /* -----------------------------------------
+               CHART
+            ----------------------------------------- */
 
-    .metric-value {
-        font-size: 30px;
-    }
+            .chart-area {
+                width: 100%;
 
-    .two-columns,
-    .video-metrics {
-        grid-template-columns: 1fr;
+                height: 200px;
 
-        gap: 25px;
-    }
+                margin-top: 18px;
 
-    .two-columns .metric-value,
-    .video-metrics .metric-value {
-        font-size: 28px;
-    }
-}
+                padding-right: 58px;
+            }
 
+            .chart {
+                height: 155px;
+            }
 
-/* =========================================================
-   LANDSCAPE MOBILE
-   ========================================================= */
+            .chart-line {
+                left: 8px;
+            }
 
-@media (max-height: 500px) and (orientation: landscape) {
+            .chart-line.two {
+                top: 77px;
+            }
 
-    #formPage {
-        padding-top: 12px;
-        padding-bottom: 12px;
-    }
+            .chart-line.three {
+                top: 154px;
+            }
 
-    .form-wrapper {
-        padding: 18px;
-    }
+            .chart-bar {
+                left: 14px;
 
-    .header {
-        height: 52px;
-    }
+                width: 90px;
 
-    .post-card {
-        margin-top: 10px;
-    }
-}
+                bottom: 0;
+            }
 
+            .y-label {
+                left:
+                    calc(100% + 10px);
 
-/* =========================================================
-   ACCESSIBILITY / TOUCH
-   ========================================================= */
+                font-size: 17px;
+            }
 
-@media (pointer: coarse) {
+            .y50 {
+                top: 77px;
+            }
 
-    .back-button {
-        min-width: 42px;
-        min-height: 42px;
-    }
+            .y0 {
+                top: 154px;
+            }
 
-    .generate-button {
-        min-height: 50px;
-    }
+            .x-labels {
+                left: 8px;
+                right: -3px;
 
-    .field input,
-    .field textarea {
-        font-size: 16px;
-    }
-}
+                top: 168px;
 
-</style>
+                font-size: 14px;
+            }
+        }
 
+
+        /* =========================================================
+           SMALL PHONES
+        ========================================================= */
+
+        @media (max-width: 390px) {
+
+            .header {
+                height: 64px;
+
+                padding: 0 18px;
+
+                gap: 14px;
+            }
+
+            .header-title {
+                font-size: 22px;
+            }
+
+            .back-button {
+                width: 38px;
+                height: 38px;
+
+                min-width: 38px;
+            }
+
+
+            .post-card {
+                width: calc(100% - 32px);
+
+                margin:
+                    22px 16px 16px;
+
+                padding: 16px;
+            }
+
+            .post-content {
+                grid-template-columns:
+                    105px
+                    minmax(0, 1fr);
+
+                gap: 12px;
+            }
+
+            .thumbnail {
+                width: 105px;
+                height: 105px;
+
+                min-width: 105px;
+
+                border-radius: 15px;
+            }
+
+            .caption {
+                font-size: 17px;
+
+                line-height: 1.3;
+            }
+
+
+            .engagement-card {
+                width: calc(100% - 32px);
+
+                margin:
+                    0 16px;
+
+                height: 108px;
+
+                border-radius: 19px;
+            }
+
+            .engagement-item {
+                gap: 7px;
+            }
+
+            .engagement-item svg {
+                width: 24px;
+                height: 24px;
+            }
+
+            .engagement-value {
+                font-size: 20px;
+            }
+
+
+            .metrics {
+                padding:
+                    50px 34px 45px;
+            }
+
+            .metric {
+                margin-bottom: 55px;
+            }
+
+            .metric-label {
+                font-size: 17px;
+            }
+
+            .metric-value {
+                font-size: 42px;
+            }
+
+            .two-columns {
+                column-gap: 22px;
+            }
+
+            .two-columns .metric-value {
+                font-size: 36px;
+            }
+
+
+            .video-section {
+                padding:
+                    26px 34px
+                    max(60px, env(safe-area-inset-bottom));
+            }
+
+            .video-heading {
+                font-size: 34px;
+            }
+
+            .video-description {
+                font-size: 17px;
+            }
+
+            .video-metrics {
+                margin-top: 42px;
+
+                gap: 20px;
+            }
+
+            .video-metrics .metric-label {
+                font-size: 16px;
+            }
+
+            .video-metrics .metric-value {
+                font-size: 36px;
+            }
+
+            .retention {
+                margin-top: 65px;
+            }
+
+            .retention-title {
+                font-size: 16px;
+            }
+        }
+
+
+        /* =========================================================
+           VERY SMALL PHONES
+        ========================================================= */
+
+        @media (max-width: 340px) {
+
+            .header {
+                padding: 0 14px;
+            }
+
+            .header-title {
+                font-size: 20px;
+            }
+
+
+            .post-card {
+                width: calc(100% - 24px);
+
+                margin-left: 12px;
+                margin-right: 12px;
+
+                padding: 13px;
+            }
+
+            .post-content {
+                grid-template-columns:
+                    88px
+                    minmax(0, 1fr);
+
+                gap: 10px;
+            }
+
+            .thumbnail {
+                width: 88px;
+                height: 88px;
+
+                min-width: 88px;
+            }
+
+            .caption {
+                font-size: 15px;
+            }
+
+
+            .engagement-card {
+                width: calc(100% - 24px);
+
+                margin-left: 12px;
+                margin-right: 12px;
+
+                height: 100px;
+            }
+
+            .engagement-item svg {
+                width: 21px;
+                height: 21px;
+            }
+
+            .engagement-value {
+                font-size: 18px;
+            }
+
+
+            .metrics {
+                padding:
+                    44px 26px 40px;
+            }
+
+            .metric {
+                margin-bottom: 48px;
+            }
+
+            .metric-label {
+                font-size: 15px;
+            }
+
+            .metric-value {
+                font-size: 37px;
+            }
+
+            .two-columns {
+                column-gap: 16px;
+            }
+
+            .two-columns .metric-value {
+                font-size: 31px;
+            }
+
+
+            .video-section {
+                padding:
+                    24px 26px 50px;
+            }
+
+            .video-heading {
+                font-size: 31px;
+            }
+
+            .video-description {
+                font-size: 15px;
+            }
+
+            .video-metrics {
+                gap: 15px;
+            }
+
+            .video-metrics .metric-value {
+                font-size: 31px;
+            }
+        }
+
+
+        /* =========================================================
+           TOUCH DEVICES
+        ========================================================= */
+
+        @media (pointer: coarse) {
+
+            .back-button {
+                min-width: 42px;
+                min-height: 42px;
+            }
+
+            .generate-button {
+                min-height: 50px;
+            }
+
+            input,
+            textarea {
+                font-size: 16px !important;
+            }
+        }
+
+
+        /* =========================================================
+           SAFE AREA
+        ========================================================= */
+
+        @supports (padding: env(safe-area-inset-top)) {
+
+            .header {
+                padding-top:
+                    env(safe-area-inset-top);
+            }
+
+            #insightsPage {
+                padding-bottom:
+                    env(safe-area-inset-bottom);
+            }
+        }
+
+    </style>
 </head>
 
 
 <body>
 
 
-<!-- =====================================================
-     FORM
-===================================================== -->
+    <!-- =========================================================
+         FORM PAGE
+    ========================================================= -->
 
-<section id="formPage">
+    <section id="formPage">
 
-    <div class="form-wrapper">
+        <div class="form-wrapper">
 
-        <h1 class="form-title">
-            Create Insights
-        </h1>
+            <h1 class="form-title">
+                Create Insights
+            </h1>
 
-        <p class="form-subtitle">
-            Enter the post information below to generate
-            the responsive analytics demo.
-        </p>
-
-
-        <form id="insightsForm">
-
-            <div class="form-grid">
+            <p class="form-subtitle">
+                Enter the post information below to generate
+                the responsive analytics demo.
+            </p>
 
 
-                <!-- USERNAME -->
+            <form id="insightsForm">
 
-                <div class="field">
+                <div class="form-grid">
 
-                    <label>
-                        Username
-                    </label>
 
-                    <input
-                        id="username"
-                        type="text"
-                        value="kim john"
-                        required
-                    >
+                    <!-- USERNAME -->
+
+                    <div class="field">
+
+                        <label>
+                            Username
+                        </label>
+
+                        <input
+                            id="username"
+                            type="text"
+                            value="kim john"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- HANDLE -->
+
+                    <div class="field">
+
+                        <label>
+                            Handle
+                        </label>
+
+                        <input
+                            id="handle"
+                            type="text"
+                            value="@kimjohnclv"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- POST TIME -->
+
+                    <div class="field">
+
+                        <label>
+                            Post time
+                        </label>
+
+                        <input
+                            id="postTime"
+                            type="text"
+                            value="11h"
+                        >
+
+                    </div>
+
+
+                    <!-- VIDEO DURATION -->
+
+                    <div class="field">
+
+                        <label>
+                            Video duration
+                        </label>
+
+                        <input
+                            id="duration"
+                            type="text"
+                            value="1:00"
+                        >
+
+                    </div>
+
+
+                    <!-- CAPTION -->
+
+                    <div class="field full">
+
+                        <label>
+                            Caption
+                        </label>
+
+                        <textarea
+                            id="caption"
+                            required
+                        >20% of profits back every Friday. 💀 MineBit really said “we’ll share.” #MineBit #MineBitCasino</textarea>
+
+                    </div>
+
+
+                    <!-- IMAGE -->
+
+                    <div class="field full">
+
+                        <label>
+                            Image / Video thumbnail
+                        </label>
+
+                        <label class="upload-box">
+
+                            <input
+                                id="imageInput"
+                                type="file"
+                                accept="image/*"
+                            >
+
+                            <div
+                                id="uploadContent"
+                                class="upload-content"
+                            >
+
+                                <i data-lucide="upload"></i>
+
+                                <span>
+                                    Click to upload image
+                                </span>
+
+                            </div>
+
+
+                            <img
+                                id="imagePreview"
+                                alt="Preview"
+                            >
+
+                        </label>
+
+                    </div>
+
+
+                    <!-- LIKES -->
+
+                    <div class="field">
+
+                        <label>
+                            Likes
+                        </label>
+
+                        <input
+                            id="likes"
+                            type="number"
+                            min="0"
+                            value="35"
+                        >
+
+                    </div>
+
+
+                    <!-- REPOSTS -->
+
+                    <div class="field">
+
+                        <label>
+                            Reposts
+                        </label>
+
+                        <input
+                            id="reposts"
+                            type="number"
+                            min="0"
+                            value="0"
+                        >
+
+                    </div>
+
+
+                    <!-- REPLIES -->
+
+                    <div class="field">
+
+                        <label>
+                            Replies
+                        </label>
+
+                        <input
+                            id="replies"
+                            type="number"
+                            min="0"
+                            value="0"
+                        >
+
+                    </div>
+
+
+                    <!-- IMPRESSIONS -->
+
+                    <div class="field">
+
+                        <label>
+                            Impressions
+                        </label>
+
+                        <input
+                            id="impressions"
+                            type="number"
+                            min="0"
+                            value="5210"
+                        >
+
+                    </div>
+
+
+                    <!-- ENGAGEMENTS -->
+
+                    <div class="field">
+
+                        <label>
+                            Engagements
+                        </label>
+
+                        <input
+                            id="engagements"
+                            type="number"
+                            min="0"
+                            value="2052"
+                        >
+
+                    </div>
+
+
+                    <!-- DETAIL EXPANDS -->
+
+                    <div class="field">
+
+                        <label>
+                            Detail expands
+                        </label>
+
+                        <input
+                            id="detailExpands"
+                            type="number"
+                            min="0"
+                            value="1000"
+                        >
+
+                    </div>
+
+
+                    <!-- PROFILE VISITS -->
+
+                    <div class="field">
+
+                        <label>
+                            Profile visits
+                        </label>
+
+                        <input
+                            id="profileVisits"
+                            type="number"
+                            min="0"
+                            value="1000"
+                        >
+
+                    </div>
+
+
+                    <!-- UNIQUE VIEWS -->
+
+                    <div class="field">
+
+                        <label>
+                            Unique views
+                        </label>
+
+                        <input
+                            id="uniqueViews"
+                            type="number"
+                            min="0"
+                            value="1"
+                        >
+
+                    </div>
+
+
+                    <!-- VIDEO VIEWS -->
+
+                    <div class="field">
+
+                        <label>
+                            Video views
+                        </label>
+
+                        <input
+                            id="videoViews"
+                            type="number"
+                            min="0"
+                            value="9"
+                        >
+
+                    </div>
+
+
+                    <!-- RETENTION -->
+
+                    <div class="field">
+
+                        <label>
+                            Retention %
+                        </label>
+
+                        <input
+                            id="retention"
+                            type="number"
+                            min="0"
+                            max="100"
+                            value="100"
+                        >
+
+                    </div>
 
                 </div>
 
 
-                <!-- HANDLE -->
+                <button
+                    class="generate-button"
+                    type="submit"
+                >
+                    Generate Insights
+                </button>
 
-                <div class="field">
+            </form>
 
-                    <label>
-                        Handle
-                    </label>
+        </div>
 
-                    <input
-                        id="handle"
-                        type="text"
-                        value="@kimjohnclv"
-                        required
+    </section>
+
+
+
+    <!-- =========================================================
+         INSIGHTS PAGE
+    ========================================================= -->
+
+    <section id="insightsPage">
+
+
+        <!-- HEADER -->
+
+        <header class="header">
+
+            <button
+                class="back-button"
+                id="backButton"
+                type="button"
+            >
+
+                <i data-lucide="arrow-left"></i>
+
+            </button>
+
+
+            <h1 class="header-title">
+                Post activity
+            </h1>
+
+        </header>
+
+
+
+        <!-- =====================================================
+             POST CARD
+        ====================================================== -->
+
+        <section class="post-card page-animation">
+
+
+            <!-- USER -->
+
+            <div class="user-row">
+
+                <div class="avatar">
+
+                    <span
+                        id="avatarDefault"
+                        class="avatar-default"
                     >
+                        🌿
+                    </span>
 
                 </div>
 
 
-                <!-- POST TIME -->
+                <div class="user-info">
 
-                <div class="field">
-
-                    <label>
-                        Post time
-                    </label>
-
-                    <input
-                        id="postTime"
-                        type="text"
-                        value="12h"
+                    <span
+                        id="outUsername"
+                        class="username"
                     >
+                        kim john
+                    </span>
+
+                    <span
+                        id="outHandle"
+                        class="handle"
+                    >
+                        @kimjohnclv
+                    </span>
+
+                    <span class="user-dot">
+                        ·
+                    </span>
+
+                    <span
+                        id="outTime"
+                        class="post-time"
+                    >
+                        11h
+                    </span>
 
                 </div>
 
+            </div>
 
-                <!-- DURATION -->
 
-                <div class="field">
 
-                    <label>
-                        Video duration
-                    </label>
+            <!-- POST BODY -->
 
-                    <input
-                        id="duration"
-                        type="text"
-                        value="1:03"
+            <div class="post-content">
+
+
+                <!-- THUMBNAIL -->
+
+                <div
+                    id="thumbnail"
+                    class="thumbnail"
+                >
+
+                    <img
+                        id="outImage"
+                        class="thumbnail-image"
+                        alt="Post image"
                     >
+
+
+                    <div class="thumbnail-default">
+
+                        <div class="thumbnail-name">
+                            MINEBIT
+                        </div>
+
+                        <div class="thumbnail-icon">
+                            🎰
+                        </div>
+
+                        <div
+                            id="outDuration"
+                            class="thumbnail-duration"
+                        >
+                            1:00
+                        </div>
+
+                    </div>
 
                 </div>
 
 
                 <!-- CAPTION -->
 
-                <div class="field full">
+                <div
+                    id="outCaption"
+                    class="caption"
+                >
+                    20% of profits back every Friday.
+                    💀 MineBit really said “we’ll share.”
+                    #MineBit #MineBitCasino
+                </div>
 
-                    <label>
-                        Caption
-                    </label>
+            </div>
 
-                    <textarea
-                        id="caption"
-                        required
-                    >Instead of keeping all the profits, MineBit gives 20% back to players 💀🐂</textarea>
+        </section>
+
+
+
+        <!-- =====================================================
+             ENGAGEMENT
+        ====================================================== -->
+
+        <section class="engagement-card">
+
+
+            <!-- LIKES -->
+
+            <div class="engagement-item">
+
+                <i data-lucide="heart"></i>
+
+                <span
+                    id="outLikes"
+                    class="engagement-value"
+                >
+                    35
+                </span>
+
+            </div>
+
+
+            <!-- REPOSTS -->
+
+            <div class="engagement-item">
+
+                <i data-lucide="repeat-2"></i>
+
+                <span
+                    id="outReposts"
+                    class="engagement-value"
+                >
+                    0
+                </span>
+
+            </div>
+
+
+            <!-- REPLIES -->
+
+            <div class="engagement-item">
+
+                <i data-lucide="message-circle"></i>
+
+                <span
+                    id="outReplies"
+                    class="engagement-value"
+                >
+                    0
+                </span>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             METRICS
+        ====================================================== -->
+
+        <section class="metrics">
+
+
+            <!-- IMPRESSIONS -->
+
+            <div class="metric">
+
+                <div class="metric-label">
+
+                    Impressions
+
+                    <i data-lucide="info"></i>
 
                 </div>
 
-
-                <!-- IMAGE -->
-
-                <div class="field full">
-
-                    <label>
-                        Image / Video thumbnail
-                    </label>
-
-
-                    <label class="upload-box">
-
-                        <input
-                            id="imageInput"
-                            type="file"
-                            accept="image/*"
-                        >
-
-
-                        <div
-                            id="uploadContent"
-                            class="upload-content"
-                        >
-
-                            <i data-lucide="upload"></i>
-
-                            <span>
-                                Click to upload image
-                            </span>
-
-                        </div>
-
-
-                        <img
-                            id="imagePreview"
-                            alt="Preview"
-                        >
-
-                    </label>
-
+                <div
+                    id="outImpressions"
+                    class="metric-value"
+                >
+                    5,210
                 </div>
 
-
-                <!-- LIKES -->
-
-                <div class="field">
-
-                    <label>
-                        Likes
-                    </label>
-
-                    <input
-                        id="likes"
-                        type="number"
-                        min="0"
-                        value="233"
-                    >
-
-                </div>
+            </div>
 
 
-                <!-- REPOSTS -->
 
-                <div class="field">
+            <!-- TWO COLUMNS -->
 
-                    <label>
-                        Reposts
-                    </label>
-
-                    <input
-                        id="reposts"
-                        type="number"
-                        min="0"
-                        value="0"
-                    >
-
-                </div>
-
-
-                <!-- REPLIES -->
-
-                <div class="field">
-
-                    <label>
-                        Replies
-                    </label>
-
-                    <input
-                        id="replies"
-                        type="number"
-                        min="0"
-                        value="0"
-                    >
-
-                </div>
-
-
-                <!-- IMPRESSIONS -->
-
-                <div class="field">
-
-                    <label>
-                        Impressions
-                    </label>
-
-                    <input
-                        id="impressions"
-                        type="number"
-                        min="0"
-                        value="88899"
-                    >
-
-                </div>
+            <div class="two-columns">
 
 
                 <!-- ENGAGEMENTS -->
 
-                <div class="field">
+                <div class="metric">
 
-                    <label>
+                    <div class="metric-label">
+
                         Engagements
-                    </label>
 
-                    <input
-                        id="engagements"
-                        type="number"
-                        min="0"
-                        value="8262"
+                        <i data-lucide="info"></i>
+
+                    </div>
+
+                    <div
+                        id="outEngagements"
+                        class="metric-value"
                     >
+                        2,052
+                    </div>
 
                 </div>
 
 
                 <!-- DETAIL EXPANDS -->
 
-                <div class="field">
+                <div class="metric">
 
-                    <label>
+                    <div class="metric-label">
+
                         Detail expands
-                    </label>
 
-                    <input
-                        id="detailExpands"
-                        type="number"
-                        min="0"
-                        value="4000"
+                        <i data-lucide="info"></i>
+
+                    </div>
+
+                    <div
+                        id="outDetailExpands"
+                        class="metric-value"
                     >
+                        1,000
+                    </div>
 
                 </div>
 
+            </div>
 
-                <!-- PROFILE VISITS -->
 
-                <div class="field">
 
-                    <label>
-                        Profile visits
-                    </label>
+            <!-- PROFILE VISITS -->
 
-                    <input
-                        id="profileVisits"
-                        type="number"
-                        min="0"
-                        value="4000"
-                    >
+            <div class="metric">
+
+                <div class="metric-label">
+
+                    Profile visits
+
+                    <i data-lucide="info"></i>
 
                 </div>
+
+                <div
+                    id="outProfileVisits"
+                    class="metric-value"
+                >
+                    1,000
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             VIDEO
+        ====================================================== -->
+
+        <section class="video-section">
+
+
+            <h2 class="video-heading">
+                Video
+            </h2>
+
+
+            <p class="video-description">
+                Metrics for the video you shared
+            </p>
+
+
+
+            <!-- VIDEO METRICS -->
+
+            <div class="video-metrics">
 
 
                 <!-- UNIQUE VIEWS -->
 
-                <div class="field">
+                <div class="metric">
 
-                    <label>
+                    <div class="metric-label">
+
                         Unique views
-                    </label>
 
-                    <input
-                        id="uniqueViews"
-                        type="number"
-                        min="0"
-                        value="1"
-                    >
+                        <i data-lucide="info"></i>
 
-                </div>
-
-
-                <!-- VIDEO VIEWS -->
-
-                <div class="field">
-
-                    <label>
-                        Video views
-                    </label>
-
-                    <input
-                        id="videoViews"
-                        type="number"
-                        min="0"
-                        value="23"
-                    >
-
-                </div>
-
-
-                <!-- RETENTION -->
-
-                <div class="field">
-
-                    <label>
-                        Retention %
-                    </label>
-
-                    <input
-                        id="retention"
-                        type="number"
-                        min="0"
-                        max="100"
-                        value="65"
-                    >
-
-                </div>
-
-
-            </div>
-
-
-            <button
-                class="generate-button"
-                type="submit"
-            >
-                Generate Insights
-            </button>
-
-        </form>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     INSIGHTS PAGE
-===================================================== -->
-
-<section id="insightsPage">
-
-
-    <!-- HEADER -->
-
-    <header class="header">
-
-        <button
-            class="back-button"
-            id="backButton"
-            type="button"
-        >
-
-            <i data-lucide="arrow-left"></i>
-
-        </button>
-
-
-        <h1 class="header-title">
-            Post activity
-        </h1>
-
-    </header>
-
-
-    <!-- =================================================
-         POST CARD
-    ================================================== -->
-
-    <section class="post-card page-animation">
-
-
-        <!-- USER -->
-
-        <div class="user-row">
-
-
-            <div class="avatar">
-
-                <span
-                    id="avatarDefault"
-                    class="avatar-default"
-                >
-                    🌿
-                </span>
-
-            </div>
-
-
-            <div class="user-info">
-
-                <span
-                    id="outUsername"
-                    class="username"
-                >
-                    kim john
-                </span>
-
-
-                <span
-                    id="outHandle"
-                    class="handle"
-                >
-                    @kimjohnclv
-                </span>
-
-
-                <span class="user-dot">
-                    ·
-                </span>
-
-
-                <span
-                    id="outTime"
-                    class="post-time"
-                >
-                    12h
-                </span>
-
-            </div>
-
-        </div>
-
-
-        <!-- POST BODY -->
-
-        <div class="post-content">
-
-
-            <!-- THUMBNAIL -->
-
-            <div
-                id="thumbnail"
-                class="thumbnail"
-            >
-
-                <img
-                    id="outImage"
-                    class="thumbnail-image"
-                    alt="Post image"
-                >
-
-
-                <div class="thumbnail-default">
-
-                    <div class="thumbnail-name">
-                        MINEBIT
                     </div>
-
-
-                    <div class="thumbnail-icon">
-                        🎰
-                    </div>
-
 
                     <div
-                        id="outDuration"
-                        class="thumbnail-duration"
+                        id="outUniqueViews"
+                        class="metric-value"
                     >
-                        1:03
+                        1
+                    </div>
+
+                </div>
+
+
+                <!-- VIEWS -->
+
+                <div class="metric">
+
+                    <div class="metric-label">
+
+                        Views
+
+                        <i data-lucide="info"></i>
+
+                    </div>
+
+                    <div
+                        id="outVideoViews"
+                        class="metric-value"
+                    >
+                        9
                     </div>
 
                 </div>
@@ -2101,341 +2491,90 @@ img {
             </div>
 
 
-            <!-- CAPTION -->
 
-            <div
-                id="outCaption"
-                class="caption"
-            >
-                Instead of keeping all the profits,
-                MineBit gives 20% back to players 💀🐂
-            </div>
+            <!-- RETENTION -->
 
-        </div>
+            <div class="retention">
 
-    </section>
+                <div class="retention-title">
 
-
-    <!-- =================================================
-         ENGAGEMENT
-    ================================================== -->
-
-    <section class="engagement-card">
-
-
-        <!-- LIKES -->
-
-        <div class="engagement-item">
-
-            <i data-lucide="heart"></i>
-
-            <span
-                id="outLikes"
-                class="engagement-value"
-            >
-                233
-            </span>
-
-        </div>
-
-
-        <!-- REPOSTS -->
-
-        <div class="engagement-item">
-
-            <i data-lucide="repeat-2"></i>
-
-            <span
-                id="outReposts"
-                class="engagement-value"
-            >
-                0
-            </span>
-
-        </div>
-
-
-        <!-- REPLIES -->
-
-        <div class="engagement-item">
-
-            <i data-lucide="message-circle"></i>
-
-            <span
-                id="outReplies"
-                class="engagement-value"
-            >
-                0
-            </span>
-
-        </div>
-
-    </section>
-
-
-    <!-- =================================================
-         METRICS
-    ================================================== -->
-
-    <section class="metrics">
-
-
-        <!-- IMPRESSIONS -->
-
-        <div class="metric">
-
-            <div class="metric-label">
-
-                Impressions
-
-                <i data-lucide="info"></i>
-
-            </div>
-
-
-            <div
-                id="outImpressions"
-                class="metric-value"
-            >
-                88,899
-            </div>
-
-        </div>
-
-
-        <!-- TWO COLUMNS -->
-
-        <div class="two-columns">
-
-
-            <!-- ENGAGEMENTS -->
-
-            <div class="metric">
-
-                <div class="metric-label">
-
-                    Engagements
+                    Audience retention
 
                     <i data-lucide="info"></i>
 
-                </div>
-
-
-                <div
-                    id="outEngagements"
-                    class="metric-value"
-                >
-                    8,262
-                </div>
-
-            </div>
-
-
-            <!-- DETAIL EXPANDS -->
-
-            <div class="metric">
-
-                <div class="metric-label">
-
-                    Detail expands
-
-                    <i data-lucide="info"></i>
-
-                </div>
-
-
-                <div
-                    id="outDetailExpands"
-                    class="metric-value"
-                >
-                    4,000
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- PROFILE VISITS -->
-
-        <div class="metric">
-
-            <div class="metric-label">
-
-                Profile visits
-
-                <i data-lucide="info"></i>
-
-            </div>
-
-
-            <div
-                id="outProfileVisits"
-                class="metric-value"
-            >
-                4,000
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =================================================
-         VIDEO
-    ================================================== -->
-
-    <section class="video-section">
-
-
-        <h2 class="video-heading">
-            Video
-        </h2>
-
-
-        <p class="video-description">
-            Metrics for the video you shared
-        </p>
-
-
-        <!-- VIDEO METRICS -->
-
-        <div class="video-metrics">
-
-
-            <!-- UNIQUE -->
-
-            <div class="metric">
-
-                <div class="metric-label">
-
-                    Unique views
-
-                    <i data-lucide="info"></i>
-
-                </div>
-
-
-                <div
-                    id="outUniqueViews"
-                    class="metric-value"
-                >
-                    1
-                </div>
-
-            </div>
-
-
-            <!-- VIEWS -->
-
-            <div class="metric">
-
-                <div class="metric-label">
-
-                    Views
-
-                    <i data-lucide="info"></i>
-
-                </div>
-
-
-                <div
-                    id="outVideoViews"
-                    class="metric-value"
-                >
-                    23
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- RETENTION -->
-
-        <div class="retention">
-
-
-            <div class="retention-title">
-
-                Audience retention
-
-                <i data-lucide="info"></i>
-
-                <span>✧</span>
-
-            </div>
-
-
-            <div class="chart-area">
-
-
-                <div class="chart">
-
-
-                    <div
-                        class="chart-line one"
-                    ></div>
-
-
-                    <div
-                        class="chart-line two"
-                    ></div>
-
-
-                    <div
-                        class="chart-line three"
-                    ></div>
-
-
-                    <div
-                        id="chartBar"
-                        class="chart-bar"
-                    ></div>
-
-
-                    <span
-                        class="y-label y100"
-                    >
-                        100%
+                    <span>
+                        ✧
                     </span>
 
-
-                    <span
-                        class="y-label y50"
-                    >
-                        50%
-                    </span>
+                </div>
 
 
-                    <span
-                        class="y-label y0"
-                    >
-                        0%
-                    </span>
+                <div class="chart-area">
+
+                    <div class="chart">
 
 
-                    <div class="x-labels">
+                        <div
+                            class="chart-line one"
+                        ></div>
 
-                        <span>
-                            00:00
+                        <div
+                            class="chart-line two"
+                        ></div>
+
+                        <div
+                            class="chart-line three"
+                        ></div>
+
+
+                        <div
+                            id="chartBar"
+                            class="chart-bar"
+                        ></div>
+
+
+                        <span
+                            class="y-label y100"
+                        >
+                            100%
                         </span>
 
-                        <span>
-                            00:15
+                        <span
+                            class="y-label y50"
+                        >
+                            50%
                         </span>
 
-                        <span>
-                            00:31
+                        <span
+                            class="y-label y0"
+                        >
+                            0%
                         </span>
 
-                        <span>
-                            00:47
-                        </span>
 
-                        <span id="outChartTime">
-                            01:03
-                        </span>
+                        <div class="x-labels">
+
+                            <span>
+                                00:00
+                            </span>
+
+                            <span>
+                                00:15
+                            </span>
+
+                            <span>
+                                00:31
+                            </span>
+
+                            <span>
+                                00:47
+                            </span>
+
+                            <span id="outChartTime">
+                                01:00
+                            </span>
+
+                        </div>
 
                     </div>
 
@@ -2443,635 +2582,641 @@ img {
 
             </div>
 
-        </div>
+        </section>
 
     </section>
 
-</section>
 
 
-<script>
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================= -->
 
-    /* =====================================================
-       INITIALIZE ICONS
-    ===================================================== */
+    <script>
 
-    lucide.createIcons();
+        /* =====================================================
+           INITIALIZE LUCIDE
+        ===================================================== */
 
+        lucide.createIcons();
 
-    /* =====================================================
-       ELEMENTS
-    ===================================================== */
 
-    const form =
-        document.getElementById("insightsForm");
+        /* =====================================================
+           ELEMENTS
+        ===================================================== */
 
-    const formPage =
-        document.getElementById("formPage");
+        const form =
+            document.getElementById("insightsForm");
 
-    const insightsPage =
-        document.getElementById("insightsPage");
+        const formPage =
+            document.getElementById("formPage");
 
-    const imageInput =
-        document.getElementById("imageInput");
+        const insightsPage =
+            document.getElementById("insightsPage");
 
-    const imagePreview =
-        document.getElementById("imagePreview");
+        const imageInput =
+            document.getElementById("imageInput");
 
-    const uploadContent =
-        document.getElementById("uploadContent");
+        const imagePreview =
+            document.getElementById("imagePreview");
 
-    const thumbnail =
-        document.getElementById("thumbnail");
+        const uploadContent =
+            document.getElementById("uploadContent");
 
-    const outImage =
-        document.getElementById("outImage");
+        const thumbnail =
+            document.getElementById("thumbnail");
 
-    const chartBar =
-        document.getElementById("chartBar");
+        const outImage =
+            document.getElementById("outImage");
 
+        const chartBar =
+            document.getElementById("chartBar");
 
-    /* =====================================================
-       IMAGE PREVIEW
-    ===================================================== */
 
-    imageInput.addEventListener(
-        "change",
-        function () {
+        /* =====================================================
+           IMAGE UPLOAD
+        ===================================================== */
 
-            const file =
-                this.files[0];
-
-            if (!file) {
-                return;
-            }
-
-
-            const reader =
-                new FileReader();
-
-
-            reader.onload =
-                function (event) {
-
-                    imagePreview.src =
-                        event.target.result;
-
-                    imagePreview.style.display =
-                        "block";
-
-                    uploadContent.style.display =
-                        "none";
-                };
-
-
-            reader.readAsDataURL(file);
-
-        }
-    );
-
-
-    /* =====================================================
-       FORM SUBMIT
-    ===================================================== */
-
-    form.addEventListener(
-        "submit",
-        function (event) {
-
-            event.preventDefault();
-
-
-            /* ---------------------------------------------
-               READ FORM DATA
-            --------------------------------------------- */
-
-            const data = {
-
-                username:
-                    getValue("username"),
-
-                handle:
-                    getValue("handle"),
-
-                postTime:
-                    getValue("postTime"),
-
-                duration:
-                    getValue("duration"),
-
-                caption:
-                    getValue("caption"),
-
-                likes:
-                    getNumber("likes"),
-
-                reposts:
-                    getNumber("reposts"),
-
-                replies:
-                    getNumber("replies"),
-
-                impressions:
-                    getNumber("impressions"),
-
-                engagements:
-                    getNumber("engagements"),
-
-                detailExpands:
-                    getNumber("detailExpands"),
-
-                profileVisits:
-                    getNumber("profileVisits"),
-
-                uniqueViews:
-                    getNumber("uniqueViews"),
-
-                videoViews:
-                    getNumber("videoViews"),
-
-                retention:
-                    getNumber("retention")
-
-            };
-
-
-            /* ---------------------------------------------
-               SAVE DATA
-            --------------------------------------------- */
-
-            localStorage.setItem(
-                "insightsDemoData",
-                JSON.stringify(data)
-            );
-
-
-            /* ---------------------------------------------
-               UPDATE UI
-            --------------------------------------------- */
-
-            updateUI(data);
-
-
-            /* ---------------------------------------------
-               SWITCH PAGE
-            --------------------------------------------- */
-
-            formPage.style.display =
-                "none";
-
-            insightsPage.classList.add(
-                "active"
-            );
-
-
-            window.scrollTo({
-                top: 0,
-                behavior: "instant"
-            });
-
-
-            /* Recreate icons */
-
-            lucide.createIcons();
-
-
-            /* Start chart animation */
-
-            setTimeout(
-                animateChart,
-                100
-            );
-
-        }
-    );
-
-
-    /* =====================================================
-       GET STRING
-    ===================================================== */
-
-    function getValue(id) {
-
-        return document
-            .getElementById(id)
-            .value
-            .trim();
-
-    }
-
-
-    /* =====================================================
-       GET NUMBER
-    ===================================================== */
-
-    function getNumber(id) {
-
-        const value =
-            Number(
-                document
-                    .getElementById(id)
-                    .value
-            );
-
-        return Number.isFinite(value)
-            ? Math.max(0, value)
-            : 0;
-
-    }
-
-
-    /* =====================================================
-       FORMAT NUMBER
-    ===================================================== */
-
-    function formatNumber(number) {
-
-        return Number(number || 0)
-            .toLocaleString("en-US");
-
-    }
-
-
-    /* =====================================================
-       UPDATE UI
-    ===================================================== */
-
-    function updateUI(data) {
-
-
-        /* USER */
-
-        document
-            .getElementById("outUsername")
-            .textContent =
-            data.username;
-
-
-        document
-            .getElementById("outHandle")
-            .textContent =
-            data.handle;
-
-
-        document
-            .getElementById("outTime")
-            .textContent =
-            data.postTime;
-
-
-        /* VIDEO */
-
-        document
-            .getElementById("outDuration")
-            .textContent =
-            data.duration;
-
-
-        /* CAPTION */
-
-        document
-            .getElementById("outCaption")
-            .textContent =
-            data.caption;
-
-
-        /* ENGAGEMENT */
-
-        document
-            .getElementById("outLikes")
-            .textContent =
-            formatNumber(data.likes);
-
-
-        document
-            .getElementById("outReposts")
-            .textContent =
-            formatNumber(data.reposts);
-
-
-        document
-            .getElementById("outReplies")
-            .textContent =
-            formatNumber(data.replies);
-
-
-        /* INSIGHTS */
-
-        document
-            .getElementById("outImpressions")
-            .textContent =
-            formatNumber(data.impressions);
-
-
-        document
-            .getElementById("outEngagements")
-            .textContent =
-            formatNumber(data.engagements);
-
-
-        document
-            .getElementById("outDetailExpands")
-            .textContent =
-            formatNumber(data.detailExpands);
-
-
-        document
-            .getElementById("outProfileVisits")
-            .textContent =
-            formatNumber(data.profileVisits);
-
-
-        /* VIDEO */
-
-        document
-            .getElementById("outUniqueViews")
-            .textContent =
-            formatNumber(data.uniqueViews);
-
-
-        document
-            .getElementById("outVideoViews")
-            .textContent =
-            formatNumber(data.videoViews);
-
-
-        /* CHART */
-
-        updateChart(
-            data.retention
-        );
-
-
-        /* IMAGE */
-
-        const savedImage =
-            sessionStorage.getItem(
-                "currentImage"
-            );
-
-
-        if (savedImage) {
-
-            outImage.src =
-                savedImage;
-
-            thumbnail.classList.add(
-                "has-image"
-            );
-
-        } else {
-
-            thumbnail.classList.remove(
-                "has-image"
-            );
-
-        }
-
-    }
-
-
-    /* =====================================================
-       IMAGE STORAGE
-    ===================================================== */
-
-    imageInput.addEventListener(
-        "change",
-        function () {
-
-            const file =
-                this.files[0];
-
-            if (!file) {
-                return;
-            }
-
-
-            const reader =
-                new FileReader();
-
-
-            reader.onload =
-                function (event) {
-
-                    sessionStorage.setItem(
-                        "currentImage",
-                        event.target.result
-                    );
-
-                };
-
-
-            reader.readAsDataURL(file);
-
-        }
-    );
-
-
-    /* =====================================================
-       CHART
-    ===================================================== */
-
-    function updateChart(retention) {
-
-        const value =
-            Math.max(
-                0,
-                Math.min(
-                    100,
-                    Number(retention)
-                )
-            );
-
-
-        const height =
-            142 * (value / 100);
-
-
-        chartBar.style.height =
-            height + "px";
-
-    }
-
-
-    function animateChart() {
-
-        chartBar.classList.remove(
-            "animate"
-        );
-
-
-        void chartBar.offsetWidth;
-
-
-        chartBar.classList.add(
-            "animate"
-        );
-
-    }
-
-
-    /* =====================================================
-       BACK BUTTON
-    ===================================================== */
-
-    document
-        .getElementById("backButton")
-        .addEventListener(
-            "click",
+        imageInput.addEventListener(
+            "change",
             function () {
 
-                insightsPage.classList.remove(
+                const file =
+                    this.files[0];
+
+                if (!file) {
+                    return;
+                }
+
+                const reader =
+                    new FileReader();
+
+                reader.onload =
+                    function (event) {
+
+                        const image =
+                            event.target.result;
+
+                        imagePreview.src =
+                            image;
+
+                        imagePreview.style.display =
+                            "block";
+
+                        uploadContent.style.display =
+                            "none";
+
+                        sessionStorage.setItem(
+                            "currentImage",
+                            image
+                        );
+
+                    };
+
+                reader.readAsDataURL(file);
+
+            }
+        );
+
+
+        /* =====================================================
+           FORM SUBMIT
+        ===================================================== */
+
+        form.addEventListener(
+            "submit",
+            function (event) {
+
+                event.preventDefault();
+
+
+                const data = {
+
+                    username:
+                        getValue("username"),
+
+                    handle:
+                        getValue("handle"),
+
+                    postTime:
+                        getValue("postTime"),
+
+                    duration:
+                        getValue("duration"),
+
+                    caption:
+                        getValue("caption"),
+
+                    likes:
+                        getNumber("likes"),
+
+                    reposts:
+                        getNumber("reposts"),
+
+                    replies:
+                        getNumber("replies"),
+
+                    impressions:
+                        getNumber("impressions"),
+
+                    engagements:
+                        getNumber("engagements"),
+
+                    detailExpands:
+                        getNumber("detailExpands"),
+
+                    profileVisits:
+                        getNumber("profileVisits"),
+
+                    uniqueViews:
+                        getNumber("uniqueViews"),
+
+                    videoViews:
+                        getNumber("videoViews"),
+
+                    retention:
+                        getNumber("retention")
+
+                };
+
+
+                /* SAVE */
+
+                localStorage.setItem(
+                    "insightsDemoData",
+                    JSON.stringify(data)
+                );
+
+
+                /* UPDATE */
+
+                updateUI(data);
+
+
+                /* SHOW INSIGHTS */
+
+                formPage.style.display =
+                    "none";
+
+                insightsPage.classList.add(
                     "active"
                 );
 
-                formPage.style.display =
-                    "flex";
+
+                /* GO TOP */
 
                 window.scrollTo({
                     top: 0,
                     behavior: "instant"
                 });
 
+
+                /* ICONS */
+
+                lucide.createIcons();
+
+
+                /* CHART */
+
+                setTimeout(
+                    animateChart,
+                    100
+                );
+
             }
         );
 
 
-    /* =====================================================
-       LOAD SAVED DATA
-    ===================================================== */
+        /* =====================================================
+           GET STRING
+        ===================================================== */
 
-    window.addEventListener(
-        "load",
-        function () {
+        function getValue(id) {
 
-            const saved =
-                localStorage.getItem(
-                    "insightsDemoData"
+            const element =
+                document.getElementById(id);
+
+            return element
+                ? element.value.trim()
+                : "";
+
+        }
+
+
+        /* =====================================================
+           GET NUMBER
+        ===================================================== */
+
+        function getNumber(id) {
+
+            const element =
+                document.getElementById(id);
+
+            const value =
+                Number(
+                    element
+                        ? element.value
+                        : 0
+                );
+
+            return Number.isFinite(value)
+                ? Math.max(0, value)
+                : 0;
+
+        }
+
+
+        /* =====================================================
+           FORMAT NUMBER
+        ===================================================== */
+
+        function formatNumber(number) {
+
+            return Number(number || 0)
+                .toLocaleString("en-US");
+
+        }
+
+
+        /* =====================================================
+           UPDATE UI
+        ===================================================== */
+
+        function updateUI(data) {
+
+
+            /* USER */
+
+            document
+                .getElementById("outUsername")
+                .textContent =
+                data.username;
+
+
+            document
+                .getElementById("outHandle")
+                .textContent =
+                data.handle;
+
+
+            document
+                .getElementById("outTime")
+                .textContent =
+                data.postTime;
+
+
+
+            /* DURATION */
+
+            document
+                .getElementById("outDuration")
+                .textContent =
+                data.duration;
+
+
+
+            /* CAPTION */
+
+            document
+                .getElementById("outCaption")
+                .textContent =
+                data.caption;
+
+
+
+            /* ENGAGEMENT */
+
+            document
+                .getElementById("outLikes")
+                .textContent =
+                formatNumber(data.likes);
+
+
+            document
+                .getElementById("outReposts")
+                .textContent =
+                formatNumber(data.reposts);
+
+
+            document
+                .getElementById("outReplies")
+                .textContent =
+                formatNumber(data.replies);
+
+
+
+            /* INSIGHTS */
+
+            document
+                .getElementById("outImpressions")
+                .textContent =
+                formatNumber(data.impressions);
+
+
+            document
+                .getElementById("outEngagements")
+                .textContent =
+                formatNumber(data.engagements);
+
+
+            document
+                .getElementById("outDetailExpands")
+                .textContent =
+                formatNumber(data.detailExpands);
+
+
+            document
+                .getElementById("outProfileVisits")
+                .textContent =
+                formatNumber(data.profileVisits);
+
+
+
+            /* VIDEO */
+
+            document
+                .getElementById("outUniqueViews")
+                .textContent =
+                formatNumber(data.uniqueViews);
+
+
+            document
+                .getElementById("outVideoViews")
+                .textContent =
+                formatNumber(data.videoViews);
+
+
+
+            /* CHART */
+
+            updateChart(
+                data.retention
+            );
+
+
+            /* IMAGE */
+
+            const savedImage =
+                sessionStorage.getItem(
+                    "currentImage"
                 );
 
 
-            if (!saved) {
-                return;
+            if (savedImage) {
+
+                outImage.src =
+                    savedImage;
+
+                thumbnail.classList.add(
+                    "has-image"
+                );
+
+            } else {
+
+                thumbnail.classList.remove(
+                    "has-image"
+                );
+
             }
 
 
-            try {
+            /* CHART TIME */
 
-                const data =
-                    JSON.parse(saved);
+            document
+                .getElementById("outChartTime")
+                .textContent =
+                data.duration || "01:00";
+
+        }
 
 
-                /* Put saved values back
-                   into form */
+        /* =====================================================
+           UPDATE CHART
+        ===================================================== */
 
-                setValue(
-                    "username",
-                    data.username
+        function updateChart(retention) {
+
+            const value =
+                Math.max(
+                    0,
+                    Math.min(
+                        100,
+                        Number(retention) || 0
+                    )
                 );
 
-                setValue(
-                    "handle",
-                    data.handle
-                );
 
-                setValue(
-                    "postTime",
-                    data.postTime
-                );
+            const height =
+                146 * (value / 100);
 
-                setValue(
-                    "duration",
-                    data.duration
-                );
 
-                setValue(
-                    "caption",
-                    data.caption
-                );
+            chartBar.style.height =
+                height + "px";
 
-                setValue(
-                    "likes",
-                    data.likes
-                );
+        }
 
-                setValue(
-                    "reposts",
-                    data.reposts
-                );
 
-                setValue(
-                    "replies",
-                    data.replies
-                );
+        /* =====================================================
+           ANIMATE CHART
+        ===================================================== */
 
-                setValue(
-                    "impressions",
-                    data.impressions
-                );
+        function animateChart() {
 
-                setValue(
-                    "engagements",
-                    data.engagements
-                );
+            chartBar.classList.remove(
+                "animate"
+            );
 
-                setValue(
-                    "detailExpands",
-                    data.detailExpands
-                );
 
-                setValue(
-                    "profileVisits",
-                    data.profileVisits
-                );
+            void chartBar.offsetWidth;
 
-                setValue(
-                    "uniqueViews",
-                    data.uniqueViews
-                );
 
-                setValue(
-                    "videoViews",
-                    data.videoViews
-                );
+            chartBar.classList.add(
+                "animate"
+            );
 
-                setValue(
-                    "retention",
-                    data.retention
-                );
+        }
 
-            } catch (error) {
 
-                console.log(
-                    "Could not load saved data."
-                );
+        /* =====================================================
+           BACK BUTTON
+        ===================================================== */
+
+        document
+            .getElementById("backButton")
+            .addEventListener(
+                "click",
+                function () {
+
+                    insightsPage.classList.remove(
+                        "active"
+                    );
+
+                    formPage.style.display =
+                        "flex";
+
+                    window.scrollTo({
+                        top: 0,
+                        behavior: "instant"
+                    });
+
+                }
+            );
+
+
+        /* =====================================================
+           LOAD SAVED DATA
+        ===================================================== */
+
+        window.addEventListener(
+            "load",
+            function () {
+
+                const saved =
+                    localStorage.getItem(
+                        "insightsDemoData"
+                    );
+
+
+                if (!saved) {
+                    return;
+                }
+
+
+                try {
+
+                    const data =
+                        JSON.parse(saved);
+
+
+                    setValue(
+                        "username",
+                        data.username
+                    );
+
+                    setValue(
+                        "handle",
+                        data.handle
+                    );
+
+                    setValue(
+                        "postTime",
+                        data.postTime
+                    );
+
+                    setValue(
+                        "duration",
+                        data.duration
+                    );
+
+                    setValue(
+                        "caption",
+                        data.caption
+                    );
+
+                    setValue(
+                        "likes",
+                        data.likes
+                    );
+
+                    setValue(
+                        "reposts",
+                        data.reposts
+                    );
+
+                    setValue(
+                        "replies",
+                        data.replies
+                    );
+
+                    setValue(
+                        "impressions",
+                        data.impressions
+                    );
+
+                    setValue(
+                        "engagements",
+                        data.engagements
+                    );
+
+                    setValue(
+                        "detailExpands",
+                        data.detailExpands
+                    );
+
+                    setValue(
+                        "profileVisits",
+                        data.profileVisits
+                    );
+
+                    setValue(
+                        "uniqueViews",
+                        data.uniqueViews
+                    );
+
+                    setValue(
+                        "videoViews",
+                        data.videoViews
+                    );
+
+                    setValue(
+                        "retention",
+                        data.retention
+                    );
+
+
+                    /* RESTORE IMAGE */
+
+                    const savedImage =
+                        sessionStorage.getItem(
+                            "currentImage"
+                        );
+
+
+                    if (savedImage) {
+
+                        imagePreview.src =
+                            savedImage;
+
+                        imagePreview.style.display =
+                            "block";
+
+                        uploadContent.style.display =
+                            "none";
+
+                    }
+
+                }
+                catch (error) {
+
+                    console.log(
+                        "Could not load saved data."
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           SET FORM VALUE
+        ===================================================== */
+
+        function setValue(id, value) {
+
+            const element =
+                document.getElementById(id);
+
+            if (element) {
+
+                element.value =
+                    value ?? "";
 
             }
 
         }
-    );
 
-
-    /* =====================================================
-       SET FORM VALUE
-    ===================================================== */
-
-    function setValue(id, value) {
-
-        const element =
-            document.getElementById(id);
-
-        if (element) {
-
-            element.value =
-                value ?? "";
-
-        }
-
-    }
-
-</script>
+    </script>
 
 </body>
-
 </html>
