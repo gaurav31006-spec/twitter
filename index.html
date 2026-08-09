@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+        content="width=device-width, initial-scale=1.0"
     >
 
-    <title>X Post Activity</title>
+    <title>Insights UI Demo</title>
 
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
 
-        /* =========================================================
+        /* =====================================================
            RESET
-        ========================================================= */
+        ===================================================== */
 
         * {
             margin: 0;
@@ -24,27 +25,13 @@
             box-sizing: border-box;
         }
 
-        html {
-            width: 100%;
-            min-width: 0;
-            min-height: 100%;
-            background: #000;
-            overflow-x: hidden;
-            -webkit-text-size-adjust: 100%;
-        }
-
+        html,
         body {
             width: 100%;
-            min-width: 0;
-            min-height: 100vh;
-            min-height: 100svh;
-
-            margin: 0;
-            padding: 0;
-
-            overflow-x: hidden;
+            min-height: 100%;
 
             background: #000;
+
             color: #fff;
 
             font-family:
@@ -57,6 +44,10 @@
                 sans-serif;
         }
 
+        body {
+            overflow-x: hidden;
+        }
+
         button,
         input,
         textarea {
@@ -67,19 +58,15 @@
             cursor: pointer;
         }
 
-        img {
-            max-width: 100%;
-        }
 
-
-        /* =========================================================
+        /* =====================================================
            FORM PAGE
-        ========================================================= */
+        ===================================================== */
 
         #formPage {
+
             width: 100%;
             min-height: 100vh;
-            min-height: 100svh;
 
             display: flex;
             justify-content: center;
@@ -90,23 +77,25 @@
             background: #000;
         }
 
+
         .form-wrapper {
+
             width: 100%;
             max-width: 720px;
-
-            padding: 30px;
 
             background: #111;
 
             border: 1px solid #333;
+
             border-radius: 24px;
+
+            padding: 30px;
         }
 
+
         .form-title {
-            color: #fff;
 
             font-size: 30px;
-            line-height: 1.2;
 
             font-weight: 750;
 
@@ -115,43 +104,51 @@
             margin-bottom: 8px;
         }
 
+
         .form-subtitle {
+
             color: #777;
 
             font-size: 15px;
+
             line-height: 1.5;
 
             margin-bottom: 30px;
         }
 
 
-        /* =========================================================
+        /* =====================================================
            FORM GRID
-        ========================================================= */
+        ===================================================== */
 
         .form-grid {
+
             display: grid;
 
-            grid-template-columns:
-                1fr 1fr;
+            grid-template-columns: 1fr 1fr;
 
             gap: 18px;
         }
 
+
         .field {
+
             display: flex;
+
             flex-direction: column;
 
             gap: 7px;
-
-            min-width: 0;
         }
 
+
         .field.full {
+
             grid-column: 1 / -1;
         }
 
+
         .field label {
+
             color: #aaa;
 
             font-size: 14px;
@@ -159,14 +156,18 @@
             font-weight: 600;
         }
 
+
         .field input,
         .field textarea {
+
             width: 100%;
 
             border: 1px solid #363636;
+
             outline: none;
 
             background: #181818;
+
             color: #fff;
 
             border-radius: 11px;
@@ -178,11 +179,15 @@
                 background .2s;
         }
 
+
         .field input {
+
             height: 46px;
         }
 
+
         .field textarea {
+
             min-height: 105px;
 
             resize: vertical;
@@ -190,20 +195,24 @@
             line-height: 1.5;
         }
 
+
         .field input:focus,
         .field textarea:focus {
+
             border-color: #777;
 
             background: #1b1b1b;
         }
 
 
-        /* =========================================================
-           UPLOAD
-        ========================================================= */
+        /* =====================================================
+           IMAGE UPLOAD
+        ===================================================== */
 
         .upload-box {
+
             width: 100%;
+
             min-height: 150px;
 
             border: 1px dashed #444;
@@ -213,8 +222,10 @@
             background: #151515;
 
             display: flex;
-            align-items: center;
+
             justify-content: center;
+
+            align-items: center;
 
             cursor: pointer;
 
@@ -225,34 +236,48 @@
                 background .2s;
         }
 
+
         .upload-box:hover {
+
             border-color: #777;
+
             background: #191919;
         }
 
+
         .upload-box input {
+
             display: none;
         }
 
+
         .upload-content {
+
             text-align: center;
+
             color: #777;
         }
 
+
         .upload-content svg {
+
             width: 30px;
             height: 30px;
 
             margin-bottom: 8px;
         }
 
+
         .upload-content span {
+
             display: block;
 
             font-size: 14px;
         }
 
+
         #imagePreview {
+
             width: 100%;
             height: 180px;
 
@@ -262,12 +287,14 @@
         }
 
 
-        /* =========================================================
-           BUTTON
-        ========================================================= */
+        /* =====================================================
+           BUTTONS
+        ===================================================== */
 
         .generate-button {
+
             width: 100%;
+
             height: 50px;
 
             margin-top: 25px;
@@ -277,6 +304,7 @@
             border-radius: 13px;
 
             background: #fff;
+
             color: #000;
 
             font-size: 16px;
@@ -288,57 +316,58 @@
                 opacity .2s;
         }
 
+
         .generate-button:hover {
+
             transform: translateY(-2px);
+
             opacity: .9;
         }
 
-        .generate-button:active {
-            transform: scale(.98);
-        }
 
-
-        /* =========================================================
+        /* =====================================================
            INSIGHTS PAGE
-        ========================================================= */
+        ===================================================== */
 
         #insightsPage {
+
             display: none;
 
             width: 100%;
-            min-width: 0;
 
             min-height: 100vh;
-            min-height: 100svh;
 
             background: #101010;
-
-            overflow-x: hidden;
         }
 
+
         #insightsPage.active {
+
             display: block;
         }
 
 
-        /* =========================================================
+        /* =====================================================
            HEADER
-        ========================================================= */
+        ===================================================== */
 
         .header {
+
             width: 100%;
+
             height: 68px;
-
-            padding: 0 18px;
-
-            display: flex;
-            align-items: center;
-
-            gap: 18px;
 
             background: #000;
 
             border-bottom: 1px solid #2d2d2d;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+
+            padding: 0 18px;
 
             position: sticky;
 
@@ -347,13 +376,14 @@
             z-index: 100;
         }
 
-        .back-button {
-            width: 40px;
-            height: 40px;
 
-            min-width: 40px;
+        .back-button {
+
+            width: 36px;
+            height: 36px;
 
             display: flex;
+
             align-items: center;
             justify-content: center;
 
@@ -366,45 +396,36 @@
             border-radius: 50%;
         }
 
+
         .back-button:hover {
+
             background: #181818;
         }
 
-        .back-button:active {
-            transform: scale(.92);
-        }
 
         .back-button svg {
-            width: 28px;
-            height: 28px;
 
-            stroke-width: 2;
+            width: 26px;
+            height: 26px;
         }
 
-        .header-title {
-            min-width: 0;
 
-            color: #fff;
+        .header-title {
 
             font-size: 22px;
 
             font-weight: 750;
 
             letter-spacing: -.3px;
-
-            white-space: nowrap;
-
-            overflow: hidden;
-
-            text-overflow: ellipsis;
         }
 
 
-        /* =========================================================
+        /* =====================================================
            POST CARD
-        ========================================================= */
+        ===================================================== */
 
         .post-card {
+
             width: calc(100% - 20px);
 
             margin: 20px 10px 18px;
@@ -421,53 +442,63 @@
         }
 
 
-        /* =========================================================
+        /* =====================================================
            USER
-        ========================================================= */
+        ===================================================== */
 
         .user-row {
+
             width: 100%;
 
             display: flex;
-            align-items: center;
 
-            min-width: 0;
+            align-items: center;
         }
 
+
         .avatar {
+
             width: 35px;
             height: 35px;
 
             min-width: 35px;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            border-radius: 50%;
 
             background: #dcebd9;
 
-            border-radius: 50%;
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
 
             overflow: hidden;
         }
 
+
         .avatar img {
+
             width: 100%;
             height: 100%;
 
             object-fit: cover;
         }
 
+
         .avatar-default {
+
             font-size: 17px;
         }
 
+
         .user-info {
+
             min-width: 0;
 
             margin-left: 11px;
 
             display: flex;
+
             align-items: center;
 
             gap: 5px;
@@ -475,61 +506,58 @@
             font-size: 16px;
 
             white-space: nowrap;
-
-            overflow: hidden;
         }
 
+
         .username {
+
             color: #f5f5f5;
 
             font-weight: 700;
-
-            flex-shrink: 0;
         }
+
 
         .handle,
         .post-time {
-            color: #777;
 
-            min-width: 0;
+            color: #777;
 
             overflow: hidden;
 
             text-overflow: ellipsis;
-
-            white-space: nowrap;
         }
+
 
         .user-dot {
-            color: #777;
 
-            flex-shrink: 0;
+            color: #777;
         }
 
 
-        /* =========================================================
+        /* =====================================================
            POST CONTENT
-        ========================================================= */
+        ===================================================== */
 
         .post-content {
+
             width: 100%;
 
             margin-top: 11px;
 
             display: flex;
+
             align-items: flex-start;
 
             gap: 12px;
-
-            min-width: 0;
         }
 
 
-        /* =========================================================
+        /* =====================================================
            THUMBNAIL
-        ========================================================= */
+        ===================================================== */
 
         .thumbnail {
+
             position: relative;
 
             width: 128px;
@@ -552,7 +580,9 @@
                 );
         }
 
+
         .thumbnail-image {
+
             position: absolute;
 
             inset: 0;
@@ -565,70 +595,83 @@
             display: none;
         }
 
-        .thumbnail.has-image .thumbnail-image {
+
+        .thumbnail.has-image
+        .thumbnail-image {
+
             display: block;
         }
 
-        .thumbnail.has-image .thumbnail-default {
+
+        .thumbnail.has-image
+        .thumbnail-default {
+
             display: none;
         }
 
+
         .thumbnail-default {
+
             position: absolute;
 
             inset: 0;
         }
 
+
         .thumbnail-name {
+
             position: absolute;
 
             top: 8px;
             left: 9px;
 
-            color: #fff;
-
             font-size: 9px;
 
             font-weight: 800;
+
+            color: #fff;
         }
 
+
         .thumbnail-icon {
+
             position: absolute;
 
             left: 0;
             right: 0;
 
-            top: 50%;
-
-            transform: translateY(-50%);
+            top: 39px;
 
             text-align: center;
 
             font-size: 34px;
         }
 
+
         .thumbnail-duration {
+
             position: absolute;
 
             right: 8px;
             bottom: 7px;
 
-            color: #fff;
-
             font-size: 17px;
 
             font-weight: 700;
+
+            color: #fff;
 
             text-shadow:
                 0 1px 5px #000;
         }
 
 
-        /* =========================================================
+        /* =====================================================
            CAPTION
-        ========================================================= */
+        ===================================================== */
 
         .caption {
+
             flex: 1;
 
             min-width: 0;
@@ -639,17 +682,18 @@
 
             line-height: 1.28;
 
-            overflow-wrap: anywhere;
+            overflow-wrap: break-word;
 
-            word-break: break-word;
+            word-break: normal;
         }
 
 
-        /* =========================================================
+        /* =====================================================
            ENGAGEMENT CARD
-        ========================================================= */
+        ===================================================== */
 
         .engagement-card {
+
             width: calc(100% - 30px);
 
             height: 102px;
@@ -666,12 +710,10 @@
 
             grid-template-columns:
                 repeat(3, 1fr);
-
-            overflow: hidden;
         }
 
+
         .engagement-item {
-            min-width: 0;
 
             display: flex;
 
@@ -686,42 +728,46 @@
             color: #888;
         }
 
+
         .engagement-item svg {
+
             width: 23px;
             height: 23px;
 
             stroke-width: 1.7;
         }
 
+
         .engagement-value {
+
             color: #eee;
 
             font-size: 21px;
 
             font-weight: 500;
-
-            white-space: nowrap;
         }
 
 
-        /* =========================================================
+        /* =====================================================
            METRICS
-        ========================================================= */
+        ===================================================== */
 
         .metrics {
-            width: 100%;
 
             padding: 50px 40px;
         }
 
+
         .metric {
-            width: 100%;
 
             margin-bottom: 47px;
         }
 
+
         .metric-label {
+
             display: flex;
+
             align-items: center;
 
             gap: 5px;
@@ -733,16 +779,18 @@
             margin-bottom: 8px;
         }
 
+
         .metric-label svg {
+
             width: 13px;
             height: 13px;
 
             stroke-width: 1.8;
-
-            flex-shrink: 0;
         }
 
+
         .metric-value {
+
             color: #f3f3f3;
 
             font-size: 43px;
@@ -752,96 +800,93 @@
             line-height: 1;
 
             letter-spacing: -1.5px;
-
-            overflow-wrap: anywhere;
         }
 
 
-        /* =========================================================
-           TWO COLUMN METRICS
-        ========================================================= */
+        /* =====================================================
+           TWO COLUMNS
+        ===================================================== */
 
         .two-columns {
-            width: 100%;
 
             display: grid;
 
             grid-template-columns:
-                minmax(0, 1fr)
-                minmax(0, 1fr);
+                1fr 1fr;
 
             gap: 30px;
         }
 
+
         .two-columns .metric-value {
+
             font-size: 36px;
         }
 
 
-        /* =========================================================
-           VIDEO
-        ========================================================= */
+        /* =====================================================
+           VIDEO SECTION
+        ===================================================== */
 
         .video-section {
-            width: 100%;
 
             border-top: 1px solid #363636;
 
             padding: 35px 40px 60px;
         }
 
+
         .video-heading {
-            color: #fff;
 
             font-size: 32px;
 
             font-weight: 750;
 
-            line-height: 1.1;
-
             letter-spacing: -.7px;
         }
 
+
         .video-description {
+
             margin-top: 8px;
 
             color: #808080;
 
             font-size: 16px;
-
-            line-height: 1.4;
         }
 
+
         .video-metrics {
-            width: 100%;
 
             margin-top: 45px;
 
             display: grid;
 
             grid-template-columns:
-                minmax(0, 1fr)
-                minmax(0, 1fr);
+                1fr 1fr;
 
             gap: 30px;
         }
 
+
         .video-metrics .metric-value {
+
             font-size: 36px;
         }
 
 
-        /* =========================================================
+        /* =====================================================
            RETENTION
-        ========================================================= */
+        ===================================================== */
 
         .retention {
-            width: 100%;
 
             margin-top: 4px;
         }
 
+
         .retention-title {
+
             display: flex;
 
             align-items: center;
@@ -853,20 +898,21 @@
             font-size: 16px;
         }
 
+
         .retention-title svg {
+
             width: 13px;
             height: 13px;
         }
 
 
-        /* =========================================================
+        /* =====================================================
            CHART
-        ========================================================= */
+        ===================================================== */
 
         .chart-area {
-            position: relative;
 
-            width: 100%;
+            position: relative;
 
             height: 190px;
 
@@ -875,7 +921,9 @@
             padding-right: 55px;
         }
 
+
         .chart {
+
             position: relative;
 
             width: 100%;
@@ -883,7 +931,9 @@
             height: 150px;
         }
 
+
         .chart-line {
+
             position: absolute;
 
             left: 12px;
@@ -894,19 +944,24 @@
             background: #343434;
         }
 
+
         .chart-line.one {
             top: 0;
         }
+
 
         .chart-line.two {
             top: 73px;
         }
 
+
         .chart-line.three {
             top: 146px;
         }
 
+
         .chart-bar {
+
             position: absolute;
 
             left: 12px;
@@ -924,14 +979,19 @@
             transform: scaleY(0);
 
             transition:
+                height .7s ease,
                 transform .7s ease;
         }
 
+
         .chart-bar.animate {
+
             transform: scaleY(1);
         }
 
+
         .y-label {
+
             position: absolute;
 
             left: calc(100% + 12px);
@@ -941,23 +1001,26 @@
             color: #858585;
 
             font-size: 14px;
-
-            white-space: nowrap;
         }
+
 
         .y100 {
             top: 0;
         }
 
+
         .y50 {
             top: 73px;
         }
+
 
         .y0 {
             top: 146px;
         }
 
+
         .x-labels {
+
             position: absolute;
 
             left: 12px;
@@ -975,18 +1038,21 @@
         }
 
 
-        /* =========================================================
-           ANIMATION
-        ========================================================= */
+        /* =====================================================
+           PAGE ANIMATION
+        ===================================================== */
 
         .page-animation {
+
             animation:
                 pageIn .45s ease both;
         }
 
+
         @keyframes pageIn {
 
             from {
+
                 opacity: 0;
 
                 transform:
@@ -994,6 +1060,7 @@
             }
 
             to {
+
                 opacity: 1;
 
                 transform:
@@ -1002,1393 +1069,708 @@
         }
 
 
-        /* =========================================================
-           MOBILE — MATCH PHONE SCREEN
-        ========================================================= */
+        /* =====================================================
+           MOBILE
+        ===================================================== */
 
         @media (max-width: 600px) {
 
-            html {
-                width: 100%;
-                min-width: 0;
-
-                overflow-x: hidden;
-            }
-
-            body {
-                width: 100%;
-                min-width: 0;
-
-                overflow-x: hidden;
-            }
-
-
-            /* -----------------------------------------
-               FORM
-            ----------------------------------------- */
-
             #formPage {
-                width: 100%;
 
-                min-height: 100svh;
-
-                padding:
-                    max(16px, env(safe-area-inset-top))
-                    10px
-                    max(20px, env(safe-area-inset-bottom));
+                padding: 20px 12px;
             }
+
 
             .form-wrapper {
-                width: 100%;
-                max-width: none;
 
-                padding: 22px 15px;
+                padding: 22px 17px;
 
-                border-radius: 18px;
+                border-radius: 20px;
             }
+
 
             .form-title {
-                font-size: 26px;
+
+                font-size: 25px;
             }
 
-            .form-subtitle {
-                font-size: 14px;
-
-                margin-bottom: 22px;
-            }
 
             .form-grid {
+
                 grid-template-columns: 1fr;
 
-                gap: 14px;
+                gap: 16px;
             }
 
+
             .field.full {
+
                 grid-column: auto;
             }
 
-            .field input,
-            .field textarea {
-                font-size: 16px;
-            }
-
-            .field input {
-                height: 48px;
-            }
-
-            .field textarea {
-                min-height: 120px;
-            }
-
-            .upload-box {
-                min-height: 145px;
-            }
-
-            .generate-button {
-                width: 100%;
-
-                height: 52px;
-
-                margin-top: 20px;
-            }
-
-
-            /* -----------------------------------------
-               HEADER
-            ----------------------------------------- */
 
             .header {
-                width: 100%;
 
-                height: 72px;
+                height: 64px;
 
                 padding:
-                    0
-                    max(20px, env(safe-area-inset-right))
-                    0
-                    max(20px, env(safe-area-inset-left));
-
-                gap: 20px;
-
-                background: #000;
-
-                border-bottom:
-                    1px solid #292929;
+                    0 16px;
             }
 
-            .back-button {
-                width: 40px;
-                height: 40px;
-
-                min-width: 40px;
-            }
-
-            .back-button svg {
-                width: 32px;
-                height: 32px;
-            }
 
             .header-title {
-                font-size: 24px;
 
-                letter-spacing: -.5px;
+                font-size: 21px;
             }
 
-
-            /* -----------------------------------------
-               POST
-            ----------------------------------------- */
 
             .post-card {
-                width: calc(100% - 52px);
+
+                width: calc(100% - 20px);
 
                 margin:
-                    28px 26px 20px;
+                    20px 10px 18px;
 
                 padding:
-                    19px 20px;
-
-                border-radius: 24px;
-            }
-
-
-            /* -----------------------------------------
-               USER
-            ----------------------------------------- */
-
-            .avatar {
-                width: 40px;
-                height: 40px;
-
-                min-width: 40px;
-            }
-
-            .user-info {
-                margin-left: 10px;
-
-                gap: 5px;
-
-                font-size: 16px;
-            }
-
-            .username {
-                font-size: 17px;
-            }
-
-            .handle,
-            .post-time {
-                font-size: 16px;
-            }
-
-
-            /* -----------------------------------------
-               POST BODY
-            ----------------------------------------- */
-
-            .post-content {
-                width: 100%;
-
-                margin-top: 12px;
-
-                display: grid;
-
-                grid-template-columns:
-                    128px
-                    minmax(0, 1fr);
-
-                gap: 18px;
-            }
-
-            .thumbnail {
-                width: 128px;
-                height: 124px;
-
-                min-width: 128px;
-
-                border-radius: 18px;
-            }
-
-            .thumbnail-icon {
-                top: 50%;
-
-                transform:
-                    translateY(-50%);
-
-                font-size: 35px;
-            }
-
-            .thumbnail-name {
-                top: 8px;
-                left: 9px;
-
-                font-size: 9px;
-            }
-
-            .thumbnail-duration {
-                right: 8px;
-                bottom: 7px;
-
-                font-size: 16px;
-            }
-
-            .caption {
-                width: 100%;
-
-                font-size: 20px;
-
-                line-height: 1.35;
-
-                overflow-wrap: anywhere;
-
-                word-break: break-word;
-            }
-
-
-            /* -----------------------------------------
-               ENGAGEMENT
-            ----------------------------------------- */
-
-            .engagement-card {
-                width: calc(100% - 52px);
-
-                height: 126px;
-
-                margin:
-                    0 26px;
+                    18px 14px;
 
                 border-radius: 22px;
             }
 
-            .engagement-item {
+
+            .post-content {
+
                 gap: 10px;
             }
 
-            .engagement-item svg {
-                width: 28px;
-                height: 28px;
-            }
-
-            .engagement-value {
-                font-size: 22px;
-            }
-
-
-            /* -----------------------------------------
-               METRICS
-            ----------------------------------------- */
-
-            .metrics {
-                width: 100%;
-
-                padding:
-                    66px 52px 55px;
-            }
-
-            .metric {
-                margin-bottom: 66px;
-            }
-
-            .metric-label {
-                font-size: 20px;
-
-                margin-bottom: 8px;
-            }
-
-            .metric-label svg {
-                width: 18px;
-                height: 18px;
-            }
-
-            .metric-value {
-                font-size: 48px;
-
-                line-height: 1.05;
-            }
-
-
-            /* -----------------------------------------
-               TWO COLUMNS
-            ----------------------------------------- */
-
-            .two-columns {
-                grid-template-columns:
-                    minmax(0, 1fr)
-                    minmax(0, 1fr);
-
-                column-gap: 40px;
-            }
-
-            .two-columns .metric-value {
-                font-size: 45px;
-            }
-
-
-            /* -----------------------------------------
-               VIDEO
-            ----------------------------------------- */
-
-            .video-section {
-                width: 100%;
-
-                padding:
-                    30px 52px
-                    max(70px, env(safe-area-inset-bottom));
-
-                border-top:
-                    1px solid #373737;
-            }
-
-            .video-heading {
-                font-size: 38px;
-
-                line-height: 1.1;
-            }
-
-            .video-description {
-                margin-top: 8px;
-
-                font-size: 20px;
-
-                line-height: 1.35;
-            }
-
-
-            /* -----------------------------------------
-               VIDEO METRICS
-            ----------------------------------------- */
-
-            .video-metrics {
-                width: 100%;
-
-                margin-top: 55px;
-
-                grid-template-columns:
-                    minmax(0, 1fr)
-                    minmax(0, 1fr);
-
-                gap: 40px;
-            }
-
-            .video-metrics .metric-value {
-                font-size: 45px;
-            }
-
-            .video-metrics .metric-label {
-                font-size: 19px;
-            }
-
-
-            /* -----------------------------------------
-               RETENTION
-            ----------------------------------------- */
-
-            .retention {
-                margin-top: 82px;
-            }
-
-            .retention-title {
-                font-size: 19px;
-            }
-
-            .retention-title svg {
-                width: 18px;
-                height: 18px;
-            }
-
-
-            /* -----------------------------------------
-               CHART
-            ----------------------------------------- */
-
-            .chart-area {
-                width: 100%;
-
-                height: 200px;
-
-                margin-top: 18px;
-
-                padding-right: 58px;
-            }
-
-            .chart {
-                height: 155px;
-            }
-
-            .chart-line {
-                left: 8px;
-            }
-
-            .chart-line.two {
-                top: 77px;
-            }
-
-            .chart-line.three {
-                top: 154px;
-            }
-
-            .chart-bar {
-                left: 14px;
-
-                width: 90px;
-
-                bottom: 0;
-            }
-
-            .y-label {
-                left:
-                    calc(100% + 10px);
-
-                font-size: 17px;
-            }
-
-            .y50 {
-                top: 77px;
-            }
-
-            .y0 {
-                top: 154px;
-            }
-
-            .x-labels {
-                left: 8px;
-                right: -3px;
-
-                top: 168px;
-
-                font-size: 14px;
-            }
-        }
-
-
-        /* =========================================================
-           SMALL PHONES
-        ========================================================= */
-
-        @media (max-width: 390px) {
-
-            .header {
-                height: 64px;
-
-                padding: 0 18px;
-
-                gap: 14px;
-            }
-
-            .header-title {
-                font-size: 22px;
-            }
-
-            .back-button {
-                width: 38px;
-                height: 38px;
-
-                min-width: 38px;
-            }
-
-
-            .post-card {
-                width: calc(100% - 32px);
-
-                margin:
-                    22px 16px 16px;
-
-                padding: 16px;
-            }
-
-            .post-content {
-                grid-template-columns:
-                    105px
-                    minmax(0, 1fr);
-
-                gap: 12px;
-            }
 
             .thumbnail {
-                width: 105px;
-                height: 105px;
 
-                min-width: 105px;
+                width: 110px;
+                height: 108px;
 
-                border-radius: 15px;
+                min-width: 110px;
+
+                border-radius: 17px;
             }
 
+
             .caption {
+
                 font-size: 17px;
 
                 line-height: 1.3;
             }
 
 
+            .user-info {
+
+                font-size: 14px;
+
+                gap: 4px;
+            }
+
+
             .engagement-card {
-                width: calc(100% - 32px);
 
-                margin:
-                    0 16px;
-
-                height: 108px;
-
-                border-radius: 19px;
-            }
-
-            .engagement-item {
-                gap: 7px;
-            }
-
-            .engagement-item svg {
-                width: 24px;
-                height: 24px;
-            }
-
-            .engagement-value {
-                font-size: 20px;
+                width:
+                    calc(100% - 30px);
             }
 
 
             .metrics {
+
                 padding:
-                    50px 34px 45px;
+                    48px 27px;
             }
 
-            .metric {
-                margin-bottom: 55px;
-            }
-
-            .metric-label {
-                font-size: 17px;
-            }
 
             .metric-value {
-                font-size: 42px;
+
+                font-size: 39px;
             }
+
 
             .two-columns {
-                column-gap: 22px;
-            }
-
-            .two-columns .metric-value {
-                font-size: 36px;
-            }
-
-
-            .video-section {
-                padding:
-                    26px 34px
-                    max(60px, env(safe-area-inset-bottom));
-            }
-
-            .video-heading {
-                font-size: 34px;
-            }
-
-            .video-description {
-                font-size: 17px;
-            }
-
-            .video-metrics {
-                margin-top: 42px;
 
                 gap: 20px;
             }
 
-            .video-metrics .metric-label {
-                font-size: 16px;
-            }
 
-            .video-metrics .metric-value {
-                font-size: 36px;
-            }
-
-            .retention {
-                margin-top: 65px;
-            }
-
-            .retention-title {
-                font-size: 16px;
-            }
-        }
-
-
-        /* =========================================================
-           VERY SMALL PHONES
-        ========================================================= */
-
-        @media (max-width: 340px) {
-
-            .header {
-                padding: 0 14px;
-            }
-
-            .header-title {
-                font-size: 20px;
-            }
-
-
-            .post-card {
-                width: calc(100% - 24px);
-
-                margin-left: 12px;
-                margin-right: 12px;
-
-                padding: 13px;
-            }
-
-            .post-content {
-                grid-template-columns:
-                    88px
-                    minmax(0, 1fr);
-
-                gap: 10px;
-            }
-
-            .thumbnail {
-                width: 88px;
-                height: 88px;
-
-                min-width: 88px;
-            }
-
-            .caption {
-                font-size: 15px;
-            }
-
-
-            .engagement-card {
-                width: calc(100% - 24px);
-
-                margin-left: 12px;
-                margin-right: 12px;
-
-                height: 100px;
-            }
-
-            .engagement-item svg {
-                width: 21px;
-                height: 21px;
-            }
-
-            .engagement-value {
-                font-size: 18px;
-            }
-
-
-            .metrics {
-                padding:
-                    44px 26px 40px;
-            }
-
-            .metric {
-                margin-bottom: 48px;
-            }
-
-            .metric-label {
-                font-size: 15px;
-            }
-
+            .two-columns
+            .metric-value,
+            .video-metrics
             .metric-value {
-                font-size: 37px;
-            }
 
-            .two-columns {
-                column-gap: 16px;
-            }
-
-            .two-columns .metric-value {
-                font-size: 31px;
+                font-size: 32px;
             }
 
 
             .video-section {
+
                 padding:
-                    24px 26px 50px;
+                    34px 27px 60px;
             }
+
 
             .video-heading {
-                font-size: 31px;
+
+                font-size: 29px;
             }
 
-            .video-description {
+        }
+
+
+        /* =====================================================
+           SMALL MOBILE
+        ===================================================== */
+
+        @media (max-width: 380px) {
+
+            .post-card {
+
+                padding:
+                    17px 12px;
+            }
+
+
+            .thumbnail {
+
+                width: 95px;
+                height: 95px;
+
+                min-width: 95px;
+            }
+
+
+            .caption {
+
                 font-size: 15px;
             }
 
-            .video-metrics {
-                gap: 15px;
+
+            .thumbnail-icon {
+
+                top: 31px;
+
+                font-size: 27px;
             }
 
-            .video-metrics .metric-value {
-                font-size: 31px;
-            }
-        }
 
+            .thumbnail-duration {
 
-        /* =========================================================
-           TOUCH DEVICES
-        ========================================================= */
+                right: 6px;
+                bottom: 6px;
 
-        @media (pointer: coarse) {
-
-            .back-button {
-                min-width: 42px;
-                min-height: 42px;
+                font-size: 14px;
             }
 
-            .generate-button {
-                min-height: 50px;
+
+            .thumbnail-name {
+
+                top: 7px;
+                left: 7px;
+
+                font-size: 8px;
             }
 
-            input,
-            textarea {
-                font-size: 16px !important;
-            }
-        }
 
+            .metrics {
 
-        /* =========================================================
-           SAFE AREA
-        ========================================================= */
-
-        @supports (padding: env(safe-area-inset-top)) {
-
-            .header {
-                padding-top:
-                    env(safe-area-inset-top);
+                padding-left: 22px;
+                padding-right: 22px;
             }
 
-            #insightsPage {
-                padding-bottom:
-                    env(safe-area-inset-bottom);
+
+            .video-section {
+
+                padding-left: 22px;
+                padding-right: 22px;
             }
+
         }
 
     </style>
+
 </head>
 
 
 <body>
 
 
-    <!-- =========================================================
-         FORM PAGE
-    ========================================================= -->
+<!-- =====================================================
+     FORM
+===================================================== -->
 
-    <section id="formPage">
+<section id="formPage">
 
-        <div class="form-wrapper">
+    <div class="form-wrapper">
 
-            <h1 class="form-title">
-                Create Insights
-            </h1>
+        <h1 class="form-title">
+            Create Insights
+        </h1>
 
-            <p class="form-subtitle">
-                Enter the post information below to generate
-                the responsive analytics demo.
-            </p>
+        <p class="form-subtitle">
+            Enter the post information below to generate
+            the responsive analytics demo.
+        </p>
 
 
-            <form id="insightsForm">
+        <form id="insightsForm">
 
-                <div class="form-grid">
+            <div class="form-grid">
 
 
-                    <!-- USERNAME -->
+                <!-- USERNAME -->
 
-                    <div class="field">
+                <div class="field">
 
-                        <label>
-                            Username
-                        </label>
+                    <label>
+                        Username
+                    </label>
 
-                        <input
-                            id="username"
-                            type="text"
-                            value="kim john"
-                            required
-                        >
-
-                    </div>
-
-
-                    <!-- HANDLE -->
-
-                    <div class="field">
-
-                        <label>
-                            Handle
-                        </label>
-
-                        <input
-                            id="handle"
-                            type="text"
-                            value="@kimjohnclv"
-                            required
-                        >
-
-                    </div>
-
-
-                    <!-- POST TIME -->
-
-                    <div class="field">
-
-                        <label>
-                            Post time
-                        </label>
-
-                        <input
-                            id="postTime"
-                            type="text"
-                            value="11h"
-                        >
-
-                    </div>
-
-
-                    <!-- VIDEO DURATION -->
-
-                    <div class="field">
-
-                        <label>
-                            Video duration
-                        </label>
-
-                        <input
-                            id="duration"
-                            type="text"
-                            value="1:00"
-                        >
-
-                    </div>
-
-
-                    <!-- CAPTION -->
-
-                    <div class="field full">
-
-                        <label>
-                            Caption
-                        </label>
-
-                        <textarea
-                            id="caption"
-                            required
-                        >20% of profits back every Friday. 💀 MineBit really said “we’ll share.” #MineBit #MineBitCasino</textarea>
-
-                    </div>
-
-
-                    <!-- IMAGE -->
-
-                    <div class="field full">
-
-                        <label>
-                            Image / Video thumbnail
-                        </label>
-
-                        <label class="upload-box">
-
-                            <input
-                                id="imageInput"
-                                type="file"
-                                accept="image/*"
-                            >
-
-                            <div
-                                id="uploadContent"
-                                class="upload-content"
-                            >
-
-                                <i data-lucide="upload"></i>
-
-                                <span>
-                                    Click to upload image
-                                </span>
-
-                            </div>
-
-
-                            <img
-                                id="imagePreview"
-                                alt="Preview"
-                            >
-
-                        </label>
-
-                    </div>
-
-
-                    <!-- LIKES -->
-
-                    <div class="field">
-
-                        <label>
-                            Likes
-                        </label>
-
-                        <input
-                            id="likes"
-                            type="number"
-                            min="0"
-                            value="35"
-                        >
-
-                    </div>
-
-
-                    <!-- REPOSTS -->
-
-                    <div class="field">
-
-                        <label>
-                            Reposts
-                        </label>
-
-                        <input
-                            id="reposts"
-                            type="number"
-                            min="0"
-                            value="0"
-                        >
-
-                    </div>
-
-
-                    <!-- REPLIES -->
-
-                    <div class="field">
-
-                        <label>
-                            Replies
-                        </label>
-
-                        <input
-                            id="replies"
-                            type="number"
-                            min="0"
-                            value="0"
-                        >
-
-                    </div>
-
-
-                    <!-- IMPRESSIONS -->
-
-                    <div class="field">
-
-                        <label>
-                            Impressions
-                        </label>
-
-                        <input
-                            id="impressions"
-                            type="number"
-                            min="0"
-                            value="5210"
-                        >
-
-                    </div>
-
-
-                    <!-- ENGAGEMENTS -->
-
-                    <div class="field">
-
-                        <label>
-                            Engagements
-                        </label>
-
-                        <input
-                            id="engagements"
-                            type="number"
-                            min="0"
-                            value="2052"
-                        >
-
-                    </div>
-
-
-                    <!-- DETAIL EXPANDS -->
-
-                    <div class="field">
-
-                        <label>
-                            Detail expands
-                        </label>
-
-                        <input
-                            id="detailExpands"
-                            type="number"
-                            min="0"
-                            value="1000"
-                        >
-
-                    </div>
-
-
-                    <!-- PROFILE VISITS -->
-
-                    <div class="field">
-
-                        <label>
-                            Profile visits
-                        </label>
-
-                        <input
-                            id="profileVisits"
-                            type="number"
-                            min="0"
-                            value="1000"
-                        >
-
-                    </div>
-
-
-                    <!-- UNIQUE VIEWS -->
-
-                    <div class="field">
-
-                        <label>
-                            Unique views
-                        </label>
-
-                        <input
-                            id="uniqueViews"
-                            type="number"
-                            min="0"
-                            value="1"
-                        >
-
-                    </div>
-
-
-                    <!-- VIDEO VIEWS -->
-
-                    <div class="field">
-
-                        <label>
-                            Video views
-                        </label>
-
-                        <input
-                            id="videoViews"
-                            type="number"
-                            min="0"
-                            value="9"
-                        >
-
-                    </div>
-
-
-                    <!-- RETENTION -->
-
-                    <div class="field">
-
-                        <label>
-                            Retention %
-                        </label>
-
-                        <input
-                            id="retention"
-                            type="number"
-                            min="0"
-                            max="100"
-                            value="100"
-                        >
-
-                    </div>
+                    <input
+                        id="username"
+                        type="text"
+                        value="kim john"
+                        required
+                    >
 
                 </div>
 
 
-                <button
-                    class="generate-button"
-                    type="submit"
-                >
-                    Generate Insights
-                </button>
+                <!-- HANDLE -->
 
-            </form>
+                <div class="field">
 
-        </div>
+                    <label>
+                        Handle
+                    </label>
 
-    </section>
-
-
-
-    <!-- =========================================================
-         INSIGHTS PAGE
-    ========================================================= -->
-
-    <section id="insightsPage">
-
-
-        <!-- HEADER -->
-
-        <header class="header">
-
-            <button
-                class="back-button"
-                id="backButton"
-                type="button"
-            >
-
-                <i data-lucide="arrow-left"></i>
-
-            </button>
-
-
-            <h1 class="header-title">
-                Post activity
-            </h1>
-
-        </header>
-
-
-
-        <!-- =====================================================
-             POST CARD
-        ====================================================== -->
-
-        <section class="post-card page-animation">
-
-
-            <!-- USER -->
-
-            <div class="user-row">
-
-                <div class="avatar">
-
-                    <span
-                        id="avatarDefault"
-                        class="avatar-default"
+                    <input
+                        id="handle"
+                        type="text"
+                        value="@kimjohnclv"
+                        required
                     >
-                        🌿
-                    </span>
 
                 </div>
 
 
-                <div class="user-info">
+                <!-- POST TIME -->
 
-                    <span
-                        id="outUsername"
-                        class="username"
+                <div class="field">
+
+                    <label>
+                        Post time
+                    </label>
+
+                    <input
+                        id="postTime"
+                        type="text"
+                        value="12h"
                     >
-                        kim john
-                    </span>
-
-                    <span
-                        id="outHandle"
-                        class="handle"
-                    >
-                        @kimjohnclv
-                    </span>
-
-                    <span class="user-dot">
-                        ·
-                    </span>
-
-                    <span
-                        id="outTime"
-                        class="post-time"
-                    >
-                        11h
-                    </span>
 
                 </div>
 
-            </div>
 
+                <!-- DURATION -->
 
+                <div class="field">
 
-            <!-- POST BODY -->
+                    <label>
+                        Video duration
+                    </label>
 
-            <div class="post-content">
-
-
-                <!-- THUMBNAIL -->
-
-                <div
-                    id="thumbnail"
-                    class="thumbnail"
-                >
-
-                    <img
-                        id="outImage"
-                        class="thumbnail-image"
-                        alt="Post image"
+                    <input
+                        id="duration"
+                        type="text"
+                        value="1:03"
                     >
-
-
-                    <div class="thumbnail-default">
-
-                        <div class="thumbnail-name">
-                            MINEBIT
-                        </div>
-
-                        <div class="thumbnail-icon">
-                            🎰
-                        </div>
-
-                        <div
-                            id="outDuration"
-                            class="thumbnail-duration"
-                        >
-                            1:00
-                        </div>
-
-                    </div>
 
                 </div>
 
 
                 <!-- CAPTION -->
 
-                <div
-                    id="outCaption"
-                    class="caption"
-                >
-                    20% of profits back every Friday.
-                    💀 MineBit really said “we’ll share.”
-                    #MineBit #MineBitCasino
-                </div>
+                <div class="field full">
 
-            </div>
+                    <label>
+                        Caption
+                    </label>
 
-        </section>
-
-
-
-        <!-- =====================================================
-             ENGAGEMENT
-        ====================================================== -->
-
-        <section class="engagement-card">
-
-
-            <!-- LIKES -->
-
-            <div class="engagement-item">
-
-                <i data-lucide="heart"></i>
-
-                <span
-                    id="outLikes"
-                    class="engagement-value"
-                >
-                    35
-                </span>
-
-            </div>
-
-
-            <!-- REPOSTS -->
-
-            <div class="engagement-item">
-
-                <i data-lucide="repeat-2"></i>
-
-                <span
-                    id="outReposts"
-                    class="engagement-value"
-                >
-                    0
-                </span>
-
-            </div>
-
-
-            <!-- REPLIES -->
-
-            <div class="engagement-item">
-
-                <i data-lucide="message-circle"></i>
-
-                <span
-                    id="outReplies"
-                    class="engagement-value"
-                >
-                    0
-                </span>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             METRICS
-        ====================================================== -->
-
-        <section class="metrics">
-
-
-            <!-- IMPRESSIONS -->
-
-            <div class="metric">
-
-                <div class="metric-label">
-
-                    Impressions
-
-                    <i data-lucide="info"></i>
+                    <textarea
+                        id="caption"
+                        required
+                    >Instead of keeping all the profits, MineBit gives 20% back to players 💀🐂</textarea>
 
                 </div>
 
-                <div
-                    id="outImpressions"
-                    class="metric-value"
-                >
-                    5,210
+
+                <!-- IMAGE -->
+
+                <div class="field full">
+
+                    <label>
+                        Image / Video thumbnail
+                    </label>
+
+
+                    <label class="upload-box">
+
+                        <input
+                            id="imageInput"
+                            type="file"
+                            accept="image/*"
+                        >
+
+
+                        <div
+                            id="uploadContent"
+                            class="upload-content"
+                        >
+
+                            <i data-lucide="upload"></i>
+
+                            <span>
+                                Click to upload image
+                            </span>
+
+                        </div>
+
+
+                        <img
+                            id="imagePreview"
+                            alt="Preview"
+                        >
+
+                    </label>
+
                 </div>
 
-            </div>
+
+                <!-- LIKES -->
+
+                <div class="field">
+
+                    <label>
+                        Likes
+                    </label>
+
+                    <input
+                        id="likes"
+                        type="number"
+                        min="0"
+                        value="233"
+                    >
+
+                </div>
 
 
+                <!-- REPOSTS -->
 
-            <!-- TWO COLUMNS -->
+                <div class="field">
 
-            <div class="two-columns">
+                    <label>
+                        Reposts
+                    </label>
+
+                    <input
+                        id="reposts"
+                        type="number"
+                        min="0"
+                        value="0"
+                    >
+
+                </div>
+
+
+                <!-- REPLIES -->
+
+                <div class="field">
+
+                    <label>
+                        Replies
+                    </label>
+
+                    <input
+                        id="replies"
+                        type="number"
+                        min="0"
+                        value="0"
+                    >
+
+                </div>
+
+
+                <!-- IMPRESSIONS -->
+
+                <div class="field">
+
+                    <label>
+                        Impressions
+                    </label>
+
+                    <input
+                        id="impressions"
+                        type="number"
+                        min="0"
+                        value="88899"
+                    >
+
+                </div>
 
 
                 <!-- ENGAGEMENTS -->
 
-                <div class="metric">
+                <div class="field">
 
-                    <div class="metric-label">
-
+                    <label>
                         Engagements
+                    </label>
 
-                        <i data-lucide="info"></i>
-
-                    </div>
-
-                    <div
-                        id="outEngagements"
-                        class="metric-value"
+                    <input
+                        id="engagements"
+                        type="number"
+                        min="0"
+                        value="8262"
                     >
-                        2,052
-                    </div>
 
                 </div>
 
 
                 <!-- DETAIL EXPANDS -->
 
-                <div class="metric">
+                <div class="field">
 
-                    <div class="metric-label">
-
+                    <label>
                         Detail expands
+                    </label>
 
-                        <i data-lucide="info"></i>
+                    <input
+                        id="detailExpands"
+                        type="number"
+                        min="0"
+                        value="4000"
+                    >
 
+                </div>
+
+
+                <!-- PROFILE VISITS -->
+
+                <div class="field">
+
+                    <label>
+                        Profile visits
+                    </label>
+
+                    <input
+                        id="profileVisits"
+                        type="number"
+                        min="0"
+                        value="4000"
+                    >
+
+                </div>
+
+
+                <!-- UNIQUE VIEWS -->
+
+                <div class="field">
+
+                    <label>
+                        Unique views
+                    </label>
+
+                    <input
+                        id="uniqueViews"
+                        type="number"
+                        min="0"
+                        value="1"
+                    >
+
+                </div>
+
+
+                <!-- VIDEO VIEWS -->
+
+                <div class="field">
+
+                    <label>
+                        Video views
+                    </label>
+
+                    <input
+                        id="videoViews"
+                        type="number"
+                        min="0"
+                        value="23"
+                    >
+
+                </div>
+
+
+                <!-- RETENTION -->
+
+                <div class="field">
+
+                    <label>
+                        Retention %
+                    </label>
+
+                    <input
+                        id="retention"
+                        type="number"
+                        min="0"
+                        max="100"
+                        value="65"
+                    >
+
+                </div>
+
+
+            </div>
+
+
+            <button
+                class="generate-button"
+                type="submit"
+            >
+                Generate Insights
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     INSIGHTS PAGE
+===================================================== -->
+
+<section id="insightsPage">
+
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <button
+            class="back-button"
+            id="backButton"
+            type="button"
+        >
+
+            <i data-lucide="arrow-left"></i>
+
+        </button>
+
+
+        <h1 class="header-title">
+            Post activity
+        </h1>
+
+    </header>
+
+
+    <!-- =================================================
+         POST CARD
+    ================================================== -->
+
+    <section class="post-card page-animation">
+
+
+        <!-- USER -->
+
+        <div class="user-row">
+
+
+            <div class="avatar">
+
+                <span
+                    id="avatarDefault"
+                    class="avatar-default"
+                >
+                    🌿
+                </span>
+
+            </div>
+
+
+            <div class="user-info">
+
+                <span
+                    id="outUsername"
+                    class="username"
+                >
+                    kim john
+                </span>
+
+
+                <span
+                    id="outHandle"
+                    class="handle"
+                >
+                    @kimjohnclv
+                </span>
+
+
+                <span class="user-dot">
+                    ·
+                </span>
+
+
+                <span
+                    id="outTime"
+                    class="post-time"
+                >
+                    12h
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- POST BODY -->
+
+        <div class="post-content">
+
+
+            <!-- THUMBNAIL -->
+
+            <div
+                id="thumbnail"
+                class="thumbnail"
+            >
+
+                <img
+                    id="outImage"
+                    class="thumbnail-image"
+                    alt="Post image"
+                >
+
+
+                <div class="thumbnail-default">
+
+                    <div class="thumbnail-name">
+                        MINEBIT
                     </div>
 
+
+                    <div class="thumbnail-icon">
+                        🎰
+                    </div>
+
+
                     <div
-                        id="outDetailExpands"
-                        class="metric-value"
+                        id="outDuration"
+                        class="thumbnail-duration"
                     >
-                        1,000
+                        1:03
                     </div>
 
                 </div>
@@ -2396,827 +1778,977 @@
             </div>
 
 
+            <!-- CAPTION -->
 
-            <!-- PROFILE VISITS -->
+            <div
+                id="outCaption"
+                class="caption"
+            >
+                Instead of keeping all the profits,
+                MineBit gives 20% back to players 💀🐂
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         ENGAGEMENT
+    ================================================== -->
+
+    <section class="engagement-card">
+
+
+        <!-- LIKES -->
+
+        <div class="engagement-item">
+
+            <i data-lucide="heart"></i>
+
+            <span
+                id="outLikes"
+                class="engagement-value"
+            >
+                233
+            </span>
+
+        </div>
+
+
+        <!-- REPOSTS -->
+
+        <div class="engagement-item">
+
+            <i data-lucide="repeat-2"></i>
+
+            <span
+                id="outReposts"
+                class="engagement-value"
+            >
+                0
+            </span>
+
+        </div>
+
+
+        <!-- REPLIES -->
+
+        <div class="engagement-item">
+
+            <i data-lucide="message-circle"></i>
+
+            <span
+                id="outReplies"
+                class="engagement-value"
+            >
+                0
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         METRICS
+    ================================================== -->
+
+    <section class="metrics">
+
+
+        <!-- IMPRESSIONS -->
+
+        <div class="metric">
+
+            <div class="metric-label">
+
+                Impressions
+
+                <i data-lucide="info"></i>
+
+            </div>
+
+
+            <div
+                id="outImpressions"
+                class="metric-value"
+            >
+                88,899
+            </div>
+
+        </div>
+
+
+        <!-- TWO COLUMNS -->
+
+        <div class="two-columns">
+
+
+            <!-- ENGAGEMENTS -->
 
             <div class="metric">
 
                 <div class="metric-label">
 
-                    Profile visits
+                    Engagements
 
                     <i data-lucide="info"></i>
 
                 </div>
+
 
                 <div
-                    id="outProfileVisits"
+                    id="outEngagements"
                     class="metric-value"
                 >
-                    1,000
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             VIDEO
-        ====================================================== -->
-
-        <section class="video-section">
-
-
-            <h2 class="video-heading">
-                Video
-            </h2>
-
-
-            <p class="video-description">
-                Metrics for the video you shared
-            </p>
-
-
-
-            <!-- VIDEO METRICS -->
-
-            <div class="video-metrics">
-
-
-                <!-- UNIQUE VIEWS -->
-
-                <div class="metric">
-
-                    <div class="metric-label">
-
-                        Unique views
-
-                        <i data-lucide="info"></i>
-
-                    </div>
-
-                    <div
-                        id="outUniqueViews"
-                        class="metric-value"
-                    >
-                        1
-                    </div>
-
-                </div>
-
-
-                <!-- VIEWS -->
-
-                <div class="metric">
-
-                    <div class="metric-label">
-
-                        Views
-
-                        <i data-lucide="info"></i>
-
-                    </div>
-
-                    <div
-                        id="outVideoViews"
-                        class="metric-value"
-                    >
-                        9
-                    </div>
-
+                    8,262
                 </div>
 
             </div>
 
 
+            <!-- DETAIL EXPANDS -->
 
-            <!-- RETENTION -->
+            <div class="metric">
 
-            <div class="retention">
+                <div class="metric-label">
 
-                <div class="retention-title">
-
-                    Audience retention
+                    Detail expands
 
                     <i data-lucide="info"></i>
 
-                    <span>
-                        ✧
-                    </span>
-
                 </div>
 
 
-                <div class="chart-area">
-
-                    <div class="chart">
-
-
-                        <div
-                            class="chart-line one"
-                        ></div>
-
-                        <div
-                            class="chart-line two"
-                        ></div>
-
-                        <div
-                            class="chart-line three"
-                        ></div>
-
-
-                        <div
-                            id="chartBar"
-                            class="chart-bar"
-                        ></div>
-
-
-                        <span
-                            class="y-label y100"
-                        >
-                            100%
-                        </span>
-
-                        <span
-                            class="y-label y50"
-                        >
-                            50%
-                        </span>
-
-                        <span
-                            class="y-label y0"
-                        >
-                            0%
-                        </span>
-
-
-                        <div class="x-labels">
-
-                            <span>
-                                00:00
-                            </span>
-
-                            <span>
-                                00:15
-                            </span>
-
-                            <span>
-                                00:31
-                            </span>
-
-                            <span>
-                                00:47
-                            </span>
-
-                            <span id="outChartTime">
-                                01:00
-                            </span>
-
-                        </div>
-
-                    </div>
-
+                <div
+                    id="outDetailExpands"
+                    class="metric-value"
+                >
+                    4,000
                 </div>
 
             </div>
 
-        </section>
+        </div>
+
+
+        <!-- PROFILE VISITS -->
+
+        <div class="metric">
+
+            <div class="metric-label">
+
+                Profile visits
+
+                <i data-lucide="info"></i>
+
+            </div>
+
+
+            <div
+                id="outProfileVisits"
+                class="metric-value"
+            >
+                4,000
+            </div>
+
+        </div>
 
     </section>
 
 
+    <!-- =================================================
+         VIDEO
+    ================================================== -->
 
-    <!-- =========================================================
-         JAVASCRIPT
-    ========================================================= -->
-
-    <script>
-
-        /* =====================================================
-           INITIALIZE LUCIDE
-        ===================================================== */
-
-        lucide.createIcons();
+    <section class="video-section">
 
 
-        /* =====================================================
-           ELEMENTS
-        ===================================================== */
-
-        const form =
-            document.getElementById("insightsForm");
-
-        const formPage =
-            document.getElementById("formPage");
-
-        const insightsPage =
-            document.getElementById("insightsPage");
-
-        const imageInput =
-            document.getElementById("imageInput");
-
-        const imagePreview =
-            document.getElementById("imagePreview");
-
-        const uploadContent =
-            document.getElementById("uploadContent");
-
-        const thumbnail =
-            document.getElementById("thumbnail");
-
-        const outImage =
-            document.getElementById("outImage");
-
-        const chartBar =
-            document.getElementById("chartBar");
+        <h2 class="video-heading">
+            Video
+        </h2>
 
 
-        /* =====================================================
-           IMAGE UPLOAD
-        ===================================================== */
+        <p class="video-description">
+            Metrics for the video you shared
+        </p>
 
-        imageInput.addEventListener(
-            "change",
-            function () {
 
-                const file =
-                    this.files[0];
+        <!-- VIDEO METRICS -->
 
-                if (!file) {
-                    return;
-                }
+        <div class="video-metrics">
 
-                const reader =
-                    new FileReader();
 
-                reader.onload =
-                    function (event) {
+            <!-- UNIQUE -->
 
-                        const image =
-                            event.target.result;
+            <div class="metric">
 
-                        imagePreview.src =
-                            image;
+                <div class="metric-label">
 
-                        imagePreview.style.display =
-                            "block";
+                    Unique views
 
-                        uploadContent.style.display =
-                            "none";
+                    <i data-lucide="info"></i>
 
-                        sessionStorage.setItem(
-                            "currentImage",
-                            image
-                        );
+                </div>
 
-                    };
 
-                reader.readAsDataURL(file);
+                <div
+                    id="outUniqueViews"
+                    class="metric-value"
+                >
+                    1
+                </div>
 
+            </div>
+
+
+            <!-- VIEWS -->
+
+            <div class="metric">
+
+                <div class="metric-label">
+
+                    Views
+
+                    <i data-lucide="info"></i>
+
+                </div>
+
+
+                <div
+                    id="outVideoViews"
+                    class="metric-value"
+                >
+                    23
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RETENTION -->
+
+        <div class="retention">
+
+
+            <div class="retention-title">
+
+                Audience retention
+
+                <i data-lucide="info"></i>
+
+                <span>✧</span>
+
+            </div>
+
+
+            <div class="chart-area">
+
+
+                <div class="chart">
+
+
+                    <div
+                        class="chart-line one"
+                    ></div>
+
+
+                    <div
+                        class="chart-line two"
+                    ></div>
+
+
+                    <div
+                        class="chart-line three"
+                    ></div>
+
+
+                    <div
+                        id="chartBar"
+                        class="chart-bar"
+                    ></div>
+
+
+                    <span
+                        class="y-label y100"
+                    >
+                        100%
+                    </span>
+
+
+                    <span
+                        class="y-label y50"
+                    >
+                        50%
+                    </span>
+
+
+                    <span
+                        class="y-label y0"
+                    >
+                        0%
+                    </span>
+
+
+                    <div class="x-labels">
+
+                        <span>
+                            00:00
+                        </span>
+
+                        <span>
+                            00:15
+                        </span>
+
+                        <span>
+                            00:31
+                        </span>
+
+                        <span>
+                            00:47
+                        </span>
+
+                        <span id="outChartTime">
+                            01:03
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</section>
+
+
+<script>
+
+    /* =====================================================
+       INITIALIZE ICONS
+    ===================================================== */
+
+    lucide.createIcons();
+
+
+    /* =====================================================
+       ELEMENTS
+    ===================================================== */
+
+    const form =
+        document.getElementById("insightsForm");
+
+    const formPage =
+        document.getElementById("formPage");
+
+    const insightsPage =
+        document.getElementById("insightsPage");
+
+    const imageInput =
+        document.getElementById("imageInput");
+
+    const imagePreview =
+        document.getElementById("imagePreview");
+
+    const uploadContent =
+        document.getElementById("uploadContent");
+
+    const thumbnail =
+        document.getElementById("thumbnail");
+
+    const outImage =
+        document.getElementById("outImage");
+
+    const chartBar =
+        document.getElementById("chartBar");
+
+
+    /* =====================================================
+       IMAGE PREVIEW
+    ===================================================== */
+
+    imageInput.addEventListener(
+        "change",
+        function () {
+
+            const file =
+                this.files[0];
+
+            if (!file) {
+                return;
             }
+
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function (event) {
+
+                    imagePreview.src =
+                        event.target.result;
+
+                    imagePreview.style.display =
+                        "block";
+
+                    uploadContent.style.display =
+                        "none";
+                };
+
+
+            reader.readAsDataURL(file);
+
+        }
+    );
+
+
+    /* =====================================================
+       FORM SUBMIT
+    ===================================================== */
+
+    form.addEventListener(
+        "submit",
+        function (event) {
+
+            event.preventDefault();
+
+
+            /* ---------------------------------------------
+               READ FORM DATA
+            --------------------------------------------- */
+
+            const data = {
+
+                username:
+                    getValue("username"),
+
+                handle:
+                    getValue("handle"),
+
+                postTime:
+                    getValue("postTime"),
+
+                duration:
+                    getValue("duration"),
+
+                caption:
+                    getValue("caption"),
+
+                likes:
+                    getNumber("likes"),
+
+                reposts:
+                    getNumber("reposts"),
+
+                replies:
+                    getNumber("replies"),
+
+                impressions:
+                    getNumber("impressions"),
+
+                engagements:
+                    getNumber("engagements"),
+
+                detailExpands:
+                    getNumber("detailExpands"),
+
+                profileVisits:
+                    getNumber("profileVisits"),
+
+                uniqueViews:
+                    getNumber("uniqueViews"),
+
+                videoViews:
+                    getNumber("videoViews"),
+
+                retention:
+                    getNumber("retention")
+
+            };
+
+
+            /* ---------------------------------------------
+               SAVE DATA
+            --------------------------------------------- */
+
+            localStorage.setItem(
+                "insightsDemoData",
+                JSON.stringify(data)
+            );
+
+
+            /* ---------------------------------------------
+               UPDATE UI
+            --------------------------------------------- */
+
+            updateUI(data);
+
+
+            /* ---------------------------------------------
+               SWITCH PAGE
+            --------------------------------------------- */
+
+            formPage.style.display =
+                "none";
+
+            insightsPage.classList.add(
+                "active"
+            );
+
+
+            window.scrollTo({
+                top: 0,
+                behavior: "instant"
+            });
+
+
+            /* Recreate icons */
+
+            lucide.createIcons();
+
+
+            /* Start chart animation */
+
+            setTimeout(
+                animateChart,
+                100
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       GET STRING
+    ===================================================== */
+
+    function getValue(id) {
+
+        return document
+            .getElementById(id)
+            .value
+            .trim();
+
+    }
+
+
+    /* =====================================================
+       GET NUMBER
+    ===================================================== */
+
+    function getNumber(id) {
+
+        const value =
+            Number(
+                document
+                    .getElementById(id)
+                    .value
+            );
+
+        return Number.isFinite(value)
+            ? Math.max(0, value)
+            : 0;
+
+    }
+
+
+    /* =====================================================
+       FORMAT NUMBER
+    ===================================================== */
+
+    function formatNumber(number) {
+
+        return Number(number || 0)
+            .toLocaleString("en-US");
+
+    }
+
+
+    /* =====================================================
+       UPDATE UI
+    ===================================================== */
+
+    function updateUI(data) {
+
+
+        /* USER */
+
+        document
+            .getElementById("outUsername")
+            .textContent =
+            data.username;
+
+
+        document
+            .getElementById("outHandle")
+            .textContent =
+            data.handle;
+
+
+        document
+            .getElementById("outTime")
+            .textContent =
+            data.postTime;
+
+
+        /* VIDEO */
+
+        document
+            .getElementById("outDuration")
+            .textContent =
+            data.duration;
+
+
+        /* CAPTION */
+
+        document
+            .getElementById("outCaption")
+            .textContent =
+            data.caption;
+
+
+        /* ENGAGEMENT */
+
+        document
+            .getElementById("outLikes")
+            .textContent =
+            formatNumber(data.likes);
+
+
+        document
+            .getElementById("outReposts")
+            .textContent =
+            formatNumber(data.reposts);
+
+
+        document
+            .getElementById("outReplies")
+            .textContent =
+            formatNumber(data.replies);
+
+
+        /* INSIGHTS */
+
+        document
+            .getElementById("outImpressions")
+            .textContent =
+            formatNumber(data.impressions);
+
+
+        document
+            .getElementById("outEngagements")
+            .textContent =
+            formatNumber(data.engagements);
+
+
+        document
+            .getElementById("outDetailExpands")
+            .textContent =
+            formatNumber(data.detailExpands);
+
+
+        document
+            .getElementById("outProfileVisits")
+            .textContent =
+            formatNumber(data.profileVisits);
+
+
+        /* VIDEO */
+
+        document
+            .getElementById("outUniqueViews")
+            .textContent =
+            formatNumber(data.uniqueViews);
+
+
+        document
+            .getElementById("outVideoViews")
+            .textContent =
+            formatNumber(data.videoViews);
+
+
+        /* CHART */
+
+        updateChart(
+            data.retention
         );
 
 
-        /* =====================================================
-           FORM SUBMIT
-        ===================================================== */
+        /* IMAGE */
 
-        form.addEventListener(
-            "submit",
-            function (event) {
-
-                event.preventDefault();
+        const savedImage =
+            sessionStorage.getItem(
+                "currentImage"
+            );
 
 
-                const data = {
+        if (savedImage) {
 
-                    username:
-                        getValue("username"),
+            outImage.src =
+                savedImage;
 
-                    handle:
-                        getValue("handle"),
+            thumbnail.classList.add(
+                "has-image"
+            );
 
-                    postTime:
-                        getValue("postTime"),
+        } else {
 
-                    duration:
-                        getValue("duration"),
+            thumbnail.classList.remove(
+                "has-image"
+            );
 
-                    caption:
-                        getValue("caption"),
+        }
 
-                    likes:
-                        getNumber("likes"),
+    }
 
-                    reposts:
-                        getNumber("reposts"),
 
-                    replies:
-                        getNumber("replies"),
+    /* =====================================================
+       IMAGE STORAGE
+    ===================================================== */
 
-                    impressions:
-                        getNumber("impressions"),
+    imageInput.addEventListener(
+        "change",
+        function () {
 
-                    engagements:
-                        getNumber("engagements"),
+            const file =
+                this.files[0];
 
-                    detailExpands:
-                        getNumber("detailExpands"),
+            if (!file) {
+                return;
+            }
 
-                    profileVisits:
-                        getNumber("profileVisits"),
 
-                    uniqueViews:
-                        getNumber("uniqueViews"),
+            const reader =
+                new FileReader();
 
-                    videoViews:
-                        getNumber("videoViews"),
 
-                    retention:
-                        getNumber("retention")
+            reader.onload =
+                function (event) {
+
+                    sessionStorage.setItem(
+                        "currentImage",
+                        event.target.result
+                    );
 
                 };
 
 
-                /* SAVE */
+            reader.readAsDataURL(file);
 
-                localStorage.setItem(
-                    "insightsDemoData",
-                    JSON.stringify(data)
-                );
+        }
+    );
 
 
-                /* UPDATE */
+    /* =====================================================
+       CHART
+    ===================================================== */
 
-                updateUI(data);
+    function updateChart(retention) {
+
+        const value =
+            Math.max(
+                0,
+                Math.min(
+                    100,
+                    Number(retention)
+                )
+            );
 
 
-                /* SHOW INSIGHTS */
+        const height =
+            142 * (value / 100);
 
-                formPage.style.display =
-                    "none";
 
-                insightsPage.classList.add(
+        chartBar.style.height =
+            height + "px";
+
+    }
+
+
+    function animateChart() {
+
+        chartBar.classList.remove(
+            "animate"
+        );
+
+
+        void chartBar.offsetWidth;
+
+
+        chartBar.classList.add(
+            "animate"
+        );
+
+    }
+
+
+    /* =====================================================
+       BACK BUTTON
+    ===================================================== */
+
+    document
+        .getElementById("backButton")
+        .addEventListener(
+            "click",
+            function () {
+
+                insightsPage.classList.remove(
                     "active"
                 );
 
-
-                /* GO TOP */
+                formPage.style.display =
+                    "flex";
 
                 window.scrollTo({
                     top: 0,
                     behavior: "instant"
                 });
 
-
-                /* ICONS */
-
-                lucide.createIcons();
-
-
-                /* CHART */
-
-                setTimeout(
-                    animateChart,
-                    100
-                );
-
             }
         );
 
 
-        /* =====================================================
-           GET STRING
-        ===================================================== */
-
-        function getValue(id) {
-
-            const element =
-                document.getElementById(id);
-
-            return element
-                ? element.value.trim()
-                : "";
-
-        }
-
-
-        /* =====================================================
-           GET NUMBER
-        ===================================================== */
-
-        function getNumber(id) {
-
-            const element =
-                document.getElementById(id);
-
-            const value =
-                Number(
-                    element
-                        ? element.value
-                        : 0
-                );
-
-            return Number.isFinite(value)
-                ? Math.max(0, value)
-                : 0;
-
-        }
-
-
-        /* =====================================================
-           FORMAT NUMBER
-        ===================================================== */
-
-        function formatNumber(number) {
-
-            return Number(number || 0)
-                .toLocaleString("en-US");
-
-        }
-
-
-        /* =====================================================
-           UPDATE UI
-        ===================================================== */
-
-        function updateUI(data) {
-
-
-            /* USER */
-
-            document
-                .getElementById("outUsername")
-                .textContent =
-                data.username;
-
-
-            document
-                .getElementById("outHandle")
-                .textContent =
-                data.handle;
-
-
-            document
-                .getElementById("outTime")
-                .textContent =
-                data.postTime;
-
-
-
-            /* DURATION */
-
-            document
-                .getElementById("outDuration")
-                .textContent =
-                data.duration;
-
-
-
-            /* CAPTION */
-
-            document
-                .getElementById("outCaption")
-                .textContent =
-                data.caption;
-
-
-
-            /* ENGAGEMENT */
-
-            document
-                .getElementById("outLikes")
-                .textContent =
-                formatNumber(data.likes);
-
-
-            document
-                .getElementById("outReposts")
-                .textContent =
-                formatNumber(data.reposts);
-
-
-            document
-                .getElementById("outReplies")
-                .textContent =
-                formatNumber(data.replies);
-
-
-
-            /* INSIGHTS */
-
-            document
-                .getElementById("outImpressions")
-                .textContent =
-                formatNumber(data.impressions);
-
-
-            document
-                .getElementById("outEngagements")
-                .textContent =
-                formatNumber(data.engagements);
-
-
-            document
-                .getElementById("outDetailExpands")
-                .textContent =
-                formatNumber(data.detailExpands);
-
-
-            document
-                .getElementById("outProfileVisits")
-                .textContent =
-                formatNumber(data.profileVisits);
-
-
-
-            /* VIDEO */
-
-            document
-                .getElementById("outUniqueViews")
-                .textContent =
-                formatNumber(data.uniqueViews);
-
-
-            document
-                .getElementById("outVideoViews")
-                .textContent =
-                formatNumber(data.videoViews);
-
-
-
-            /* CHART */
-
-            updateChart(
-                data.retention
-            );
-
-
-            /* IMAGE */
-
-            const savedImage =
-                sessionStorage.getItem(
-                    "currentImage"
+    /* =====================================================
+       LOAD SAVED DATA
+    ===================================================== */
+
+    window.addEventListener(
+        "load",
+        function () {
+
+            const saved =
+                localStorage.getItem(
+                    "insightsDemoData"
                 );
 
 
-            if (savedImage) {
+            if (!saved) {
+                return;
+            }
 
-                outImage.src =
-                    savedImage;
 
-                thumbnail.classList.add(
-                    "has-image"
+            try {
+
+                const data =
+                    JSON.parse(saved);
+
+
+                /* Put saved values back
+                   into form */
+
+                setValue(
+                    "username",
+                    data.username
                 );
 
-            } else {
+                setValue(
+                    "handle",
+                    data.handle
+                );
 
-                thumbnail.classList.remove(
-                    "has-image"
+                setValue(
+                    "postTime",
+                    data.postTime
+                );
+
+                setValue(
+                    "duration",
+                    data.duration
+                );
+
+                setValue(
+                    "caption",
+                    data.caption
+                );
+
+                setValue(
+                    "likes",
+                    data.likes
+                );
+
+                setValue(
+                    "reposts",
+                    data.reposts
+                );
+
+                setValue(
+                    "replies",
+                    data.replies
+                );
+
+                setValue(
+                    "impressions",
+                    data.impressions
+                );
+
+                setValue(
+                    "engagements",
+                    data.engagements
+                );
+
+                setValue(
+                    "detailExpands",
+                    data.detailExpands
+                );
+
+                setValue(
+                    "profileVisits",
+                    data.profileVisits
+                );
+
+                setValue(
+                    "uniqueViews",
+                    data.uniqueViews
+                );
+
+                setValue(
+                    "videoViews",
+                    data.videoViews
+                );
+
+                setValue(
+                    "retention",
+                    data.retention
+                );
+
+            } catch (error) {
+
+                console.log(
+                    "Could not load saved data."
                 );
 
             }
 
+        }
+    );
 
-            /* CHART TIME */
 
-            document
-                .getElementById("outChartTime")
-                .textContent =
-                data.duration || "01:00";
+    /* =====================================================
+       SET FORM VALUE
+    ===================================================== */
+
+    function setValue(id, value) {
+
+        const element =
+            document.getElementById(id);
+
+        if (element) {
+
+            element.value =
+                value ?? "";
 
         }
 
+    }
 
-        /* =====================================================
-           UPDATE CHART
-        ===================================================== */
-
-        function updateChart(retention) {
-
-            const value =
-                Math.max(
-                    0,
-                    Math.min(
-                        100,
-                        Number(retention) || 0
-                    )
-                );
-
-
-            const height =
-                146 * (value / 100);
-
-
-            chartBar.style.height =
-                height + "px";
-
-        }
-
-
-        /* =====================================================
-           ANIMATE CHART
-        ===================================================== */
-
-        function animateChart() {
-
-            chartBar.classList.remove(
-                "animate"
-            );
-
-
-            void chartBar.offsetWidth;
-
-
-            chartBar.classList.add(
-                "animate"
-            );
-
-        }
-
-
-        /* =====================================================
-           BACK BUTTON
-        ===================================================== */
-
-        document
-            .getElementById("backButton")
-            .addEventListener(
-                "click",
-                function () {
-
-                    insightsPage.classList.remove(
-                        "active"
-                    );
-
-                    formPage.style.display =
-                        "flex";
-
-                    window.scrollTo({
-                        top: 0,
-                        behavior: "instant"
-                    });
-
-                }
-            );
-
-
-        /* =====================================================
-           LOAD SAVED DATA
-        ===================================================== */
-
-        window.addEventListener(
-            "load",
-            function () {
-
-                const saved =
-                    localStorage.getItem(
-                        "insightsDemoData"
-                    );
-
-
-                if (!saved) {
-                    return;
-                }
-
-
-                try {
-
-                    const data =
-                        JSON.parse(saved);
-
-
-                    setValue(
-                        "username",
-                        data.username
-                    );
-
-                    setValue(
-                        "handle",
-                        data.handle
-                    );
-
-                    setValue(
-                        "postTime",
-                        data.postTime
-                    );
-
-                    setValue(
-                        "duration",
-                        data.duration
-                    );
-
-                    setValue(
-                        "caption",
-                        data.caption
-                    );
-
-                    setValue(
-                        "likes",
-                        data.likes
-                    );
-
-                    setValue(
-                        "reposts",
-                        data.reposts
-                    );
-
-                    setValue(
-                        "replies",
-                        data.replies
-                    );
-
-                    setValue(
-                        "impressions",
-                        data.impressions
-                    );
-
-                    setValue(
-                        "engagements",
-                        data.engagements
-                    );
-
-                    setValue(
-                        "detailExpands",
-                        data.detailExpands
-                    );
-
-                    setValue(
-                        "profileVisits",
-                        data.profileVisits
-                    );
-
-                    setValue(
-                        "uniqueViews",
-                        data.uniqueViews
-                    );
-
-                    setValue(
-                        "videoViews",
-                        data.videoViews
-                    );
-
-                    setValue(
-                        "retention",
-                        data.retention
-                    );
-
-
-                    /* RESTORE IMAGE */
-
-                    const savedImage =
-                        sessionStorage.getItem(
-                            "currentImage"
-                        );
-
-
-                    if (savedImage) {
-
-                        imagePreview.src =
-                            savedImage;
-
-                        imagePreview.style.display =
-                            "block";
-
-                        uploadContent.style.display =
-                            "none";
-
-                    }
-
-                }
-                catch (error) {
-
-                    console.log(
-                        "Could not load saved data."
-                    );
-
-                }
-
-            }
-        );
-
-
-        /* =====================================================
-           SET FORM VALUE
-        ===================================================== */
-
-        function setValue(id, value) {
-
-            const element =
-                document.getElementById(id);
-
-            if (element) {
-
-                element.value =
-                    value ?? "";
-
-            }
-
-        }
-
-    </script>
+</script>
 
 </body>
+
 </html>
