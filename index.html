@@ -1143,6 +1143,60 @@
 
         }
 
+        .popup-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .popup-modal {
+            width: 290px;
+            background: #16181c;
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .popup-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #e7e9ea;
+            margin-bottom: 8px;
+            letter-spacing: normal;
+        }
+
+        .popup-description {
+            font-size: 14px;
+            color: #71767b;
+            margin-bottom: 24px;
+            line-height: 1.4;
+        }
+
+        .popup-button {
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            border: 1px solid #2f3336;
+            border-radius: 9999px;
+            color: #e7e9ea;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+            transition: background 0.2s;
+        }
+
+        .popup-button:active {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
     </style>
 
 </head>
@@ -1842,7 +1896,7 @@
 
                     Unique views
 
-                    <i data-lucide="info"></i>
+                    <i data-lucide="info" id="infoUniqueViews" style="cursor: pointer;"></i>
 
                 </div>
 
@@ -1977,6 +2031,15 @@
         </div>
 
     </section>
+
+    <!-- POPUP OVERLAY -->
+    <div id="uniqueViewsOverlay" class="popup-overlay">
+        <div class="popup-modal">
+            <h2 class="popup-title">Unique views</h2>
+            <p class="popup-description">Number of unique views for this video</p>
+            <button id="uniqueViewsClose" class="popup-button">OK</button>
+        </div>
+    </div>
 
 </section>
 
@@ -2599,6 +2662,32 @@
 
         }
 
+    }
+
+
+    /* =====================================================
+       POPUP LOGIC
+    ===================================================== */
+
+    const infoUniqueViews = document.getElementById("infoUniqueViews");
+    const uniqueViewsOverlay = document.getElementById("uniqueViewsOverlay");
+    const uniqueViewsClose = document.getElementById("uniqueViewsClose");
+
+    if (infoUniqueViews && uniqueViewsOverlay && uniqueViewsClose) {
+        
+        infoUniqueViews.addEventListener("click", () => {
+            uniqueViewsOverlay.style.display = "flex";
+        });
+        
+        uniqueViewsClose.addEventListener("click", () => {
+            uniqueViewsOverlay.style.display = "none";
+        });
+        
+        uniqueViewsOverlay.addEventListener("click", (e) => {
+            if (e.target === uniqueViewsOverlay) {
+                uniqueViewsOverlay.style.display = "none";
+            }
+        });
     }
 
 </script>
