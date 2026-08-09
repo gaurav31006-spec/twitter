@@ -13,1284 +13,1607 @@
 
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <style>
+<style>
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    min-width: 0;
+    min-height: 100%;
+    overflow-x: hidden;
+    background: #000;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    width: 100%;
+    min-width: 0;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+
+    background: #000;
+    color: #fff;
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+}
+
+button,
+input,
+textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+img {
+    max-width: 100%;
+}
+
 
-        /* =====================================================
-           RESET
-        ===================================================== */
+/* =========================================================
+   FORM PAGE
+   ========================================================= */
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+#formPage {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100svh;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding: 40px 16px;
+
+    background: #000;
+}
+
+
+/* =========================================================
+   FORM WRAPPER
+   ========================================================= */
+
+.form-wrapper {
+    width: 100%;
+    max-width: 720px;
+
+    background: #111;
+
+    border: 1px solid #333;
+
+    border-radius: 24px;
+
+    padding: 30px;
+}
 
-        html,
-        body {
-            width: 100%;
-            min-height: 100%;
 
-            background: #000;
+/* =========================================================
+   FORM TITLE
+   ========================================================= */
 
-            color: #fff;
+.form-title {
+    font-size: 30px;
+    font-weight: 750;
+    letter-spacing: -.7px;
+    margin-bottom: 8px;
+}
 
-            font-family:
-                -apple-system,
-                BlinkMacSystemFont,
-                "Segoe UI",
-                Roboto,
-                Helvetica,
-                Arial,
-                sans-serif;
-        }
+.form-subtitle {
+    color: #777;
+    font-size: 15px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+}
 
-        body {
-            overflow-x: hidden;
-        }
 
-        button,
-        input,
-        textarea {
-            font: inherit;
-        }
+/* =========================================================
+   FORM GRID
+   ========================================================= */
 
-        button {
-            cursor: pointer;
-        }
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
 
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
 
-        /* =====================================================
-           FORM PAGE
-        ===================================================== */
+.field.full {
+    grid-column: 1 / -1;
+}
 
-        #formPage {
+.field label {
+    color: #aaa;
+    font-size: 14px;
+    font-weight: 600;
+}
 
-            width: 100%;
-            min-height: 100vh;
 
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
+/* =========================================================
+   INPUTS
+   ========================================================= */
 
-            padding: 40px 16px;
+.field input,
+.field textarea {
+    width: 100%;
 
-            background: #000;
-        }
+    border: 1px solid #363636;
+    outline: none;
 
+    background: #181818;
+    color: #fff;
 
-        .form-wrapper {
+    border-radius: 11px;
 
-            width: 100%;
-            max-width: 720px;
+    padding: 12px 13px;
 
-            background: #111;
+    transition:
+        border-color .2s,
+        background .2s;
+}
 
-            border: 1px solid #333;
+.field input {
+    height: 46px;
+}
 
-            border-radius: 24px;
+.field textarea {
+    min-height: 105px;
+    resize: vertical;
+    line-height: 1.5;
+}
 
-            padding: 30px;
-        }
+.field input:focus,
+.field textarea:focus {
+    border-color: #777;
+    background: #1b1b1b;
+}
 
 
-        .form-title {
+/* =========================================================
+   IMAGE UPLOAD
+   ========================================================= */
 
-            font-size: 30px;
+.upload-box {
+    width: 100%;
+    min-height: 150px;
 
-            font-weight: 750;
+    border: 1px dashed #444;
+    border-radius: 15px;
 
-            letter-spacing: -.7px;
+    background: #151515;
 
-            margin-bottom: 8px;
-        }
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+    cursor: pointer;
 
-        .form-subtitle {
+    overflow: hidden;
 
-            color: #777;
+    transition:
+        border-color .2s,
+        background .2s;
+}
 
-            font-size: 15px;
+.upload-box:hover {
+    border-color: #777;
+    background: #191919;
+}
 
-            line-height: 1.5;
+.upload-box input {
+    display: none;
+}
 
-            margin-bottom: 30px;
-        }
+.upload-content {
+    text-align: center;
+    color: #777;
+}
 
+.upload-content svg {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 8px;
+}
 
-        /* =====================================================
-           FORM GRID
-        ===================================================== */
+.upload-content span {
+    display: block;
+    font-size: 14px;
+}
 
-        .form-grid {
+#imagePreview {
+    width: 100%;
+    height: 180px;
 
-            display: grid;
+    object-fit: cover;
 
-            grid-template-columns: 1fr 1fr;
+    display: none;
+}
 
-            gap: 18px;
-        }
 
+/* =========================================================
+   GENERATE BUTTON
+   ========================================================= */
 
-        .field {
+.generate-button {
+    width: 100%;
+    height: 50px;
 
-            display: flex;
+    margin-top: 25px;
 
-            flex-direction: column;
+    border: none;
+    border-radius: 13px;
 
-            gap: 7px;
-        }
+    background: #fff;
+    color: #000;
 
+    font-size: 16px;
+    font-weight: 700;
 
-        .field.full {
+    transition:
+        transform .2s,
+        opacity .2s;
+}
 
-            grid-column: 1 / -1;
-        }
+.generate-button:hover {
+    transform: translateY(-2px);
+    opacity: .9;
+}
 
+.generate-button:active {
+    transform: scale(.98);
+}
 
-        .field label {
 
-            color: #aaa;
+/* =========================================================
+   INSIGHTS PAGE
+   ========================================================= */
 
-            font-size: 14px;
+#insightsPage {
+    display: none;
 
-            font-weight: 600;
-        }
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100svh;
 
+    background: #101010;
+}
 
-        .field input,
-        .field textarea {
+#insightsPage.active {
+    display: block;
+}
 
-            width: 100%;
 
-            border: 1px solid #363636;
+/* =========================================================
+   HEADER
+   ========================================================= */
 
-            outline: none;
+.header {
+    width: 100%;
+    height: 68px;
 
-            background: #181818;
+    background: #000;
 
-            color: #fff;
+    border-bottom: 1px solid #2d2d2d;
 
-            border-radius: 11px;
+    display: flex;
+    align-items: center;
 
-            padding: 12px 13px;
+    gap: 18px;
 
-            transition:
-                border-color .2s,
-                background .2s;
-        }
+    padding: 0 18px;
 
+    position: sticky;
+    top: 0;
 
-        .field input {
+    z-index: 100;
+}
 
-            height: 46px;
-        }
+.back-button {
+    width: 36px;
+    height: 36px;
 
+    min-width: 36px;
 
-        .field textarea {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-            min-height: 105px;
+    border: none;
 
-            resize: vertical;
+    background: transparent;
+    color: #fff;
 
-            line-height: 1.5;
-        }
+    border-radius: 50%;
+}
 
+.back-button:hover {
+    background: #181818;
+}
 
-        .field input:focus,
-        .field textarea:focus {
+.back-button:active {
+    transform: scale(.92);
+}
 
-            border-color: #777;
+.back-button svg {
+    width: 26px;
+    height: 26px;
+}
 
-            background: #1b1b1b;
-        }
+.header-title {
+    min-width: 0;
 
+    font-size: 22px;
+    font-weight: 750;
 
-        /* =====================================================
-           IMAGE UPLOAD
-        ===================================================== */
+    letter-spacing: -.3px;
 
-        .upload-box {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
-            width: 100%;
 
-            min-height: 150px;
+/* =========================================================
+   POST CARD
+   ========================================================= */
 
-            border: 1px dashed #444;
+.post-card {
+    width: calc(100% - 20px);
 
-            border-radius: 15px;
+    margin: 20px 10px 18px;
 
-            background: #151515;
+    padding: 19px 18px;
 
-            display: flex;
+    background: #111;
 
-            justify-content: center;
+    border: 1px solid #393939;
 
-            align-items: center;
+    border-radius: 24px;
 
-            cursor: pointer;
+    overflow: hidden;
+}
 
-            overflow: hidden;
 
-            transition:
-                border-color .2s,
-                background .2s;
-        }
+/* =========================================================
+   USER
+   ========================================================= */
 
+.user-row {
+    width: 100%;
 
-        .upload-box:hover {
+    display: flex;
+    align-items: center;
 
-            border-color: #777;
+    min-width: 0;
+}
 
-            background: #191919;
-        }
+.avatar {
+    width: 35px;
+    height: 35px;
 
+    min-width: 35px;
 
-        .upload-box input {
+    border-radius: 50%;
 
-            display: none;
-        }
+    background: #dcebd9;
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-        .upload-content {
+    overflow: hidden;
+}
 
-            text-align: center;
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
-            color: #777;
-        }
+.avatar-default {
+    font-size: 17px;
+}
 
+.user-info {
+    min-width: 0;
 
-        .upload-content svg {
+    margin-left: 11px;
 
-            width: 30px;
-            height: 30px;
+    display: flex;
+    align-items: center;
 
-            margin-bottom: 8px;
-        }
+    gap: 5px;
 
+    font-size: 16px;
 
-        .upload-content span {
+    white-space: nowrap;
 
-            display: block;
+    overflow: hidden;
+}
 
-            font-size: 14px;
-        }
+.username {
+    color: #f5f5f5;
+    font-weight: 700;
 
+    flex-shrink: 0;
+}
 
-        #imagePreview {
+.handle,
+.post-time {
+    color: #777;
 
-            width: 100%;
-            height: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
-            object-fit: cover;
+    white-space: nowrap;
+}
 
-            display: none;
-        }
+.user-dot {
+    color: #777;
+    flex-shrink: 0;
+}
 
 
-        /* =====================================================
-           BUTTONS
-        ===================================================== */
+/* =========================================================
+   POST CONTENT
+   ========================================================= */
 
-        .generate-button {
+.post-content {
+    width: 100%;
 
-            width: 100%;
+    margin-top: 11px;
 
-            height: 50px;
+    display: flex;
+    align-items: flex-start;
 
-            margin-top: 25px;
+    gap: 12px;
 
-            border: none;
+    min-width: 0;
+}
 
-            border-radius: 13px;
 
-            background: #fff;
+/* =========================================================
+   THUMBNAIL
+   ========================================================= */
 
-            color: #000;
+.thumbnail {
+    position: relative;
 
-            font-size: 16px;
+    width: 128px;
+    height: 124px;
 
-            font-weight: 700;
+    min-width: 128px;
 
-            transition:
-                transform .2s,
-                opacity .2s;
-        }
+    flex-shrink: 0;
 
+    border-radius: 20px;
 
-        .generate-button:hover {
+    overflow: hidden;
 
-            transform: translateY(-2px);
+    background:
+        linear-gradient(
+            135deg,
+            #2424a5 0%,
+            #c53e89 52%,
+            #e64a75 100%
+        );
+}
 
-            opacity: .9;
-        }
+.thumbnail-image {
+    position: absolute;
 
+    inset: 0;
 
-        /* =====================================================
-           INSIGHTS PAGE
-        ===================================================== */
+    width: 100%;
+    height: 100%;
 
-        #insightsPage {
+    object-fit: cover;
 
-            display: none;
+    display: none;
+}
 
-            width: 100%;
+.thumbnail.has-image .thumbnail-image {
+    display: block;
+}
 
-            min-height: 100vh;
+.thumbnail.has-image .thumbnail-default {
+    display: none;
+}
 
-            background: #101010;
-        }
+.thumbnail-default {
+    position: absolute;
+    inset: 0;
+}
 
+.thumbnail-name {
+    position: absolute;
 
-        #insightsPage.active {
+    top: 8px;
+    left: 9px;
 
-            display: block;
-        }
+    font-size: 9px;
 
+    font-weight: 800;
 
-        /* =====================================================
-           HEADER
-        ===================================================== */
+    color: #fff;
+}
 
-        .header {
+.thumbnail-icon {
+    position: absolute;
 
-            width: 100%;
+    left: 0;
+    right: 0;
 
-            height: 68px;
+    top: 39px;
 
-            background: #000;
+    text-align: center;
 
-            border-bottom: 1px solid #2d2d2d;
+    font-size: 34px;
+}
 
-            display: flex;
+.thumbnail-duration {
+    position: absolute;
 
-            align-items: center;
+    right: 8px;
+    bottom: 7px;
 
-            gap: 18px;
+    font-size: 17px;
 
-            padding: 0 18px;
+    font-weight: 700;
 
-            position: sticky;
+    color: #fff;
 
-            top: 0;
+    text-shadow:
+        0 1px 5px #000;
+}
 
-            z-index: 100;
-        }
 
+/* =========================================================
+   CAPTION
+   ========================================================= */
 
-        .back-button {
+.caption {
+    flex: 1;
 
-            width: 36px;
-            height: 36px;
+    min-width: 0;
 
-            display: flex;
+    color: #eee;
 
-            align-items: center;
-            justify-content: center;
+    font-size: 20px;
 
-            border: none;
+    line-height: 1.28;
 
-            background: transparent;
+    overflow-wrap: anywhere;
 
-            color: #fff;
+    word-break: break-word;
+}
 
-            border-radius: 50%;
-        }
 
+/* =========================================================
+   ENGAGEMENT CARD
+   ========================================================= */
 
-        .back-button:hover {
+.engagement-card {
+    width: calc(100% - 30px);
 
-            background: #181818;
-        }
+    height: 102px;
 
+    margin: 0 15px;
 
-        .back-button svg {
+    background: #111;
 
-            width: 26px;
-            height: 26px;
-        }
+    border: 1px solid #393939;
 
+    border-radius: 20px;
 
-        .header-title {
+    display: grid;
 
-            font-size: 22px;
+    grid-template-columns:
+        repeat(3, 1fr);
+}
 
-            font-weight: 750;
+.engagement-item {
+    min-width: 0;
 
-            letter-spacing: -.3px;
-        }
+    display: flex;
 
+    flex-direction: column;
 
-        /* =====================================================
-           POST CARD
-        ===================================================== */
+    justify-content: center;
 
-        .post-card {
+    align-items: center;
 
-            width: calc(100% - 20px);
+    gap: 7px;
 
-            margin: 20px 10px 18px;
+    color: #888;
+}
 
-            padding: 19px 18px;
+.engagement-item svg {
+    width: 23px;
+    height: 23px;
 
-            background: #111;
+    stroke-width: 1.7;
+}
 
-            border: 1px solid #393939;
+.engagement-value {
+    color: #eee;
 
-            border-radius: 24px;
+    font-size: 21px;
 
-            overflow: hidden;
-        }
+    font-weight: 500;
 
+    white-space: nowrap;
+}
 
-        /* =====================================================
-           USER
-        ===================================================== */
 
-        .user-row {
+/* =========================================================
+   METRICS
+   ========================================================= */
 
-            width: 100%;
+.metrics {
+    width: 100%;
 
-            display: flex;
+    padding: 50px 40px;
+}
 
-            align-items: center;
-        }
+.metric {
+    margin-bottom: 47px;
+}
 
+.metric-label {
+    display: flex;
 
-        .avatar {
+    align-items: center;
 
-            width: 35px;
-            height: 35px;
+    gap: 5px;
 
-            min-width: 35px;
+    color: #858585;
 
-            border-radius: 50%;
+    font-size: 16px;
 
-            background: #dcebd9;
+    margin-bottom: 8px;
+}
 
-            display: flex;
+.metric-label svg {
+    width: 13px;
+    height: 13px;
 
-            justify-content: center;
-            align-items: center;
+    stroke-width: 1.8;
 
-            overflow: hidden;
-        }
+    flex-shrink: 0;
+}
 
+.metric-value {
+    color: #f3f3f3;
 
-        .avatar img {
+    font-size: 43px;
 
-            width: 100%;
-            height: 100%;
+    font-weight: 500;
 
-            object-fit: cover;
-        }
+    line-height: 1;
 
+    letter-spacing: -1.5px;
 
-        .avatar-default {
+    overflow-wrap: anywhere;
+}
 
-            font-size: 17px;
-        }
 
+/* =========================================================
+   TWO COLUMNS
+   ========================================================= */
 
-        .user-info {
+.two-columns {
+    width: 100%;
 
-            min-width: 0;
+    display: grid;
 
-            margin-left: 11px;
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1fr);
 
-            display: flex;
+    gap: 30px;
+}
 
-            align-items: center;
+.two-columns .metric-value {
+    font-size: 36px;
+}
 
-            gap: 5px;
 
-            font-size: 16px;
+/* =========================================================
+   VIDEO SECTION
+   ========================================================= */
 
-            white-space: nowrap;
-        }
+.video-section {
+    width: 100%;
 
+    border-top: 1px solid #363636;
 
-        .username {
+    padding: 35px 40px 60px;
+}
 
-            color: #f5f5f5;
+.video-heading {
+    font-size: 32px;
 
-            font-weight: 700;
-        }
+    font-weight: 750;
 
+    letter-spacing: -.7px;
+}
 
-        .handle,
-        .post-time {
+.video-description {
+    margin-top: 8px;
 
-            color: #777;
+    color: #808080;
 
-            overflow: hidden;
+    font-size: 16px;
 
-            text-overflow: ellipsis;
-        }
+    line-height: 1.5;
+}
 
+.video-metrics {
+    width: 100%;
 
-        .user-dot {
+    margin-top: 45px;
 
-            color: #777;
-        }
+    display: grid;
 
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1fr);
 
-        /* =====================================================
-           POST CONTENT
-        ===================================================== */
+    gap: 30px;
+}
 
-        .post-content {
+.video-metrics .metric-value {
+    font-size: 36px;
+}
 
-            width: 100%;
 
-            margin-top: 11px;
+/* =========================================================
+   RETENTION
+   ========================================================= */
 
-            display: flex;
+.retention {
+    margin-top: 4px;
+}
 
-            align-items: flex-start;
+.retention-title {
+    display: flex;
 
-            gap: 12px;
-        }
+    align-items: center;
 
+    gap: 5px;
 
-        /* =====================================================
-           THUMBNAIL
-        ===================================================== */
+    color: #858585;
 
-        .thumbnail {
+    font-size: 16px;
+}
 
-            position: relative;
+.retention-title svg {
+    width: 13px;
+    height: 13px;
+}
 
-            width: 128px;
-            height: 124px;
 
-            min-width: 128px;
+/* =========================================================
+   CHART
+   ========================================================= */
 
-            flex-shrink: 0;
+.chart-area {
+    position: relative;
 
-            border-radius: 20px;
+    width: 100%;
 
-            overflow: hidden;
+    height: 190px;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #2424a5 0%,
-                    #c53e89 52%,
-                    #e64a75 100%
-                );
-        }
+    margin-top: 12px;
 
+    padding-right: 55px;
+}
 
-        .thumbnail-image {
+.chart {
+    position: relative;
 
-            position: absolute;
+    width: 100%;
 
-            inset: 0;
+    height: 150px;
+}
 
-            width: 100%;
-            height: 100%;
+.chart-line {
+    position: absolute;
 
-            object-fit: cover;
+    left: 12px;
+    right: 0;
 
-            display: none;
-        }
+    height: 1px;
 
+    background: #343434;
+}
 
-        .thumbnail.has-image
-        .thumbnail-image {
+.chart-line.one {
+    top: 0;
+}
 
-            display: block;
-        }
+.chart-line.two {
+    top: 73px;
+}
 
+.chart-line.three {
+    top: 146px;
+}
 
-        .thumbnail.has-image
-        .thumbnail-default {
+.chart-bar {
+    position: absolute;
 
-            display: none;
-        }
+    left: 12px;
 
+    bottom: 4px;
 
-        .thumbnail-default {
+    width: 74px;
 
-            position: absolute;
+    height: 90px;
 
-            inset: 0;
-        }
+    background: #a9e8fa;
 
+    transform-origin: bottom;
 
-        .thumbnail-name {
+    transform: scaleY(0);
 
-            position: absolute;
+    transition:
+        height .7s ease,
+        transform .7s ease;
+}
 
-            top: 8px;
-            left: 9px;
+.chart-bar.animate {
+    transform: scaleY(1);
+}
 
-            font-size: 9px;
+.y-label {
+    position: absolute;
 
-            font-weight: 800;
+    left: calc(100% + 12px);
 
-            color: #fff;
-        }
+    transform: translateY(-50%);
 
+    color: #858585;
 
-        .thumbnail-icon {
+    font-size: 14px;
 
-            position: absolute;
+    white-space: nowrap;
+}
 
-            left: 0;
-            right: 0;
+.y100 {
+    top: 0;
+}
 
-            top: 39px;
+.y50 {
+    top: 73px;
+}
 
-            text-align: center;
+.y0 {
+    top: 146px;
+}
 
-            font-size: 34px;
-        }
+.x-labels {
+    position: absolute;
 
+    left: 12px;
+    right: -5px;
 
-        .thumbnail-duration {
+    top: 158px;
 
-            position: absolute;
+    display: flex;
 
-            right: 8px;
-            bottom: 7px;
+    justify-content: space-between;
 
-            font-size: 17px;
+    color: #747474;
 
-            font-weight: 700;
+    font-size: 13px;
+}
 
-            color: #fff;
 
-            text-shadow:
-                0 1px 5px #000;
-        }
+/* =========================================================
+   PAGE ANIMATION
+   ========================================================= */
 
+.page-animation {
+    animation:
+        pageIn .45s ease both;
+}
 
-        /* =====================================================
-           CAPTION
-        ===================================================== */
+@keyframes pageIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
 
-        .caption {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-            flex: 1;
 
-            min-width: 0;
+/* =========================================================
+   MOBILE — FULL SCREEN
+   ========================================================= */
 
-            color: #eee;
+@media (max-width: 600px) {
 
-            font-size: 20px;
+    html,
+    body {
+        width: 100%;
+        min-width: 0;
+    }
 
-            line-height: 1.28;
+    /* -------------------------
+       FORM
+       ------------------------- */
 
-            overflow-wrap: break-word;
+    #formPage {
+        width: 100%;
+        min-height: 100svh;
 
-            word-break: normal;
-        }
+        padding:
+            max(16px, env(safe-area-inset-top))
+            10px
+            max(20px, env(safe-area-inset-bottom));
 
+        align-items: flex-start;
+    }
 
-        /* =====================================================
-           ENGAGEMENT CARD
-        ===================================================== */
+    .form-wrapper {
+        width: 100%;
+        max-width: none;
 
-        .engagement-card {
+        padding: 20px 14px;
 
-            width: calc(100% - 30px);
+        border-radius: 18px;
+    }
 
-            height: 102px;
+    .form-title {
+        font-size: clamp(23px, 7vw, 28px);
+        line-height: 1.2;
+    }
 
-            margin: 0 15px;
+    .form-subtitle {
+        font-size: 14px;
 
-            background: #111;
+        line-height: 1.5;
 
-            border: 1px solid #393939;
+        margin-bottom: 22px;
+    }
 
-            border-radius: 20px;
+    .form-grid {
+        width: 100%;
 
-            display: grid;
+        grid-template-columns: 1fr;
 
-            grid-template-columns:
-                repeat(3, 1fr);
-        }
+        gap: 14px;
+    }
 
+    .field {
+        width: 100%;
+        min-width: 0;
+    }
 
-        .engagement-item {
+    .field.full {
+        grid-column: auto;
+    }
 
-            display: flex;
+    .field input,
+    .field textarea {
+        width: 100%;
 
-            flex-direction: column;
+        font-size: 16px;
+    }
 
-            justify-content: center;
+    .field input {
+        height: 48px;
+    }
 
-            align-items: center;
+    .field textarea {
+        min-height: 120px;
+    }
 
-            gap: 7px;
+    .upload-box {
+        width: 100%;
+        min-height: 145px;
+    }
 
-            color: #888;
-        }
+    .generate-button {
+        width: 100%;
 
+        height: 52px;
 
-        .engagement-item svg {
+        margin-top: 20px;
+    }
 
-            width: 23px;
-            height: 23px;
 
-            stroke-width: 1.7;
-        }
+    /* -------------------------
+       HEADER
+       ------------------------- */
 
+    .header {
+        width: 100%;
 
-        .engagement-value {
+        height: 58px;
 
-            color: #eee;
+        padding:
+            0
+            max(12px, env(safe-area-inset-right))
+            0
+            max(12px, env(safe-area-inset-left));
 
-            font-size: 21px;
+        gap: 10px;
+    }
 
-            font-weight: 500;
-        }
+    .back-button {
+        width: 40px;
+        height: 40px;
 
+        min-width: 40px;
+    }
 
-        /* =====================================================
-           METRICS
-        ===================================================== */
+    .back-button svg {
+        width: 24px;
+        height: 24px;
+    }
 
-        .metrics {
+    .header-title {
+        min-width: 0;
 
-            padding: 50px 40px;
-        }
+        font-size: 19px;
 
+        overflow: hidden;
 
-        .metric {
+        text-overflow: ellipsis;
 
-            margin-bottom: 47px;
-        }
+        white-space: nowrap;
+    }
 
 
-        .metric-label {
+    /* -------------------------
+       POST CARD
+       ------------------------- */
 
-            display: flex;
+    .post-card {
+        width: calc(100% - 20px);
 
-            align-items: center;
+        margin:
+            12px 10px 14px;
 
-            gap: 5px;
+        padding:
+            15px 12px;
 
-            color: #858585;
+        border-radius: 18px;
+    }
 
-            font-size: 16px;
+    .user-row {
+        width: 100%;
 
-            margin-bottom: 8px;
-        }
+        min-width: 0;
+    }
 
+    .avatar {
+        width: 35px;
+        height: 35px;
 
-        .metric-label svg {
+        min-width: 35px;
+    }
 
-            width: 13px;
-            height: 13px;
+    .user-info {
+        min-width: 0;
 
-            stroke-width: 1.8;
-        }
+        max-width:
+            calc(100% - 46px);
 
+        margin-left: 10px;
 
-        .metric-value {
+        font-size: 14px;
 
-            color: #f3f3f3;
+        gap: 4px;
+    }
 
-            font-size: 43px;
+    .username,
+    .handle,
+    .post-time {
+        min-width: 0;
 
-            font-weight: 500;
+        overflow: hidden;
 
-            line-height: 1;
+        text-overflow: ellipsis;
 
-            letter-spacing: -1.5px;
-        }
+        white-space: nowrap;
+    }
 
 
-        /* =====================================================
-           TWO COLUMNS
-        ===================================================== */
+    /* -------------------------
+       POST CONTENT
+       ------------------------- */
 
-        .two-columns {
+    .post-content {
+        width: 100%;
 
-            display: grid;
+        display: grid;
 
-            grid-template-columns:
-                1fr 1fr;
+        grid-template-columns:
+            minmax(86px, 31vw)
+            minmax(0, 1fr);
 
-            gap: 30px;
-        }
+        gap: 10px;
 
+        align-items: start;
+    }
 
-        .two-columns .metric-value {
 
-            font-size: 36px;
-        }
+    /* -------------------------
+       THUMBNAIL
+       ------------------------- */
 
+    .thumbnail {
+        width: 100%;
 
-        /* =====================================================
-           VIDEO SECTION
-        ===================================================== */
+        height: auto;
 
-        .video-section {
+        aspect-ratio: 1 / 1;
 
-            border-top: 1px solid #363636;
+        min-width: 0;
 
-            padding: 35px 40px 60px;
-        }
+        border-radius: 15px;
+    }
 
+    .thumbnail-icon {
+        top: 50%;
 
-        .video-heading {
+        transform:
+            translateY(-50%);
 
-            font-size: 32px;
+        font-size:
+            clamp(25px, 8vw, 34px);
+    }
 
-            font-weight: 750;
+    .thumbnail-name {
+        top: 7px;
+        left: 7px;
 
-            letter-spacing: -.7px;
-        }
+        font-size: 8px;
+    }
 
+    .thumbnail-duration {
+        right: 6px;
+        bottom: 6px;
 
-        .video-description {
+        font-size: 14px;
+    }
 
-            margin-top: 8px;
 
-            color: #808080;
+    /* -------------------------
+       CAPTION
+       ------------------------- */
 
-            font-size: 16px;
-        }
+    .caption {
+        min-width: 0;
 
+        font-size:
+            clamp(15px, 4.5vw, 18px);
 
-        .video-metrics {
+        line-height: 1.32;
 
-            margin-top: 45px;
+        overflow-wrap: anywhere;
 
-            display: grid;
+        word-break: break-word;
+    }
 
-            grid-template-columns:
-                1fr 1fr;
 
-            gap: 30px;
-        }
+    /* -------------------------
+       ENGAGEMENT
+       ------------------------- */
 
+    .engagement-card {
+        width: calc(100% - 20px);
 
-        .video-metrics .metric-value {
+        height: 92px;
 
-            font-size: 36px;
-        }
+        margin:
+            0 10px;
 
+        border-radius: 17px;
+    }
 
-        /* =====================================================
-           RETENTION
-        ===================================================== */
+    .engagement-item {
+        min-width: 0;
 
-        .retention {
+        gap: 5px;
+    }
 
-            margin-top: 4px;
-        }
+    .engagement-item svg {
+        width: 20px;
+        height: 20px;
+    }
 
+    .engagement-value {
+        font-size:
+            clamp(17px, 5vw, 21px);
+    }
 
-        .retention-title {
 
-            display: flex;
+    /* -------------------------
+       METRICS
+       ------------------------- */
 
-            align-items: center;
+    .metrics {
+        width: 100%;
 
-            gap: 5px;
+        padding:
+            36px 20px
+            42px;
+    }
 
-            color: #858585;
+    .metric {
+        width: 100%;
 
-            font-size: 16px;
-        }
+        margin-bottom: 38px;
+    }
 
+    .metric-label {
+        font-size: 14px;
 
-        .retention-title svg {
+        margin-bottom: 7px;
+    }
 
-            width: 13px;
-            height: 13px;
-        }
+    .metric-value {
+        font-size:
+            clamp(34px, 10vw, 43px);
 
+        letter-spacing: -1px;
+    }
 
-        /* =====================================================
-           CHART
-        ===================================================== */
 
-        .chart-area {
+    /* -------------------------
+       TWO COLUMN METRICS
+       ------------------------- */
 
-            position: relative;
+    .two-columns {
+        width: 100%;
 
-            height: 190px;
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(0, 1fr);
 
-            margin-top: 12px;
+        gap: 18px;
+    }
 
-            padding-right: 55px;
-        }
+    .two-columns .metric-value,
+    .video-metrics .metric-value {
+        font-size:
+            clamp(27px, 8vw, 34px);
+    }
 
 
-        .chart {
+    /* -------------------------
+       VIDEO
+       ------------------------- */
 
-            position: relative;
+    .video-section {
+        width: 100%;
 
-            width: 100%;
+        padding:
+            28px 20px
+            max(45px, env(safe-area-inset-bottom));
+    }
 
-            height: 150px;
-        }
+    .video-heading {
+        font-size:
+            clamp(26px, 8vw, 32px);
 
+        line-height: 1.2;
+    }
 
-        .chart-line {
+    .video-description {
+        font-size: 14px;
 
-            position: absolute;
+        line-height: 1.45;
+    }
 
-            left: 12px;
-            right: 0;
+    .video-metrics {
+        width: 100%;
 
-            height: 1px;
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(0, 1fr);
 
-            background: #343434;
-        }
+        gap: 18px;
 
+        margin-top: 32px;
+    }
 
-        .chart-line.one {
-            top: 0;
-        }
 
+    /* -------------------------
+       CHART
+       ------------------------- */
 
-        .chart-line.two {
-            top: 73px;
-        }
+    .chart-area {
+        width: 100%;
 
+        height: 180px;
 
-        .chart-line.three {
-            top: 146px;
-        }
+        padding-right: 43px;
+    }
 
+    .chart {
+        width: 100%;
 
-        .chart-bar {
+        height: 145px;
+    }
 
-            position: absolute;
+    .chart-line {
+        left: 8px;
+    }
 
-            left: 12px;
+    .chart-bar {
+        left: 8px;
 
-            bottom: 4px;
+        width:
+            clamp(48px, 16vw, 70px);
+    }
 
-            width: 74px;
+    .x-labels {
+        left: 8px;
+        right: -2px;
 
-            height: 90px;
+        font-size: 11px;
+    }
 
-            background: #a9e8fa;
+    .y-label {
+        left:
+            calc(100% + 7px);
 
-            transform-origin: bottom;
+        font-size: 11px;
+    }
+}
 
-            transform: scaleY(0);
 
-            transition:
-                height .7s ease,
-                transform .7s ease;
-        }
+/* =========================================================
+   SMALL PHONES — 380px
+   ========================================================= */
 
+@media (max-width: 380px) {
 
-        .chart-bar.animate {
+    #formPage {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
 
-            transform: scaleY(1);
-        }
+    .form-wrapper {
+        padding:
+            18px 12px;
+    }
 
+    .form-title {
+        font-size: 23px;
+    }
 
-        .y-label {
 
-            position: absolute;
+    /* Post */
 
-            left: calc(100% + 12px);
+    .post-card {
+        width: calc(100% - 16px);
 
-            transform: translateY(-50%);
+        margin-left: 8px;
+        margin-right: 8px;
+    }
 
-            color: #858585;
+    .post-content {
+        grid-template-columns:
+            88px
+            minmax(0, 1fr);
 
-            font-size: 14px;
-        }
+        gap: 9px;
+    }
 
+    .caption {
+        font-size: 15px;
+    }
 
-        .y100 {
-            top: 0;
-        }
 
+    /* Engagement */
 
-        .y50 {
-            top: 73px;
-        }
+    .engagement-card {
+        width: calc(100% - 16px);
 
+        margin-left: 8px;
+        margin-right: 8px;
+    }
 
-        .y0 {
-            top: 146px;
-        }
 
+    /* Metrics */
 
-        .x-labels {
+    .metrics,
+    .video-section {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
 
-            position: absolute;
+    .two-columns,
+    .video-metrics {
+        gap: 12px;
+    }
 
-            left: 12px;
-            right: -5px;
+    .metric-value {
+        font-size: 32px;
+    }
 
-            top: 158px;
+    .two-columns .metric-value,
+    .video-metrics .metric-value {
+        font-size: 26px;
+    }
 
-            display: flex;
 
-            justify-content: space-between;
+    /* Chart */
 
-            color: #747474;
+    .x-labels span:nth-child(2),
+    .x-labels span:nth-child(4) {
+        display: none;
+    }
+}
 
-            font-size: 13px;
-        }
 
+/* =========================================================
+   VERY SMALL PHONES — 320px
+   ========================================================= */
 
-        /* =====================================================
-           PAGE ANIMATION
-        ===================================================== */
+@media (max-width: 320px) {
 
-        .page-animation {
+    .form-wrapper {
+        padding:
+            17px 11px;
+    }
 
-            animation:
-                pageIn .45s ease both;
-        }
+    .form-title {
+        font-size: 22px;
+    }
 
+    .post-card {
+        width: calc(100% - 12px);
 
-        @keyframes pageIn {
+        margin-left: 6px;
+        margin-right: 6px;
+    }
 
-            from {
+    .post-content {
+        grid-template-columns:
+            78px
+            minmax(0, 1fr);
 
-                opacity: 0;
+        gap: 8px;
+    }
 
-                transform:
-                    translateY(12px);
-            }
+    .caption {
+        font-size: 14px;
+    }
 
-            to {
+    .thumbnail {
+        border-radius: 13px;
+    }
 
-                opacity: 1;
+    .thumbnail-duration {
+        font-size: 12px;
+    }
 
-                transform:
-                    translateY(0);
-            }
-        }
+    .thumbnail-name {
+        font-size: 7px;
+    }
 
+    .engagement-card {
+        width: calc(100% - 12px);
 
-        /* =====================================================
-           MOBILE
-        ===================================================== */
+        margin-left: 6px;
+        margin-right: 6px;
+    }
 
-        @media (max-width: 600px) {
+    .engagement-value {
+        font-size: 16px;
+    }
 
-            #formPage {
+    .metrics {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
 
-                padding: 20px 12px;
-            }
+    .video-section {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
 
+    .metric-value {
+        font-size: 30px;
+    }
 
-            .form-wrapper {
+    .two-columns,
+    .video-metrics {
+        grid-template-columns: 1fr;
 
-                padding: 22px 17px;
+        gap: 25px;
+    }
 
-                border-radius: 20px;
-            }
+    .two-columns .metric-value,
+    .video-metrics .metric-value {
+        font-size: 28px;
+    }
+}
 
 
-            .form-title {
+/* =========================================================
+   LANDSCAPE MOBILE
+   ========================================================= */
 
-                font-size: 25px;
-            }
+@media (max-height: 500px) and (orientation: landscape) {
 
+    #formPage {
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
 
-            .form-grid {
+    .form-wrapper {
+        padding: 18px;
+    }
 
-                grid-template-columns: 1fr;
+    .header {
+        height: 52px;
+    }
 
-                gap: 16px;
-            }
+    .post-card {
+        margin-top: 10px;
+    }
+}
 
 
-            .field.full {
+/* =========================================================
+   ACCESSIBILITY / TOUCH
+   ========================================================= */
 
-                grid-column: auto;
-            }
+@media (pointer: coarse) {
 
+    .back-button {
+        min-width: 42px;
+        min-height: 42px;
+    }
 
-            .header {
+    .generate-button {
+        min-height: 50px;
+    }
 
-                height: 64px;
+    .field input,
+    .field textarea {
+        font-size: 16px;
+    }
+}
 
-                padding:
-                    0 16px;
-            }
-
-
-            .header-title {
-
-                font-size: 21px;
-            }
-
-
-            .post-card {
-
-                width: calc(100% - 20px);
-
-                margin:
-                    20px 10px 18px;
-
-                padding:
-                    18px 14px;
-
-                border-radius: 22px;
-            }
-
-
-            .post-content {
-
-                gap: 10px;
-            }
-
-
-            .thumbnail {
-
-                width: 110px;
-                height: 108px;
-
-                min-width: 110px;
-
-                border-radius: 17px;
-            }
-
-
-            .caption {
-
-                font-size: 17px;
-
-                line-height: 1.3;
-            }
-
-
-            .user-info {
-
-                font-size: 14px;
-
-                gap: 4px;
-            }
-
-
-            .engagement-card {
-
-                width:
-                    calc(100% - 30px);
-            }
-
-
-            .metrics {
-
-                padding:
-                    48px 27px;
-            }
-
-
-            .metric-value {
-
-                font-size: 39px;
-            }
-
-
-            .two-columns {
-
-                gap: 20px;
-            }
-
-
-            .two-columns
-            .metric-value,
-            .video-metrics
-            .metric-value {
-
-                font-size: 32px;
-            }
-
-
-            .video-section {
-
-                padding:
-                    34px 27px 60px;
-            }
-
-
-            .video-heading {
-
-                font-size: 29px;
-            }
-
-        }
-
-
-        /* =====================================================
-           SMALL MOBILE
-        ===================================================== */
-
-        @media (max-width: 380px) {
-
-            .post-card {
-
-                padding:
-                    17px 12px;
-            }
-
-
-            .thumbnail {
-
-                width: 95px;
-                height: 95px;
-
-                min-width: 95px;
-            }
-
-
-            .caption {
-
-                font-size: 15px;
-            }
-
-
-            .thumbnail-icon {
-
-                top: 31px;
-
-                font-size: 27px;
-            }
-
-
-            .thumbnail-duration {
-
-                right: 6px;
-                bottom: 6px;
-
-                font-size: 14px;
-            }
-
-
-            .thumbnail-name {
-
-                top: 7px;
-                left: 7px;
-
-                font-size: 8px;
-            }
-
-
-            .metrics {
-
-                padding-left: 22px;
-                padding-right: 22px;
-            }
-
-
-            .video-section {
-
-                padding-left: 22px;
-                padding-right: 22px;
-            }
-
-        }
-
-    </style>
+</style>
 
 </head>
 
